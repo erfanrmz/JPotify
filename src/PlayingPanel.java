@@ -1,5 +1,12 @@
+import javazoom.jl.player.Player;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 
 public class PlayingPanel extends JPanel {
     private EJButton play;
@@ -61,6 +68,32 @@ public class PlayingPanel extends JPanel {
         //this.add(volumeBar,BorderLayout.LINE_END);
         this.add(buttonsBar,BorderLayout.NORTH);
         this.add(musicSeekPanel,BorderLayout.CENTER);
+
+        play.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame f = new JFrame();
+                f.setSize(1000, 500);
+                JFileChooser a = new JFileChooser();
+                f.add(a);
+                int fasf = a.showOpenDialog(null);
+                if (fasf == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        BufferedInputStream file = new BufferedInputStream(new FileInputStream(new File(a.getSelectedFile().getAbsolutePath())));
+                        try {
+
+                            Player playMP3 = new Player(file);
+                            playMP3.play();
+                        } catch (Exception q) {
+                            System.out.print("kieeeeeeee");
+                        }
+                    } catch (Exception q) {
+                        System.out.print("kifffffffff");
+                    }
+                    f.setVisible(true);
+                }
+            }
+        });
     }
 
 }
