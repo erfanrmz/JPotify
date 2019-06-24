@@ -1,0 +1,10 @@
+.DS_Store
+bin
+test-bin
+build
+*.iml
+.idea
+*.project
+*.classpath
+target
+.settings

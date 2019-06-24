@@ -1,16 +1,25 @@
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class Song {
     private String address;
-    private int songSeek;
+    private int songSeekPos;
     private String title;
     private String artist;
     private String album;
     private String year;
+    private ImageIcon imageIcon;
 
-    public Song(String address) {
+    public Song(String address) throws IOException, InvalidDataException, UnsupportedTagException {
         this.address = address;
+        songSeekPos = 0;
         try {
             File song = new File(address);
             FileInputStream inputStream = new FileInputStream(song);
@@ -28,7 +37,6 @@ public class Song {
             }
             for (int i = 0; i < 4; i++)
                 yearB[i] = last128[i + 93];
-
             title = new String(titleB);
             artist = new String(artistB);
             album = new String(albumB);
@@ -37,17 +45,55 @@ public class Song {
         } catch (Exception e) {
             System.out.println("Error ? " + e.toString());
         }
+        Mp3File mp3File = new Mp3File(address);
+        imageIcon = new ImageIcon(mp3File.getId3v2Tag().getAlbumImage());
+        Image img = imageIcon.getImage();
+        Image resizedImage = img.getScaledInstance(300, 300,  java.awt.Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(resizedImage);
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public int getSongSeekPos() {
+        return songSeekPos;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public ImageIcon getImageIcon() {
+        return imageIcon;
+    }
+
+    public void setSongSeekPos(int songSeekPos) {
+        this.songSeekPos = songSeekPos;
     }
 
     @Override
     public String toString() {
         return "Song{" +
                 "address='" + address + '\'' +
-                ", songSeek=" + songSeek +
+                ", songSeek=" + songSeekPos +
                 ", title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
                 ", album='" + album + '\'' +
                 ", year='" + year + '\'' +
                 '}';
+
     }
 }
