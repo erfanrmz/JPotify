@@ -4,8 +4,10 @@ import java.awt.*;
 public class MainFrame extends JFrame {
     private MainPanel mainPanel;
     private PlayingPanel playingPanel;
+    private LeftPanel leftPanel;
     public MainFrame()
     {
+        leftPanel = new LeftPanel();
         playingPanel = new PlayingPanel();
         mainPanel = new MainPanel();
         this.setTitle("Jpotify");
@@ -13,6 +15,7 @@ public class MainFrame extends JFrame {
         this.setLayout(new BorderLayout());
         this.add(mainPanel,BorderLayout.CENTER);
         this.add(playingPanel,BorderLayout.PAGE_END);
+        this.add(leftPanel,BorderLayout.LINE_START);
         this.setVisible(true);
     }
 }

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PlayingPanel extends JPanel {
     private EJButton play;
@@ -48,6 +50,47 @@ public class PlayingPanel extends JPanel {
         //icons
         play.setIcon(new ImageIcon("Icons\\play50.png"));
         play.setPreferredSize(new Dimension(75,50));
+        play.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+                if(play.getPressed() % 2 == 0)
+                {
+
+                    play.setIcon(new ImageIcon("Icons\\playEntered50.png"));
+                }
+                else if (play.getPressed()%2 == 1)
+                {
+                    play.setIcon(new ImageIcon("Icons\\pauseEntered50.png"));
+                }
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                if(play.getPressed() % 2 == 0)
+                {
+
+                    play.setIcon(new ImageIcon("Icons\\playEntered50.png"));
+                }
+                else if (play.getPressed()%2 == 1)
+                {
+                    play.setIcon(new ImageIcon("Icons\\pauseEntered50.png"));
+                }
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                if(play.getPressed() % 2 == 0)
+                {
+                    play.setIcon(new ImageIcon("Icons\\play50.png"));
+                }
+                else if (play.getPressed()%2 == 1)
+                {
+                    play.setIcon(new ImageIcon("Icons\\pause50.png"));
+                }
+            }
+        });
         previousMusic.setIcon(new ImageIcon("Icons\\previous30.png"));
         previousMusic.setPreferredSize(new Dimension(75,30));
         nextMusic.setIcon(new ImageIcon("Icons\\next30.png"));
