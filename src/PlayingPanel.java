@@ -72,26 +72,30 @@ public class PlayingPanel extends JPanel {
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame f = new JFrame();
-                f.setSize(1000, 500);
-                JFileChooser a = new JFileChooser();
-                f.add(a);
-                int fasf = a.showOpenDialog(null);
-                if (fasf == JFileChooser.APPROVE_OPTION) {
-                    try {
-                        BufferedInputStream file = new BufferedInputStream(new FileInputStream(new File(a.getSelectedFile().getAbsolutePath())));
-                        try {
-
-                            Player playMP3 = new Player(file);
-                            playMP3.play();
-                        } catch (Exception q) {
-                            System.out.print("kieeeeeeee");
+                //Play play = new Play();
+                //play.run();
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        JFileChooser a = new JFileChooser();
+                        int fasf = a.showOpenDialog(null);
+                        if (fasf == JFileChooser.APPROVE_OPTION) {
+                            try {
+                                BufferedInputStream file = new BufferedInputStream(new FileInputStream(new File(a.getSelectedFile().getAbsolutePath())));
+                                try {
+                                    Player playMP3 = new Player(file);
+                                    playMP3.play();
+                                } catch (Exception q) {
+                                    System.out.print(q);
+                                }
+                            } catch (Exception q) {
+                                System.out.print(q);
+                            }
                         }
-                    } catch (Exception q) {
-                        System.out.print("kifffffffff");
                     }
-                    f.setVisible(true);
-                }
+                };
+                Thread t = new Thread(r);
+                t.start();
             }
         });
     }
