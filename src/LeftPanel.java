@@ -8,8 +8,13 @@ public class LeftPanel extends JPanel {
     private EJButton home;
     private EJButton others;
     private EJButton songs;
+    private JPopupMenu popupMenu;
+    private JMenuItem addsong;
     public LeftPanel()
     {
+        popupMenu = new JPopupMenu("others");
+        addsong = new JMenuItem("Add song");
+        popupMenu.add(addsong);
         setLayout (new BoxLayout (this, BoxLayout.Y_AXIS));
         others = new EJButton();
         home = new EJButton();
@@ -21,7 +26,7 @@ public class LeftPanel extends JPanel {
         others.setIcon(new ImageIcon("Icons\\others.png"));
         songs.setIcon(new ImageIcon("Icons\\song1.png"));
         Color leftPanelBackground = new Color(18,18,18);
-
+        popupMenu.setPreferredSize(new Dimension(150, 40));
         this.setBackground(leftPanelBackground);
 
         this.add(others);
@@ -30,6 +35,11 @@ public class LeftPanel extends JPanel {
         //Actionlistoners
 
         others.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                popupMenu.show(others,30,40);
+            }
             @Override
             public void mouseEntered(MouseEvent e) {
                 others.setIcon(new ImageIcon("Icons\\othersEntered.png"));
