@@ -2,16 +2,13 @@ import javazoom.jl.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
-<<<<<<< HEAD
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-=======
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
->>>>>>> 819bb2143bee25f0421fabae0713ee7b2e8f084d
 
 public class PlayingPanel extends JPanel {
     private EJButton play;
