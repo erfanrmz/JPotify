@@ -2,16 +2,13 @@ import javazoom.jl.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
-<<<<<<< HEAD
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-=======
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
->>>>>>> 819bb2143bee25f0421fabae0713ee7b2e8f084d
 
 public class PlayingPanel extends JPanel {
     private EJButton play;
@@ -24,6 +21,7 @@ public class PlayingPanel extends JPanel {
     private JPanel buttonsBar;
     private JPanel volumeBar;
     private JPanel musicSeekPanel;
+    private Play mp3player;
 
     public PlayingPanel()
     {
@@ -64,14 +62,25 @@ public class PlayingPanel extends JPanel {
             @Override
             public void mousePressed(MouseEvent e)
             {
-                if(play.getPressed() % 2 == 0)
+                if(play.getPressed() % 2 == 0 )
                 {
 
                     play.setIcon(new ImageIcon("Icons\\playEntered50.png"));
+                    mp3player.mp3Pause();
+
                 }
                 else if (play.getPressed()%2 == 1)
                 {
+
                     play.setIcon(new ImageIcon("Icons\\pauseEntered50.png"));
+                    if (play.getPressed() == 1)
+                    {
+                        mp3player = new Play();
+                        mp3player.start();
+
+                    }
+
+                    mp3player.mp3Resume();
                 }
 
             }
@@ -94,6 +103,7 @@ public class PlayingPanel extends JPanel {
                 if(play.getPressed() % 2 == 0)
                 {
                     play.setIcon(new ImageIcon("Icons\\play50.png"));
+
                 }
                 else if (play.getPressed()%2 == 1)
                 {
@@ -118,30 +128,8 @@ public class PlayingPanel extends JPanel {
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Play play = new Play();
-                //play.run();
-                Runnable r = new Runnable() {
-                    @Override
-                    public void run() {
-                        JFileChooser a = new JFileChooser();
-                        int fasf = a.showOpenDialog(null);
-                        if (fasf == JFileChooser.APPROVE_OPTION) {
-                            try {
-                                BufferedInputStream file = new BufferedInputStream(new FileInputStream(new File(a.getSelectedFile().getAbsolutePath())));
-                                try {
-                                    Player playMP3 = new Player(file);
-                                    playMP3.play();
-                                } catch (Exception q) {
-                                    System.out.print(q);
-                                }
-                            } catch (Exception q) {
-                                System.out.print(q);
-                            }
-                        }
-                    }
-                };
-                Thread t = new Thread(r);
-                t.start();
+            //    Play play = new Play();
+            //    play.start();
             }
         });
     }
