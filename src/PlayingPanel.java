@@ -1,7 +1,17 @@
+import javazoom.jl.player.Player;
+
 import javax.swing.*;
 import java.awt.*;
+<<<<<<< HEAD
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+=======
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+>>>>>>> 819bb2143bee25f0421fabae0713ee7b2e8f084d
 
 public class PlayingPanel extends JPanel {
     private EJButton play;
@@ -104,6 +114,36 @@ public class PlayingPanel extends JPanel {
         //this.add(volumeBar,BorderLayout.LINE_END);
         this.add(buttonsBar,BorderLayout.NORTH);
         this.add(musicSeekPanel,BorderLayout.CENTER);
+
+        play.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Play play = new Play();
+                //play.run();
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        JFileChooser a = new JFileChooser();
+                        int fasf = a.showOpenDialog(null);
+                        if (fasf == JFileChooser.APPROVE_OPTION) {
+                            try {
+                                BufferedInputStream file = new BufferedInputStream(new FileInputStream(new File(a.getSelectedFile().getAbsolutePath())));
+                                try {
+                                    Player playMP3 = new Player(file);
+                                    playMP3.play();
+                                } catch (Exception q) {
+                                    System.out.print(q);
+                                }
+                            } catch (Exception q) {
+                                System.out.print(q);
+                            }
+                        }
+                    }
+                };
+                Thread t = new Thread(r);
+                t.start();
+            }
+        });
     }
 
 }
