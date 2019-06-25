@@ -8,6 +8,7 @@ public class MainFrame extends JFrame {
     private PlayingPanel playingPanel;
     private LeftPanel leftPanel;
     private Play player;
+    private JScrollPane songsScrollPane;
     public MainFrame()
     {
         player = new Play();
@@ -16,10 +17,14 @@ public class MainFrame extends JFrame {
         mainPanel = new MainPanel(this , player);
         leftPanel = new LeftPanel(mainPanel);
         playingPanel = new PlayingPanel(player);
+        int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED ;
+        int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED ;
+        songsScrollPane = new JScrollPane(mainPanel, v, h ) ;
+        songsScrollPane.setBorder(null);
         this.setTitle("Jpotify");
         this.setSize(new Dimension(1600,900));
         this.setLayout(new BorderLayout());
-        this.add(mainPanel,BorderLayout.CENTER);
+        this.add(songsScrollPane,BorderLayout.CENTER);
         this.add(playingPanel,BorderLayout.PAGE_END);
         this.add(leftPanel,BorderLayout.LINE_START);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

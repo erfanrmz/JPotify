@@ -20,8 +20,6 @@ public class Play extends Thread {
 
     @Override
     public void run() {
-        while(!this.isInterrupted())
-        {
 
 
             try {
@@ -36,16 +34,15 @@ public class Play extends Thread {
                         }
                     }
 
-                } catch (InterruptedException e)
-                {
-                    Thread.currentThread().interrupt();
-                } catch (Exception q) {
+                }
+                catch (Exception q) {
                     System.out.print(q);
                 }
-            } catch (Exception q) {
+            }
+            catch (Exception q) {
                 System.out.print(q);
             }
-        }
+
     }
 
     public void mp3Pause() {
