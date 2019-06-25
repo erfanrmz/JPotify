@@ -7,35 +7,45 @@ import java.io.FileInputStream;
 public class Play extends Thread {
     private boolean isPause;
     private Player playMP3;
+    private Song playingSong;
 
     public Play() {
         isPause = false;
+//        playingSong = song;
+    }
+    public void setPlayingSong(Song song)
+    {
+        playingSong = song;
     }
 
     @Override
     public void run() {
-        //JFileChooser a = new JFileChooser();
-        //int fasf = a.showOpenDialog(null);
-        //if (fasf == JFileChooser.APPROVE_OPTION) {
-        try {
-            BufferedInputStream file = new BufferedInputStream(new FileInputStream(new File("D:\\Musics\\Owl City feat. Hanson - Unbelievable.mp3")));
+        while(!this.isInterrupted())
+        {
+
+
             try {
-                playMP3 = new Player(file);
-                while (playMP3.play(1)) {
-                    if (this.isPause) {
-                        synchronized (playMP3) {
-                            playMP3.wait();
+                BufferedInputStream file = new BufferedInputStream(new FileInputStream(new File(playingSong.getAddress())));
+                try {
+                    playMP3 = new Player(file);
+                    while (playMP3.play(1)) {
+                        if (this.isPause) {
+                            synchronized (playMP3) {
+                                playMP3.wait();
+                            }
                         }
                     }
-                }
 
+                } catch (InterruptedException e)
+                {
+                    Thread.currentThread().interrupt();
+                } catch (Exception q) {
+                    System.out.print(q);
+                }
             } catch (Exception q) {
                 System.out.print(q);
             }
-        } catch (Exception q) {
-            System.out.print(q);
         }
-        //}
     }
 
     public void mp3Pause() {

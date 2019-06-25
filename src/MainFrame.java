@@ -1,3 +1,5 @@
+import javazoom.jl.player.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -5,11 +7,15 @@ public class MainFrame extends JFrame {
     private MainPanel mainPanel;
     private PlayingPanel playingPanel;
     private LeftPanel leftPanel;
+    private Play player;
     public MainFrame()
     {
-        leftPanel = new LeftPanel();
-        playingPanel = new PlayingPanel();
-        mainPanel = new MainPanel();
+        player = new Play();
+        ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
+        this.setIconImage(spotify.getImage());
+        mainPanel = new MainPanel(this , player);
+        leftPanel = new LeftPanel(mainPanel);
+        playingPanel = new PlayingPanel(player);
         this.setTitle("Jpotify");
         this.setSize(new Dimension(1600,900));
         this.setLayout(new BorderLayout());

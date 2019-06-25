@@ -1,3 +1,5 @@
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import javazoom.jl.player.Player;
 
 import javax.swing.*;
@@ -9,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class PlayingPanel extends JPanel {
     private EJButton play;
@@ -21,10 +24,11 @@ public class PlayingPanel extends JPanel {
     private JPanel buttonsBar;
     private JPanel volumeBar;
     private JPanel musicSeekPanel;
-    private Play mp3player;
+    private Play player;
 
-    public PlayingPanel()
+    public PlayingPanel(Play player)
     {
+        this.player = player;
         this.setPreferredSize(new Dimension(1600,100));
         this.setLayout(new BorderLayout());
         play = new EJButton();
@@ -66,21 +70,28 @@ public class PlayingPanel extends JPanel {
                 {
 
                     play.setIcon(new ImageIcon("Icons\\playEntered50.png"));
-                    mp3player.mp3Pause();
+                    player.mp3Pause();
 
                 }
                 else if (play.getPressed()%2 == 1)
                 {
 
                     play.setIcon(new ImageIcon("Icons\\pauseEntered50.png"));
-                    if (play.getPressed() == 1)
-                    {
-                        mp3player = new Play();
-                        mp3player.start();
-
-                    }
-
-                    mp3player.mp3Resume();
+//                    if (play.getPressed() == 1)
+//                    {
+//                        try {
+//                            mp3player = new Play();
+//                            mp3player.setPlayingSong(new Song("D:\\Marketa Irglova - This Right Here.mp3"));
+//                        } catch (IOException e1) {
+//                            e1.printStackTrace();
+//                        } catch (InvalidDataException e1) {
+//                            e1.printStackTrace();
+//                        } catch (UnsupportedTagException e1) {
+//                            e1.printStackTrace();
+//                        }
+//                        mp3player.start();
+//                    }
+                    player.mp3Resume();
                 }
 
             }

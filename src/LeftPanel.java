@@ -3,6 +3,8 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileOutputStream;
@@ -15,8 +17,10 @@ public class LeftPanel extends JPanel {
     private EJButton songs;
     private JPopupMenu popupMenu;
     private JMenuItem addsong;
-    public LeftPanel()
+    private JPanel songsPanel;
+    public LeftPanel(JPanel songsPanel)
     {
+        this.songsPanel = songsPanel;
         popupMenu = new JPopupMenu("others");
         addsong = new JMenuItem("Add song");
         popupMenu.add(addsong);
@@ -39,6 +43,24 @@ public class LeftPanel extends JPanel {
         this.add(songs);
         //Actionlistoners
 
+        addsong.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser a = new JFileChooser();
+                int fasf = a.showOpenDialog(null);
+                try {
+                    Song song = new Song(a.getSelectedFile().getAbsolutePath());
+                    ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("library.ser"));
+                    library.writeObject(song);
+                    ((MainPanel)songsPanel).addsong(song);
+
+
+                } catch (IOException | InvalidDataException | UnsupportedTagException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
         others.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e)
@@ -55,6 +77,7 @@ public class LeftPanel extends JPanel {
                 others.setIcon(new ImageIcon("Icons\\others.png"));
             }
         });
+
         home.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -68,19 +91,6 @@ public class LeftPanel extends JPanel {
             }
         });
         songs.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                JFileChooser a = new JFileChooser();
-                int fasf = a.showOpenDialog(null);
-                try {
-                    Song s = new Song(a.getSelectedFile().getAbsolutePath());
-                    ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("library.ser"));
-                    library.writeObject(s);
-                } catch (IOException | InvalidDataException | UnsupportedTagException ex) {
-                    ex.printStackTrace();
-                }
-
-            }
 
             @Override
             public void mouseEntered(MouseEvent e) {
