@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public class Song implements Serializable {
-    private String address;
     private  int songSeekPos;
+    private String address;
     private  String title;
     private  String artist;
     private  String album;
