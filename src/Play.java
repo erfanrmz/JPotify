@@ -1,59 +1,79 @@
-import javazoom.jl.player.Player;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+import javazoom.jl.player.advanced.PlaybackEvent;
+import javazoom.jl.player.advanced.PlaybackListener;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
-public class Play extends Thread {
-    private boolean isPause;
-    private Player playMP3;
+public class MPlayer {
+    AdvancedPlayer player;
+    private static int pausedOnFrame = 0;
+    private byte[] decrypted = null;
+    private long audioLength;
+    private AudioInputStream stream;
 
-    public Play() {
-        isPause = false;
+    private InputStream bytesToStream(byte[] in) {
+        InputStream is = new ByteArrayInputStream(in);
+        return is;
     }
 
-    @Override
-    public void run() {
-        //JFileChooser a = new JFileChooser();
-        //int fasf = a.showOpenDialog(null);
-        //if (fasf == JFileChooser.APPROVE_OPTION) {
-        try {
-            BufferedInputStream file = new BufferedInputStream(new FileInputStream(new File("D:\\Musics\\Owl City feat. Hanson - Unbelievable.mp3")));
-            try {
-                playMP3 = new Player(file);
-                while (playMP3.play(1)) {
-                    if (this.isPause) {
-                        synchronized (playMP3) {
-                            playMP3.wait();
-                        }
-                    }
+    public MPlayer(String fname) throws IOException, UnsupportedAudioFileException, JavaLayerException {
+        /* here file is encrypted to variable byte[] decrypted and then: */
+        InputStream is = bytesToStream(decrypted);
+        stream = AudioSystem.getAudioInputStream(is);
+        audioLength = stream.getFrameLength();
+
+        player = new AdvancedPlayer(stream);
+        player.setPlayBackListener(new PlaybackListener() {
+            @Override
+            public void playbackFinished(PlaybackEvent event) {
+                System.err.println(event.getFrame());
+                pausedOnFrame = event.getFrame();
+            }
+
+        });
+    }
+
+    public void play() throws Exception {
+        Thread th = new Thread() {
+            public void run() {
+                try {
+                    player.play(MPlayer.pausedOnFrame, Integer.MAX_VALUE);
+                } catch (JavaLayerException e) {
+                    e.printStackTrace();
                 }
-
-            } catch (Exception q) {
-                System.out.print(q);
             }
-        } catch (Exception q) {
-            System.out.print(q);
-        }
-        //}
+        };
+        th.start();
     }
 
-    public void mp3Pause() {
-        this.isPause = true;
+    public void fastforward() throws Exception {
+        pausemusic();
+        long nextFrame = (long) (pausedOnFrame + 0.02 * audioLength);
+        if (nextFrame < audioLength)
+            play();
     }
 
-    public void mp3Play() {
-        this.isPause = false;
+    public void rewind() throws Exception {
+        pausemusic();
+        long nextFrame = (long) (pausedOnFrame - 0.02 * audioLength);
+        if (nextFrame > 0)
+            play();
     }
 
-    public void mp3Resume() {
-        this.isPause = false;
-        try {
-            synchronized (playMP3) {
-                playMP3.notifyAll();
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+
+    public void pausemusic() throws LineUnavailableException {
+        player.stop();
+    }
+
+    public void stopmusic() throws LineUnavailableException {
+        player.stop();
+        pausedOnFrame = 0;
     }
 }
