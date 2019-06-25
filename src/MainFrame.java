@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
         this.add(mainPanel,BorderLayout.CENTER);
         this.add(playingPanel,BorderLayout.PAGE_END);
         this.add(leftPanel,BorderLayout.LINE_START);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 }

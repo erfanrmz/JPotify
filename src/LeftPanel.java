@@ -1,8 +1,13 @@
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.UnsupportedTagException;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class LeftPanel extends JPanel {
     private EJButton home;
@@ -63,6 +68,20 @@ public class LeftPanel extends JPanel {
             }
         });
         songs.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JFileChooser a = new JFileChooser();
+                int fasf = a.showOpenDialog(null);
+                try {
+                    Song s = new Song(a.getSelectedFile().getAbsolutePath());
+                    ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("library.ser"));
+                    library.writeObject(s);
+                } catch (IOException | InvalidDataException | UnsupportedTagException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+
             @Override
             public void mouseEntered(MouseEvent e) {
                 songs.setIcon(new ImageIcon("Icons\\songEntered1.png"));

@@ -7,15 +7,16 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Song {
+public class Song implements Serializable {
     private String address;
-    private int songSeekPos;
-    private String title;
-    private String artist;
-    private String album;
-    private String year;
-    private ImageIcon imageIcon;
+    private  int songSeekPos;
+    private  String title;
+    private  String artist;
+    private  String album;
+    private  String year;
+    private  ImageIcon imageIcon;
 
     public Song(String address) throws IOException, InvalidDataException, UnsupportedTagException {
         this.address = address;
@@ -46,10 +47,14 @@ public class Song {
             System.out.println("Error ? " + e.toString());
         }
         Mp3File mp3File = new Mp3File(address);
-        imageIcon = new ImageIcon(mp3File.getId3v2Tag().getAlbumImage());
-        Image img = imageIcon.getImage();
-        Image resizedImage = img.getScaledInstance(300, 300,  java.awt.Image.SCALE_SMOOTH);
-        imageIcon = new ImageIcon(resizedImage);
+        try {
+            imageIcon = new ImageIcon(mp3File.getId3v2Tag().getAlbumImage());
+            Image img = imageIcon.getImage();
+            Image resizedImage = img.getScaledInstance(300, 300,  java.awt.Image.SCALE_SMOOTH);
+            imageIcon = new ImageIcon(resizedImage);
+        }catch (Exception e){
+            System.out.println("No artwork");
+        }
     }
 
     public String getAddress() {
