@@ -35,7 +35,7 @@ public class PlayingPanel extends JPanel {
     private JPanel buttonsBar;
     private JPanel volumeBar;
     private JPanel musicSeekPanel;
-    private Play player;
+    private  Play player;
 
     public PlayingPanel(Play player)
     {

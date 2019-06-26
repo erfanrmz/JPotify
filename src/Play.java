@@ -5,35 +5,47 @@ import javazoom.jl.player.Player;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class Play extends Thread {
     private boolean isPause;
     private Player playMP3;
     private Song playingSong;
     private BufferedInputStream file;
+    private boolean stopMusic;
 
     public Play() {
+        stopMusic = false;
         isPause = false;
 //        playingSong = song;
+
     }
 
     public void setPlayingSong(Song song) {
         playingSong = song;
+        stopMusic = false;
+        try {
+            file = new BufferedInputStream(new FileInputStream(new File(playingSong.getAddress())));
+            System.out.println("music changed");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void run() {
-        try {
-            BufferedInputStream file = new BufferedInputStream(new FileInputStream(new File(playingSong.getAddress())));
+        while (!stopMusic)
+        {
             try {
                 playMP3 = new Player(file);
-                while (playMP3.play(1)) {
+                while (playMP3.play(1 ) && !stopMusic ) {
                     if (this.isPause) {
                         synchronized (playMP3) {
                             playMP3.wait();
                         }
                     }
                 }
+
             }
             //JFileChooser a = new JFileChooser();
             //int fasf = a.showOpenDialog(null);
@@ -41,9 +53,9 @@ public class Play extends Thread {
             catch (Exception q) {
                 System.out.print(q);
             }
-        } catch (Exception q) {
-            System.out.print(q);
+
         }
+        playMP3.close();
 
     }
 
@@ -66,8 +78,16 @@ public class Play extends Thread {
         }
     }
 
-    public void changeMusic() {
-        playMP3.close();
+    public void stopMusic() {
+        try {
+            stopMusic = true;
+            System.out.println("stop music true");
+
+        }catch (Exception e)
+        {
+            System.out.println("fuck off :D");
+        }
+
     }
 //    public void mp3seek(int pos) throws JavaLayerException {
 //        playMP3.close();

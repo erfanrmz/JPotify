@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MainPanel extends JPanel {
     private MainFrame mainFrame;
@@ -8,9 +9,11 @@ public class MainPanel extends JPanel {
     private JPanel box2;
     private JPanel box3;
     private int count;
-    public MainPanel(MainFrame mainFrame , Play player)
+    private ArrayList<Play> playingThreads;
+    public MainPanel(MainFrame mainFrame , Play player ,ArrayList<Play> playingThreads)
     {
         count = 0;
+        this.playingThreads = playingThreads;
         box1 = new JPanel();
         box2 = new JPanel();
         box3 = new JPanel();
@@ -34,7 +37,7 @@ public class MainPanel extends JPanel {
 
     public void addsong(Song song)
     {
-        SJButton songadded = new SJButton(song.getTitle(),song.getImageIcon(),song,player);
+        SJButton songadded = new SJButton(song.getTitle(),song.getImageIcon(),song,player ,mainFrame ,playingThreads );
         if(count % 3 == 0)
         {
             box1.add(songadded);
