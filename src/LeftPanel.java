@@ -41,6 +41,7 @@ public class LeftPanel extends JPanel {
         this.add(others);
         this.add(home);
         this.add(songs);
+
         //Actionlistoners
 
         addsong.addActionListener(new ActionListener() {
@@ -52,7 +53,7 @@ public class LeftPanel extends JPanel {
                     Song song = new Song(a.getSelectedFile().getAbsolutePath());
                     ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("library.ser"));
                     library.writeObject(song);
-                    ((MainPanel)songsPanel).addsong(song);
+                    ((MainPanel)songsPanel).addsongFromButton(song);
 
 
                 } catch (IOException | InvalidDataException | UnsupportedTagException ex) {

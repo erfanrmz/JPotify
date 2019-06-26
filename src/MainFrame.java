@@ -1,7 +1,9 @@
-import javazoom.jl.player.Player;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.UnsupportedTagException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class MainFrame extends JFrame {
     private MainPanel mainPanel;
@@ -9,8 +11,7 @@ public class MainFrame extends JFrame {
     private LeftPanel leftPanel;
     private Play player;
     private JScrollPane songsScrollPane;
-    public MainFrame()
-    {
+    public MainFrame() throws InvalidDataException, IOException, UnsupportedTagException, ClassNotFoundException {
         player = new Play();
         ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
         this.setIconImage(spotify.getImage());
