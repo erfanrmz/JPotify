@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
             this.setIconImage(spotify.getImage());
             mainPanel = new MainPanel(this, player, playingThreads);
             leftPanel = new LeftPanel(mainPanel,this, player, playingThreads);
-            playingPanel = new PlayingPanel(player);
+            playingPanel = new PlayingPanel(player,playingThreads);
             int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
             int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
             songsScrollPane = new JScrollPane(mainPanel, v, h);

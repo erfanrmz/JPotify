@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 
 public class PlayingPanel extends JPanel {
@@ -21,9 +22,11 @@ public class PlayingPanel extends JPanel {
     private JPanel volumeBar;
     private JPanel musicSeekPanel;
     private  Play player;
+    private ArrayList<Play> playingThreads;
 
-    public PlayingPanel(Play player)
+    public PlayingPanel(Play player , ArrayList<Play> playingThreads)
     {
+        this.playingThreads = playingThreads;
         this.player = player;
         this.setPreferredSize(new Dimension(1600,100));
         this.setLayout(new BorderLayout());
@@ -66,7 +69,7 @@ public class PlayingPanel extends JPanel {
                 {
 
                     play.setIcon(new ImageIcon("Icons\\playEntered50.png"));
-                    player.mp3Pause();
+                    playingThreads.get(playingThreads.size()-1).mp3Pause();
 
                 }
                 else if (play.getPressed()%2 == 1)
@@ -87,7 +90,7 @@ public class PlayingPanel extends JPanel {
 //                        }
 //                        mp3player.start();
 //                    }
-                    player.mp3Resume();
+                    playingThreads.get(playingThreads.size()-1).mp3Resume();
                 }
 
             }

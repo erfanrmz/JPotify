@@ -88,13 +88,12 @@ public class Playlist extends JPanel {
     public void readSongs() throws
             InvalidDataException, IOException, UnsupportedTagException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream(name + ".ser");
-        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(name + "library.ser"))));
+        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(name + ".ser"))));
         songs = (ArrayList<Song>) ois.readObject();
         for (int i = 0; i < songs.size(); i++) {
             addsongFromSer(songs.get(i));
         }
     }
 }
-
 
 
