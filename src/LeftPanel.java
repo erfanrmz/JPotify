@@ -15,6 +15,7 @@ public class LeftPanel extends JPanel {
     private EJButton home;
     private EJButton others;
     private EJButton songs;
+    private EJButton newPlayList;
     private JPopupMenu popupMenu;
     private JMenuItem addsong;
     private JPanel songsPanel;
@@ -28,12 +29,15 @@ public class LeftPanel extends JPanel {
         others = new EJButton();
         home = new EJButton();
         songs = new EJButton();
+        newPlayList = new EJButton();
         others.setPreferredSize(new Dimension(250,40));
         home.setPreferredSize(new Dimension(250,40));
         songs.setPreferredSize(new Dimension(250,40));
+        newPlayList.setPreferredSize(new Dimension(250,90));
         home.setIcon(new ImageIcon("Icons\\home.png"));
         others.setIcon(new ImageIcon("Icons\\others.png"));
         songs.setIcon(new ImageIcon("Icons\\song1.png"));
+        newPlayList.setIcon(new ImageIcon("Icons\\newPlaylist.png"));
         Color leftPanelBackground = new Color(18,18,18);
         popupMenu.setPreferredSize(new Dimension(150, 40));
         this.setBackground(leftPanelBackground);
@@ -41,7 +45,7 @@ public class LeftPanel extends JPanel {
         this.add(others);
         this.add(home);
         this.add(songs);
-
+        this.add(newPlayList);
         //Actionlistoners
 
         addsong.addActionListener(new ActionListener() {
@@ -89,6 +93,18 @@ public class LeftPanel extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 home.setIcon(new ImageIcon("Icons\\home.png"));
+            }
+        });
+        newPlayList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                newPlayList.setIcon(new ImageIcon("Icons\\newPlaylistEntered.png"));
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                newPlayList.setIcon(new ImageIcon("Icons\\newPlaylist.png"));
             }
         });
         songs.addMouseListener(new MouseAdapter() {
