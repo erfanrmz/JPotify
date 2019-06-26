@@ -63,4 +63,8 @@ public class Play extends Thread {
             System.out.println(e);
         }
     }
+    public void changeMusic()
+    {
+        playMP3.close();
+    }
 }

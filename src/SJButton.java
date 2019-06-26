@@ -29,11 +29,14 @@ public class SJButton extends JButton {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (player.isAlive())
+                if (!Thread.currentThread().isAlive())
                 {
-                    player.interrupt();
-//                    player.setPlayingSong(song);
                     System.out.println("FUck off :)");
+                    Thread.currentThread().stop();
+                    Play player = new Play();
+//                    player
+//                    player.setPlayingSong(song);
+
                 }
                 else
                 {
