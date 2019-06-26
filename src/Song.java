@@ -55,6 +55,7 @@ public class Song implements Serializable {
             Image resizedImage = img.getScaledInstance(250, 250,  java.awt.Image.SCALE_SMOOTH);
             imageIcon = new ImageIcon(resizedImage);
         }catch (Exception e){
+            imageIcon = new ImageIcon("Icons\\cover1.png");
             System.out.println("No artwork");
         }
     }
