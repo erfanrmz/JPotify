@@ -32,7 +32,10 @@ public class MainPanel extends JPanel {
         this.add(box1);
         this.add(box2);
         this.add(box3);
-        readSongs();
+        try {
+            readSongs();
+        }catch (Exception e){
+        }
 //        this.setLayout(new FlowLayout(FlowLayout.LEFT));
     }
 
