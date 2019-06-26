@@ -1,9 +1,5 @@
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.UnsupportedTagException;
-
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
@@ -20,7 +16,7 @@ public class MainFrame extends JFrame {
             ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
             this.setIconImage(spotify.getImage());
             mainPanel = new MainPanel(this, player, playingThreads);
-            leftPanel = new LeftPanel(mainPanel);
+            leftPanel = new LeftPanel(mainPanel,this, player, playingThreads);
             playingPanel = new PlayingPanel(player);
             int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
             int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;

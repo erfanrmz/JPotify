@@ -17,10 +17,10 @@ public class Playlist extends JPanel {
     private ArrayList<Song> songs;
     private ArrayList<Play> playingThreads;
 
-    public Playlist(MainFrame mainFrame, Play player, ArrayList < Play > playingThreads)
-    {
+    public Playlist(String name, MainFrame mainFrame, Play player, ArrayList<Play> playingThreads) {
         songs = new ArrayList<>();
         count = 0;
+        this.name = name;
         this.playingThreads = playingThreads;
         box1 = new JPanel();
         box2 = new JPanel();
@@ -43,9 +43,10 @@ public class Playlist extends JPanel {
         }
 //        this.setLayout(new FlowLayout(FlowLayout.LEFT));
     }
-    public void addsongFromButton (Song song) throws IOException {
+
+    public void addsongFromButton(Song song) throws IOException {
         songs.add(song);
-        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads);
+        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads);
         if (count % 3 == 0) {
             box1.add(songadded);
             box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
@@ -65,8 +66,9 @@ public class Playlist extends JPanel {
         oos.writeObject(songs);
 
     }
-    public void addsongFromSer (Song song){
-        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads);
+
+    public void addsongFromSer(Song song) {
+        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads);
         if (count % 3 == 0) {
             box1.add(songadded);
             box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
@@ -82,7 +84,8 @@ public class Playlist extends JPanel {
         }
         this.revalidate();
     }
-    public void readSongs () throws
+
+    public void readSongs() throws
             InvalidDataException, IOException, UnsupportedTagException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream(name + ".ser");
         ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(name + "library.ser"))));
