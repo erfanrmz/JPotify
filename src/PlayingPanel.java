@@ -1,17 +1,28 @@
+
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import javazoom.jl.player.Player;
 
+
+import javazoom.jl.decoder.JavaLayerException;
+
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 public class PlayingPanel extends JPanel {
     private EJButton play;
@@ -132,17 +143,51 @@ public class PlayingPanel extends JPanel {
         shuffle.setPreferredSize(new Dimension(75,30));
         //
         this.setSize(new Dimension(1600,100));
-        //this.add(volumeBar,BorderLayout.LINE_END);
+        this.add(volumeBar,BorderLayout.LINE_END);
         this.add(buttonsBar,BorderLayout.NORTH);
         this.add(musicSeekPanel,BorderLayout.CENTER);
 
+        volume.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                Audio.setMasterOutputVolume((float)volume.getValue()/100);
+            }
+        });
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            //    Play play = new Play();
-            //    play.start();
+                //    Play play = new Play();
+                //    play.start();
             }
         });
+//        musicSeek.addAncestorListener(new AncestorListener() {
+//            @Override
+//            public void ancestorAdded(AncestorEvent event) {
+//                if (mp3player != null && !musicSeek.getValueIsAdjusting()) {
+//                    int dAngle = musicSeek.getValue();
+//                    try {
+//                        mp3player.mp3seek(dAngle);
+//                    } catch (JavaLayerException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//            @Override
+//            public void ancestorRemoved(AncestorEvent event) {
+//                if (mp3player != null && !musicSeek.getValueIsAdjusting()) {
+//                    int dAngle = musicSeek.getValue();
+//                    try {
+//                        mp3player.mp3seek(dAngle);
+//                    } catch (JavaLayerException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//            @Override
+//            public void ancestorMoved(AncestorEvent event) {
+//
+//            }
+//        });
     }
 
 }

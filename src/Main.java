@@ -1,8 +1,9 @@
+import javazoom.jl.decoder.JavaLayerException;
+
 import javax.swing.*;
 
 public class Main {
-    public static void main(String arg[])
-    {
+    public static void main(String arg[]) throws JavaLayerException {
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
