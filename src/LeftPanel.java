@@ -24,6 +24,10 @@ public class LeftPanel extends JPanel {
     private ArrayList<EJButton> playlistsButt;
     private ArrayList<Playlist> playlists;
 
+    public ArrayList<Playlist> getPlaylists() {
+        return playlists;
+    }
+
     public LeftPanel(JPanel songsPanel, MainFrame mainFrame, Play player, ArrayList<Play> playingThreads) {
         playlists = new ArrayList<>();
         playlistsButt = new ArrayList<>();
@@ -123,7 +127,7 @@ public class LeftPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 JTextField playlistName = new JTextField();
                 JFrame newPlaylistFrame = new JFrame("Please enter the name of your new playlist");
-                newPlaylistFrame.setSize(520,90);
+                newPlaylistFrame.setBounds(700,400,520,90);
                 newPlaylistFrame.setVisible(true);
                 newPlaylistFrame.add(playlistName);
                 playlistName.addActionListener(new ActionListener() {

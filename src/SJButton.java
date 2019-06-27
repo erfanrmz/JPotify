@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -13,13 +15,16 @@ public class SJButton extends JButton {
     private ArrayList<Play> playingThreads;
     private JPopupMenu popupMenu;
     private JMenuItem addToPlayList;
+    private LeftPanel leftPanel;
+
     public Play getPlayer() {
         return player;
     }
 
-    public SJButton(String text, Icon icon, Song song, Play player, MainFrame mainFrame, ArrayList<Play> playingThreads) {
+    public SJButton(String text, Icon icon, Song song, Play player, MainFrame mainFrame, ArrayList<Play> playingThreads, LeftPanel leftPanel) {
         super(text, icon);
         this.song = song;
+        this.leftPanel = leftPanel;
         this.setSize(new Dimension(260, 260));
         press = 0;
         this.mainFrame = mainFrame;
@@ -58,14 +63,25 @@ public class SJButton extends JButton {
 
 
                 }
-                if (e.getButton() == MouseEvent.BUTTON3)
-                {
+                if (e.getButton() == MouseEvent.BUTTON3) {
                     popupMenu.show(SJButton.this, e.getX(), e.getY());
-
                 }
             }
         });
+        addToPlayList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox playlists = new JComboBox();
+                JFrame playlistFrame = new JFrame();
+                playlistFrame.setLayout(new FlowLayout());
+                playlistFrame.setBounds(700, 400, 500, 500);
+                playlistFrame.setVisible(true);
 
-
+                for (int i = 0; i < SJButton.this.leftPanel.getPlaylists().size(); i++) {
+                    playlists.addItem(SJButton.this.leftPanel.getPlaylists().get(i).getName());
+                }
+                playlistFrame.add(playlists);
+            }
+        });
     }
 }

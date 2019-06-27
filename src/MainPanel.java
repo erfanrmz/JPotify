@@ -15,9 +15,11 @@ public class MainPanel extends JPanel {
     private int count;
     private ArrayList<Song> songs;
     private ArrayList<Play> playingThreads;
+    private LeftPanel leftPanel;
 
-    public MainPanel(MainFrame mainFrame, Play player, ArrayList < Play > playingThreads)
+    public MainPanel(MainFrame mainFrame, Play player, ArrayList < Play > playingThreads,LeftPanel leftPanel)
         {
+            this.leftPanel = leftPanel;
             songs = new ArrayList<>();
             count = 0;
             this.playingThreads = playingThreads;
@@ -43,7 +45,7 @@ public class MainPanel extends JPanel {
         }
     public void addsongFromButton (Song song) throws IOException {
         songs.add(song);
-        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads);
+        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads,leftPanel);
         if (count % 3 == 0) {
             box1.add(songadded);
             box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
@@ -64,7 +66,7 @@ public class MainPanel extends JPanel {
 
     }
     public void addsongFromSer (Song song){
-        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads);
+        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads,leftPanel);
             if (count % 3 == 0) {
                 box1.add(songadded);
                 box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
