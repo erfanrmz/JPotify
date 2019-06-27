@@ -23,4 +23,8 @@ public class Album extends JPanel{
     public ArrayList<Song> getSongs() {
         return songs;
     }
+
+    public ImageIcon getImageIcon() {
+        return imageIcon;
+    }
 }

@@ -5,15 +5,17 @@ import java.util.ArrayList;
 public class MainFrame extends JFrame {
     private MainPanel mainPanel;
     private PlayingPanel playingPanel;
+    private Albums albumsPanel;
     private LeftPanel leftPanel;
     private Play player;
     private JScrollPane songsScrollPane;
     private ArrayList<Play> playingThreads;
     private ArrayList<Album> albums;
     public MainFrame()  {
+            albums = new ArrayList<Album>();
+            albumsPanel = new Albums(albums);
             playingThreads = new ArrayList<Play>();
             player = new Play();
-            albums = new ArrayList<Album>();
             ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
             this.setIconImage(spotify.getImage());
             mainPanel = new MainPanel(this, player, playingThreads);
@@ -37,5 +39,21 @@ public class MainFrame extends JFrame {
 
     public LeftPanel getLeftPanel() {
         return leftPanel;
+    }
+
+    public Albums getAlbumsPanel() {
+        return albumsPanel;
+    }
+
+    public MainPanel getMainPanel() {
+        return mainPanel;
+    }
+    public void changePanel()
+    {
+        Albums p = new Albums(albums);
+        mainPanel.removeAll();
+        mainPanel.add(p);
+        this.revalidate();
+        this.repaint();
     }
 }

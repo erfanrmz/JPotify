@@ -28,7 +28,7 @@ public class SJButton extends JButton {
         this.setBorderPainted(false);
         this.setFocusPainted(false);
         this.setVerticalTextPosition(SJButton.BOTTOM);
-        this.setHorizontalTextPosition(JButton.CENTER);
+        this.setHorizontalTextPosition(SJButton.CENTER);
         this.setForeground(Color.white);
         this.setFont(new Font("", Font.BOLD, 14));
         this.player = player;

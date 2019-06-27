@@ -224,6 +224,14 @@ public class LeftPanel extends JPanel {
 
         albumsButton.addMouseListener(new MouseAdapter() {
             @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1)
+                {
+                    mainFrame.changePanel();
+                }
+            }
+
+            @Override
             public void mouseEntered(MouseEvent e) {
                 albumsButton.setForeground(Color.WHITE);
             }
