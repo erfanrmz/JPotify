@@ -1,22 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
-    private MainPanel mainPanel;
+    private JPanel mainPanel;
     private PlayingPanel playingPanel;
     private LeftPanel leftPanel;
     private Play player;
     private JScrollPane songsScrollPane;
     private ArrayList<Play> playingThreads;
 
-    public MainFrame() {
+    public MainFrame() throws IOException, ClassNotFoundException {
         playingThreads = new ArrayList<Play>();
         player = new Play();
         ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
         this.setIconImage(spotify.getImage());
+        mainPanel = new MainPanel(this, player, playingThreads);
         leftPanel = new LeftPanel(mainPanel, this, player, playingThreads);
-        mainPanel = new MainPanel(this, player, playingThreads, leftPanel);
         playingPanel = new PlayingPanel(player, playingThreads);
         songsScrollPane = new JScrollPane(mainPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         songsScrollPane.setBorder(null);
@@ -33,4 +34,39 @@ public class MainFrame extends JFrame {
     void Playernew() {
         player = new Play();
     }
+
+    public PlayingPanel getPlayingPanel() {
+        return playingPanel;
+    }
+
+    public LeftPanel getLeftPanel() {
+        return leftPanel;
+    }
+
+    public Play getPlayer() {
+        return player;
+    }
+
+    public JScrollPane getSongsScrollPane() {
+        return songsScrollPane;
+    }
+
+    public ArrayList<Play> getPlayingThreads() {
+        return playingThreads;
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+    public void ChangePanel(Playlist playlist)
+    {
+        mainPanel.removeAll();
+        mainPanel.add(playlist);
+        mainPanel.revalidate();
+        this.revalidate();
+        this.repaint();
+    }
+    //    public void chageMainPanel(JPanel mainPanel) {
+//        this.mainPanel = mainPanel;
+//    }
 }

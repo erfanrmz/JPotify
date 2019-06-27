@@ -15,11 +15,9 @@ public class MainPanel extends JPanel {
     private int count;
     private ArrayList<Song> songs;
     private ArrayList<Play> playingThreads;
-    private LeftPanel leftPanel;
 
-    public MainPanel(MainFrame mainFrame, Play player, ArrayList < Play > playingThreads,LeftPanel leftPanel)
+    public MainPanel(MainFrame mainFrame, Play player, ArrayList < Play > playingThreads)
         {
-            this.leftPanel = leftPanel;
             songs = new ArrayList<>();
             count = 0;
             this.playingThreads = playingThreads;
@@ -45,7 +43,7 @@ public class MainPanel extends JPanel {
         }
     public void addsongFromButton (Song song) throws IOException {
         songs.add(song);
-        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads,leftPanel);
+        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads);
         if (count % 3 == 0) {
             box1.add(songadded);
             box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
@@ -60,13 +58,13 @@ public class MainPanel extends JPanel {
             count++;
         }
         this.revalidate();
-        FileOutputStream fop = new FileOutputStream("library.ser");
+        FileOutputStream fop = new FileOutputStream("Saves\\library.ser");
         ObjectOutputStream oos = new ObjectOutputStream(fop);
         oos.writeObject(songs);
 
     }
     public void addsongFromSer (Song song){
-        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads,leftPanel);
+        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads);
             if (count % 3 == 0) {
                 box1.add(songadded);
                 box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
@@ -84,8 +82,8 @@ public class MainPanel extends JPanel {
     }
     public void readSongs () throws
             InvalidDataException, IOException, UnsupportedTagException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream("library.ser");
-        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("library.ser"))));
+        FileInputStream fis = new FileInputStream("Saves\\library.ser");
+        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\library.ser"))));
         songs = (ArrayList<Song>) ois.readObject();
         for (int i = 0; i < songs.size(); i++) {
             addsongFromSer(songs.get(i));

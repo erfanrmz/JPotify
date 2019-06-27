@@ -7,9 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class LeftPanel extends JPanel {
@@ -23,12 +21,20 @@ public class LeftPanel extends JPanel {
     private JPanel playlistsPanel;
     private ArrayList<EJButton> playlistsButt;
     private ArrayList<Playlist> playlists;
+    private ArrayList<String> playlistNames;
+    private MainFrame mainFrame;
+    private Play player;
+    private ArrayList<Play> playingThreads;
 
     public ArrayList<Playlist> getPlaylists() {
         return playlists;
     }
 
-    public LeftPanel(JPanel songsPanel, MainFrame mainFrame, Play player, ArrayList<Play> playingThreads) {
+    public LeftPanel(JPanel songsPanel, MainFrame mainFrame, Play player, ArrayList<Play> playingThreads) throws IOException, ClassNotFoundException {
+        playlistNames = new ArrayList<>();
+        this.playingThreads = playingThreads;
+        this.player = player;
+        this.mainFrame = mainFrame;
         playlists = new ArrayList<>();
         playlistsButt = new ArrayList<>();
         this.songsPanel = songsPanel;
@@ -50,7 +56,7 @@ public class LeftPanel extends JPanel {
         home.setIcon(new ImageIcon("Icons\\home.png"));
         others.setIcon(new ImageIcon("Icons\\others.png"));
         songs.setIcon(new ImageIcon("Icons\\song1.png"));
-        playlistsPanel.setBackground(new Color(18,18,18));
+        playlistsPanel.setBackground(new Color(18, 18, 18));
         newPlayList.setIcon(new ImageIcon("Icons\\newPlaylist.png"));
         Color leftPanelBackground = new Color(18, 18, 18);
         popupMenu.setPreferredSize(new Dimension(150, 40));
@@ -70,7 +76,7 @@ public class LeftPanel extends JPanel {
                 int fasf = a.showOpenDialog(null);
                 try {
                     Song song = new Song(a.getSelectedFile().getAbsolutePath());
-                    ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("library.ser"));
+                    ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("Saves\\library.ser"));
                     library.writeObject(song);
                     ((MainPanel) songsPanel).addsongFromButton(song);
 
@@ -127,18 +133,41 @@ public class LeftPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 JTextField playlistName = new JTextField();
                 JFrame newPlaylistFrame = new JFrame("Please enter the name of your new playlist");
-                newPlaylistFrame.setBounds(700,400,520,90);
+                newPlaylistFrame.setBounds(700, 400, 520, 90);
                 newPlaylistFrame.setVisible(true);
                 newPlaylistFrame.add(playlistName);
                 playlistName.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        playlists.add(new Playlist(playlistName.getText(), mainFrame, player, playingThreads));
+                        Playlist newp = new Playlist(playlistName.getText(), mainFrame, player, playingThreads);
+                        playlists.add(newp);
+                        playlistNames.add(playlistName.getText());
                         EJButton playl = new EJButton(playlistName.getText());
+                        FileOutputStream fop = null;
+                        try {
+                            fop = new FileOutputStream("Saves\\Name of the playlists.ser");
+                        } catch (FileNotFoundException ex) {
+                            ex.printStackTrace();
+                        }
+                        ObjectOutputStream oos = null;
+                        try {
+                            oos = new ObjectOutputStream(fop);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        try {
+                            oos.writeObject(playlistNames);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        playl.addActionListener(e1 -> {
+                            mainFrame.ChangePanel(newp);
+                        });
                         playl.setForeground(Color.WHITE);
                         playl.setPreferredSize(new Dimension(250, 40));
                         playlistsButt.add(playl);
                         playlistsPanel.add(playl);
+
                         newPlaylistFrame.dispose();
                         mainFrame.revalidate();
                     }
@@ -148,7 +177,6 @@ public class LeftPanel extends JPanel {
         });
 
         songs.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mouseEntered(MouseEvent e) {
                 songs.setIcon(new ImageIcon("Icons\\songEntered1.png"));
@@ -159,7 +187,34 @@ public class LeftPanel extends JPanel {
                 songs.setIcon(new ImageIcon("Icons\\song1.png"));
             }
         });
+        try {
+            readPlaylists();
+        } catch (Exception e) {
 
+        }
+    }
 
+    public void readPlaylists() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream("Saves\\Name of the playlists.ser");
+        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\Name of the playlists.ser"))));
+        playlistNames = (ArrayList<String>) ois.readObject();
+        for (int i = 0; i < playlistNames.size(); i++) {
+            Playlist newp = new Playlist(playlistNames.get(i), mainFrame, player, playingThreads);
+            playlists.add(newp);
+            EJButton playl = new EJButton(playlistNames.get(i));
+            playl.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    mainFrame.ChangePanel(newp);
+                }
+            });
+            playl.setForeground(Color.WHITE);
+            playl.setPreferredSize(new Dimension(250, 40));
+            playlistsButt.add(playl);
+            playlistsPanel.add(playl);
+            mainFrame.revalidate();
+            System.out.println(playlistNames.get(i));
+            System.out.println("ss");
+        }
     }
 }

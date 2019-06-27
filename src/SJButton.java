@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SJButton extends JButton {
@@ -15,16 +16,14 @@ public class SJButton extends JButton {
     private ArrayList<Play> playingThreads;
     private JPopupMenu popupMenu;
     private JMenuItem addToPlayList;
-    private LeftPanel leftPanel;
 
     public Play getPlayer() {
         return player;
     }
 
-    public SJButton(String text, Icon icon, Song song, Play player, MainFrame mainFrame, ArrayList<Play> playingThreads, LeftPanel leftPanel) {
+    public SJButton(String text, Icon icon, Song song, Play player, MainFrame mainFrame, ArrayList<Play> playingThreads) {
         super(text, icon);
         this.song = song;
-        this.leftPanel = leftPanel;
         this.setSize(new Dimension(260, 260));
         press = 0;
         this.mainFrame = mainFrame;
@@ -71,16 +70,25 @@ public class SJButton extends JButton {
         addToPlayList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JComboBox playlists = new JComboBox();
                 JFrame playlistFrame = new JFrame();
                 playlistFrame.setLayout(new FlowLayout());
                 playlistFrame.setBounds(700, 400, 500, 500);
                 playlistFrame.setVisible(true);
-
-                for (int i = 0; i < SJButton.this.leftPanel.getPlaylists().size(); i++) {
-                    playlists.addItem(SJButton.this.leftPanel.getPlaylists().get(i).getName());
+                for (int i = 0; i < mainFrame.getLeftPanel().getPlaylists().size(); i++) {
+                    JButton playlistBut = new JButton(mainFrame.getLeftPanel().getPlaylists().get(i).getName());
+                    playlistFrame.add(playlistBut);
+                    int finalI = i;
+                    playlistBut.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            try {
+                                mainFrame.getLeftPanel().getPlaylists().get(finalI).addsongFromButton(song);
+                            } catch (IOException ex) {
+                            }
+                            playlistFrame.dispose();
+                        }
+                    });
                 }
-                playlistFrame.add(playlists);
             }
         });
     }
