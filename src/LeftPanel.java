@@ -1,6 +1,5 @@
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.UnsupportedTagException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +27,6 @@ public class LeftPanel extends JPanel {
     private JScrollPane yourLibraryScrollPane;
     private ArrayList<EJButton> playlistsButt;
     private ArrayList<Playlist> playlists;
-    //<<<<<<< HEAD
     private ArrayList<String> playlistNames;
     private MainFrame mainFrame;
     private Play player;
@@ -48,7 +46,6 @@ public class LeftPanel extends JPanel {
         this.setPreferredSize(new Dimension(250, 800));
         this.setMaximumSize(new Dimension(250, 800));
         this.setMinimumSize(new Dimension(250, 800));
-//>>>>>>> album
         playlists = new ArrayList<>();
         playlistsButt = new ArrayList<>();
         yourLibrary = new JPanel();
@@ -73,8 +70,6 @@ public class LeftPanel extends JPanel {
         yourLibraryScrollPane.setBorder(null);
         yourLibrary.setMinimumSize(new Dimension(230, 230));
         yourLibrary.setMaximumSize(new Dimension(230, 230));
-//        yourLibrary.setPreferredSize(new Dimension(240,240));
-//        yourLibrary.setPreferredSize(new Dimension(250,250));
         this.albums = albums;
         this.songsPanel = songsPanel;
         popupMenu = new JPopupMenu("others");
@@ -112,6 +107,7 @@ public class LeftPanel extends JPanel {
 //        this.add(playlistsPanel);
         this.add(newPlayList);
         this.add(musicPlayingArtWork);
+
         //Actionlistoners
 
         addsong.addActionListener(new ActionListener() {
@@ -191,7 +187,6 @@ public class LeftPanel extends JPanel {
                 playlistName.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-//<<<<<<<HEAD
                         Playlist newp = new Playlist(playlistName.getText(), mainFrame, player, playingThreads);
                         playlists.add(newp);
                         playlistNames.add(playlistName.getText());
@@ -216,8 +211,8 @@ public class LeftPanel extends JPanel {
                         playl.addActionListener(e1 -> {
                             mainFrame.ChangePanel(newp);
                         });
-                        playlists.add(new Playlist(playlistName.getText(), mainFrame, player, playingThreads));
-                       // EJButton playl = new EJButton("     " + playlistName.getText());
+//                        playlists.add(new Playlist(playlistName.getText(), mainFrame, player, playingThreads));
+//                        EJButton playl = new EJButton("     " + playlistName.getText());
                         playl.setFont(new Font(" ", Font.BOLD, 20));
                         playl.setForeground(new Color(179, 179, 179));
                         playl.addMouseListener(new MouseAdapter() {
@@ -242,7 +237,6 @@ public class LeftPanel extends JPanel {
 
             }
         });
-
         songs.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -272,7 +266,6 @@ public class LeftPanel extends JPanel {
                 albumsButton.setForeground(new Color(179, 179, 179));
             }
         });
-
         favoriteButtton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -317,7 +310,6 @@ public class LeftPanel extends JPanel {
                     mainFrame.ChangePanel(newp);
                 }
             });
-//            playl.setForeground(Color.WHITE);
             playl.setPreferredSize(new Dimension(250, 40));
             playlistsButt.add(playl);
             playlistsPanel.add(playl);
@@ -325,7 +317,6 @@ public class LeftPanel extends JPanel {
             System.out.println(playlistNames.get(i));
             System.out.println("ss");
         }
-//=======
     }
 
     public EJButton getMusicPlayingArtWork() {

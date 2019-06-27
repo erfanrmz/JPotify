@@ -52,25 +52,20 @@ public class MainFrame extends JFrame {
             this.add(leftPanel, BorderLayout.LINE_START);
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.setVisible(true);
-//>>>>>>> album
     }
 
     void Playernew() {
         player = new Play();
     }
 
-//<<<<<<< HEAD
     public PlayingPanel getPlayingPanel() {
         return playingPanel;
     }
 
-//=======
-//>>>>>>> album
     public LeftPanel getLeftPanel() {
         return leftPanel;
     }
 
-//<<<<<<< HEAD
     public Play getPlayer() {
         return player;
     }
@@ -95,10 +90,6 @@ public class MainFrame extends JFrame {
         this.revalidate();
         this.repaint();
     }
-    //    public void chageMainPanel(JPanel mainPanel) {
-//        this.mainPanel = mainPanel;
-//    }
-
     public Albums getAlbumsPanel() {
         return albumsPanel;
     }
