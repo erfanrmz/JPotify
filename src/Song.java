@@ -102,6 +102,5 @@ public class Song implements Serializable {
                 ", album='" + album + '\'' +
                 ", year='" + year + '\'' +
                 '}';
-
     }
 }
