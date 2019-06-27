@@ -44,6 +44,7 @@ public class Play extends Thread {
                         }
                     }
                 }
+                System.out.println("END");
 
             }
             //JFileChooser a = new JFileChooser();

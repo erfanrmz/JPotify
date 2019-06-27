@@ -5,10 +5,19 @@ import java.awt.event.MouseEvent;
 
 public class AJButton extends JButton {
     private Album album;
-        public AJButton(Album album) {
+        public AJButton(String text , Icon icon ,Album album) {
+            super(text, icon);
             this.album = album;
             this.setPreferredSize(new Dimension(250,250));
-            this.setIcon(album.getImageIcon());
+            this.setSize(new Dimension(260, 260));
+            this.setOpaque(false);
+            this.setContentAreaFilled(false);
+            this.setBorderPainted(false);
+            this.setFocusPainted(false);
+            this.setVerticalTextPosition(SJButton.BOTTOM);
+            this.setHorizontalTextPosition(SJButton.CENTER);
+            this.setForeground(Color.white);
+            this.setFont(new Font("", Font.BOLD, 14));
         }
 
     public Album getAlbum() {

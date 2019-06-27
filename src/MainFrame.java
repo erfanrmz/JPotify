@@ -1,6 +1,9 @@
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.UnsupportedTagException;
+
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
@@ -11,6 +14,8 @@ public class MainFrame extends JFrame {
     private Play player;
     private JScrollPane songsScrollPane;
     private ArrayList<Play> playingThreads;
+    private ArrayList<Album> albums;
+    private ArrayList<Song> songs;
 
 //    public MainFrame() throws IOException, ClassNotFoundException {
 //        playingThreads = new ArrayList<Play>();
@@ -31,16 +36,24 @@ public class MainFrame extends JFrame {
 //        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        this.setVisible(true);
 //=======
-    private ArrayList<Album> albums;
+
     public MainFrame() throws IOException, ClassNotFoundException {
+            songs = new ArrayList<Song>();
             albums = new ArrayList<Album>();
-            albumsPanel = new Albums(albums);
             playingThreads = new ArrayList<Play>();
+            try{
+                readSongs();
+            }catch (Exception e2)
+            {
+                System.out.println(e2);
+            }
+            System.out.println(songs.size());
             player = new Play();
             ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
             this.setIconImage(spotify.getImage());
-            mainPanel = new MainPanel(this, player, playingThreads);
-            leftPanel = new LeftPanel(mainPanel,this, player, playingThreads ,albums);
+            mainPanel = new MainPanel(this, player, playingThreads,songs);
+            leftPanel = new LeftPanel(mainPanel,this, player, playingThreads ,albums,songs);
+            albumsPanel = new Albums(albums,songs);
             playingPanel = new PlayingPanel(player,playingThreads);
             songsScrollPane = new JScrollPane(mainPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
             songsScrollPane.setBorder(null);
@@ -94,13 +107,21 @@ public class MainFrame extends JFrame {
         return albumsPanel;
     }
 
-    public void changePanel()
+    public void setAlbumPanel()
     {
-        Albums p = new Albums(albums);
         mainPanel.removeAll();
-        mainPanel.add(p);
+        albumsPanel.updateAlbums();
+        mainPanel.add(albumsPanel);
+        mainPanel.revalidate();
+        mainPanel.repaint();
         this.revalidate();
         this.repaint();
-    }
 
+    }
+    public void readSongs () throws
+            InvalidDataException, IOException, UnsupportedTagException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream("Saves\\library.ser");
+        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\library.ser"))));
+        songs = (ArrayList<Song>) ois.readObject();
+    }
 }

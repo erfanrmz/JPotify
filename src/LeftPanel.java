@@ -32,17 +32,18 @@ public class LeftPanel extends JPanel {
     private Play player;
     private ArrayList<Play> playingThreads;
     private ArrayList<Album> albums;
-
+    private ArrayList<Song> songs1;
     public ArrayList<Playlist> getPlaylists() {
         return playlists;
     }
 
 
-    public LeftPanel(JPanel songsPanel, MainFrame mainFrame, Play player, ArrayList<Play> playingThreads, ArrayList<Album> albums) {
+    public LeftPanel(JPanel songsPanel, MainFrame mainFrame, Play player, ArrayList<Play> playingThreads, ArrayList<Album> albums , ArrayList<Song> songs1) {
         playlistNames = new ArrayList<>();
         this.playingThreads = playingThreads;
         this.player = player;
         this.mainFrame = mainFrame;
+        this.songs1 =songs1;
         this.setPreferredSize(new Dimension(250, 800));
         this.setMaximumSize(new Dimension(250, 800));
         this.setMinimumSize(new Dimension(250, 800));
@@ -117,19 +118,10 @@ public class LeftPanel extends JPanel {
                 int fasf = a.showOpenDialog(null);
                 try {
                     Song song = new Song(a.getSelectedFile().getAbsolutePath());
+                    songs1.add(song);
                     ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("Saves\\library.ser"));
                     library.writeObject(song);
                     ((MainPanel) songsPanel).addsongFromButton(song);
-                    for (int i = 0; i < albums.size(); i++) {
-                        if (song.getAlbum().equals(albums.get(i).getName())) {
-                            albums.get(i).getSongs().add(song);
-                            break;
-                        } else if (i == albums.size() - 1 && !song.getAlbum().equals(albums.get(i).getName())) {
-                            Album album = new Album(song.getAlbum(), song.getArtist(), song.getYear(), song.getImageIcon());
-                            albums.add(album);
-                            break;
-                        }
-                    }
                 } catch (IOException | InvalidDataException | UnsupportedTagException ex) {
                     ex.printStackTrace();
                 }
@@ -252,7 +244,7 @@ public class LeftPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    mainFrame.changePanel();
+                    mainFrame.setAlbumPanel();
                 }
             }
 
