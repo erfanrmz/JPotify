@@ -12,10 +12,10 @@ import java.io.Serializable;
 public class Song implements Serializable {
     private  int songSeekPos;
     private String address;
-    private  String title;
-    private  String artist;
-    private  String album;
-    private  String year;
+    private String title;
+    private String artist;
+    private String album;
+    private String year;
     private  ImageIcon imageIcon;
     private boolean favorite;
 

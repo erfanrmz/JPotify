@@ -41,6 +41,7 @@ public class SJButton extends JButton {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
+                    mainFrame.getLeftPanel().getMusicPlayingArtWork().setIcon(song.getImageIcon());
 
                     try {
                         for (int i = 0; i < playingThreads.size(); i++) {
@@ -61,7 +62,6 @@ public class SJButton extends JButton {
                 if (e.getButton() == MouseEvent.BUTTON3)
                 {
                     popupMenu.show(SJButton.this, e.getX(), e.getY());
-
                 }
             }
         });

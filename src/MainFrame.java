@@ -9,18 +9,17 @@ public class MainFrame extends JFrame {
     private Play player;
     private JScrollPane songsScrollPane;
     private ArrayList<Play> playingThreads;
-
+    private ArrayList<Album> albums;
     public MainFrame()  {
             playingThreads = new ArrayList<Play>();
             player = new Play();
+            albums = new ArrayList<Album>();
             ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
             this.setIconImage(spotify.getImage());
             mainPanel = new MainPanel(this, player, playingThreads);
-            leftPanel = new LeftPanel(mainPanel,this, player, playingThreads);
+            leftPanel = new LeftPanel(mainPanel,this, player, playingThreads ,albums);
             playingPanel = new PlayingPanel(player,playingThreads);
-            int v = ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
-            int h = ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED;
-            songsScrollPane = new JScrollPane(mainPanel, v, h);
+            songsScrollPane = new JScrollPane(mainPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
             songsScrollPane.setBorder(null);
             this.setTitle("Jpotify");
             this.setSize(new Dimension(1600, 900));
@@ -34,5 +33,9 @@ public class MainFrame extends JFrame {
 
     void Playernew() {
         player = new Play();
+    }
+
+    public LeftPanel getLeftPanel() {
+        return leftPanel;
     }
 }

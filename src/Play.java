@@ -31,7 +31,6 @@ public class Play extends Thread {
             e.printStackTrace();
         }
     }
-
     @Override
     public void run() {
         while (!stopMusic)

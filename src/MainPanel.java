@@ -27,7 +27,6 @@ public class MainPanel extends JPanel {
             box1.setBackground(new Color(24, 24, 24));
             box2.setBackground(new Color(24, 24, 24));
             box3.setBackground(new Color(24, 24, 24));
-
             this.mainFrame = mainFrame;
             this.player = player;
             this.setBackground(new Color(24, 24, 24));
