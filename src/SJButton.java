@@ -32,7 +32,7 @@ public class SJButton extends JButton {
         this.setBorderPainted(false);
         this.setFocusPainted(false);
         this.setVerticalTextPosition(SJButton.BOTTOM);
-        this.setHorizontalTextPosition(JButton.CENTER);
+        this.setHorizontalTextPosition(SJButton.CENTER);
         this.setForeground(Color.white);
         this.setFont(new Font("", Font.BOLD, 14));
         this.player = player;
@@ -45,6 +45,7 @@ public class SJButton extends JButton {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
+                    mainFrame.getLeftPanel().getMusicPlayingArtWork().setIcon(song.getImageIcon());
 
                     try {
                         for (int i = 0; i < playingThreads.size(); i++) {
