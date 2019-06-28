@@ -83,13 +83,22 @@ public class SJButton extends JButton {
                     SJButton.this.player.setPlayingSong(SJButton.this.song);
                     SJButton.this.player.start();
                     playingThreads.add(SJButton.this.player);
+
                     int numOfSong = 0;
                     for (int i = 0; i < mainFrame.getSongs().size(); i++)
                         if (SJButton.this.song == mainFrame.getSongs().get(i))
                             numOfSong = i;
                     for (int j = 0; j < numOfSong; j++)
                         Collections.swap(mainFrame.getSongs(), j, numOfSong);
-                    ((MainPanel)mainFrame.getMainPanel()).modifyPanel();
+                    ((MainPanel) mainFrame.getMainPanel()).modifyPanel();
+
+                    int numOfAlbum = 0;
+                    for (int i = 0; i < mainFrame.getAlbums().size(); i++)
+                        if (SJButton.this.song.getAlbum().equals(mainFrame.getAlbums().get(i).getName()))
+                            numOfAlbum = i;
+                    for (int j = 0; j < numOfAlbum; j++)
+                        Collections.swap(mainFrame.getAlbums(), j, numOfAlbum);
+                    mainFrame.getAlbumsPanel().updateAlbums();
                 }
 
                 if (e.getButton() == MouseEvent.BUTTON3) {

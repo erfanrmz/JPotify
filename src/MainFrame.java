@@ -129,4 +129,8 @@ public class MainFrame extends JFrame {
     public JPanel getMainPanel() {
         return mainPanel;
     }
+
+    public Albums getAlbumsPanel() {
+        return albumsPanel;
+    }
 }
