@@ -13,6 +13,7 @@ public class MainFrame extends JFrame {
     private ArrayList<Play> playingThreads;
     private ArrayList<Album> albums;
     private ArrayList<Song> songs;
+    private ArrayList<JSliderSeek> jSliderSeeks;
 
 //    public MainFrame() throws IOException, ClassNotFoundException {
 //        playingThreads = new ArrayList<Play>();
@@ -35,6 +36,8 @@ public class MainFrame extends JFrame {
 //=======
 
     public MainFrame() {
+
+        jSliderSeeks = new ArrayList<JSliderSeek>();
         songs = new ArrayList<Song>();
         albums = new ArrayList<Album>();
         playingThreads = new ArrayList<Play>();
@@ -50,7 +53,7 @@ public class MainFrame extends JFrame {
         mainPanel = new MainPanel(this, player, playingThreads, songs);
         leftPanel = new LeftPanel(mainPanel, this, player, playingThreads, albums, songs);
         albumsPanel = new Albums(albums, songs, this);
-        playingPanel = new PlayingPanel(player, playingThreads);
+        playingPanel = new PlayingPanel(player, playingThreads,this);
         songsScrollPane = new JScrollPane(mainPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         songsScrollPane.setBorder(null);
         this.setTitle("Jpotify");
@@ -109,5 +112,9 @@ public class MainFrame extends JFrame {
 
     public PlayingPanel getPlayingPanel() {
         return playingPanel;
+    }
+
+    public ArrayList<JSliderSeek> getjSliderSeeks() {
+        return jSliderSeeks;
     }
 }

@@ -23,8 +23,10 @@ public class PlayingPanel extends JPanel {
     private JPanel musicSeekPanel;
     private Play player;
     private ArrayList<Play> playingThreads;
+    private MainFrame mainFrame;
 
-    public PlayingPanel(Play player, ArrayList<Play> playingThreads) {
+    public PlayingPanel(Play player, ArrayList<Play> playingThreads , MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
         this.playingThreads = playingThreads;
         this.player = player;
         this.setPreferredSize(new Dimension(1600, 100));
@@ -67,10 +69,14 @@ public class PlayingPanel extends JPanel {
 
                     play.setIcon(new ImageIcon("Icons\\playEntered50.png"));
                     playingThreads.get(playingThreads.size() - 1).mp3Pause();
+                    mainFrame.getjSliderSeeks().get(mainFrame.getjSliderSeeks().size()-1).stop();
 
                 } else if (play.getPressed() % 2 == 1) {
                     play.setIcon(new ImageIcon("Icons\\pauseEntered50.png"));
                     playingThreads.get(playingThreads.size() - 1).mp3Resume();
+                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame.getPlayingPanel().getMusicSeek());
+                    jSliderSeek.start();
+                    mainFrame.getjSliderSeeks().add(jSliderSeek);
                 }
 
             }

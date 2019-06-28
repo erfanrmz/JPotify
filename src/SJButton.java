@@ -48,6 +48,14 @@ public class SJButton extends JButton {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
+                    mainFrame.getPlayingPanel().getMusicSeek().setValue(0);
+                    for (int i = 0 ; i < mainFrame.getjSliderSeeks().size() ;i++)
+                    {
+                        mainFrame.getjSliderSeeks().get(i).stop();
+                    }
+                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame.getPlayingPanel().getMusicSeek());
+                    mainFrame.getjSliderSeeks().add(jSliderSeek);
+                    jSliderSeek.start();
                     mainFrame.getLeftPanel().getMusicPlayingArtWork().setIcon(song.getImageIcon());
                     mainFrame.getPlayingPanel().getPlay().setIcon(new ImageIcon("Icons\\pause50.png"));
                     mainFrame.getPlayingPanel().getPlay().setPressed(1);
@@ -55,7 +63,6 @@ public class SJButton extends JButton {
                         for (int i = 0; i < playingThreads.size(); i++) {
                             playingThreads.get(i).stop();
                         }
-
                         System.out.println("stopped");
                     } catch (Exception e1) {
                         System.out.println("SHIT");
