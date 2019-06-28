@@ -117,4 +117,16 @@ public class MainFrame extends JFrame {
     public ArrayList<JSliderSeek> getjSliderSeeks() {
         return jSliderSeeks;
     }
+
+    public ArrayList<Song> getSongs() {
+        return songs;
+    }
+
+    public ArrayList<Album> getAlbums() {
+        return albums;
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
 }
