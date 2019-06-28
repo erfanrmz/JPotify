@@ -67,12 +67,13 @@ public class PJButton extends JButton {
                         }
                         System.out.println("stopped");
                     } catch (Exception e1) {
-                        System.out.println("SHIT");
                     }
                     PJButton.this.player = new Play(0);
                     PJButton.this.player.setPlayingSong(song);
                     PJButton.this.player.start();
                     playingThreads.add(PJButton.this.player);
+                    ((MainPanel)mainFrame.getMainPanel()).RecentlyPlayed(PJButton.this.song);
+
                 }
                 if (e.getButton() == MouseEvent.BUTTON3) {
                     popupMenu.show(PJButton.this, e.getX(), e.getY());

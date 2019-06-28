@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainPanel extends JPanel {
     private MainFrame mainFrame;
@@ -123,6 +124,23 @@ public class MainPanel extends JPanel {
 //        System.out.println(songs.size() + "after Equal");
 //
 //    }
+    public void RecentlyPlayed(Song song) {
+        int numOfSong = 0;
+        for (int i = 0; i < mainFrame.getSongs().size(); i++)
+            if (song == mainFrame.getSongs().get(i))
+                numOfSong = i;
+        for (int j = 0; j < numOfSong; j++)
+            Collections.swap(mainFrame.getSongs(), j, numOfSong);
+
+        int numOfAlbum = 0;
+        for (int i = 0; i < mainFrame.getAlbums().size(); i++)
+            if (song.getAlbum().equals(mainFrame.getAlbums().get(i).getName())) {
+                numOfAlbum = i;
+            }
+        for (int j = 0; j < numOfAlbum; j++)
+            Collections.swap(mainFrame.getAlbums(), j, numOfAlbum);
+        mainFrame.getAlbumsPanel().updateAlbums();
+    }
 }
 
 

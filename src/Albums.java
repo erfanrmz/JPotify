@@ -51,20 +51,17 @@ public class Albums extends JPanel {
                 songsOfAlbum.add(songs.get(i));
                 Album album = new Album(songs.get(i).getAlbum(), songs.get(i).getArtist(), songs.get(i).getYear(), songs.get(i).getImageIcon(), mainFrame, songsOfAlbum);
 //                album.getSongsOfAlbum().add(songs.get(i));
-                System.out.println("FUck : " + album.getName());
                 albums.add(album);
             } else {
                 for (int j = 0; j < albums.size(); j++) {
                     if (songs.get(i).getAlbum().equals(albums.get(j).getName())) {
                         albums.get(j).getSongsOfAlbum().add(songs.get(i));
-                        System.out.println("shit : " + albums.get(j).getName());
                         break;
                     } else if (j == albums.size() - 1 && !songs.get(i).getAlbum().equals(albums.get(j).getName())) {
                         ArrayList<Song> songsOfAlbum = new ArrayList<Song>();
                         songsOfAlbum.add(songs.get(i));
                         Album album = new Album(songs.get(i).getAlbum(), songs.get(i).getArtist(), songs.get(i).getYear(), songs.get(i).getImageIcon(), mainFrame, songsOfAlbum);
 //                        albums.get(j).getSongsOfAlbum().add(songs.get(i));
-                        System.out.println("FUck : " + album.getName());
                         albums.add(album);
                         break;
                     }
