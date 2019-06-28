@@ -1,6 +1,3 @@
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.UnsupportedTagException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -28,7 +25,6 @@ public class Playlist extends JPanel {
         box1.setBackground(new Color(24, 24, 24));
         box2.setBackground(new Color(24, 24, 24));
         box3.setBackground(new Color(24, 24, 24));
-
         this.mainFrame = mainFrame;
         this.player = player;
         this.setBackground(new Color(24, 24, 24));
@@ -39,24 +35,22 @@ public class Playlist extends JPanel {
         try {
             readSongs();
         } catch (Exception e) {
-
         }
-//        this.setLayout(new FlowLayout(FlowLayout.LEFT));
     }
 
-    public void addsongFromButton(Song song) throws IOException {
+    public void addSongFromButton(Song song) throws IOException {
         songs.add(song);
-        PJButton songadded = new PJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads,this);
+        PJButton songAdded = new PJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads, this);
         if (count % 3 == 0) {
-            box1.add(songadded);
+            box1.add(songAdded);
             box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
             count++;
         } else if (count % 3 == 1) {
-            box2.add(songadded);
+            box2.add(songAdded);
             box2.setLayout(new BoxLayout(box2, BoxLayout.Y_AXIS));
             count++;
         } else if (count % 3 == 2) {
-            box3.add(songadded);
+            box3.add(songAdded);
             box3.setLayout(new BoxLayout(box3, BoxLayout.Y_AXIS));
             count++;
         }
@@ -67,18 +61,18 @@ public class Playlist extends JPanel {
 
     }
 
-    public void addsongFromSer(Song song) {
-        PJButton songadded = new PJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads,this);
+    public void addSongFromSer(Song song) {
+        PJButton songAdded = new PJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads, this);
         if (count % 3 == 0) {
-            box1.add(songadded);
+            box1.add(songAdded);
             box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
             count++;
         } else if (count % 3 == 1) {
-            box2.add(songadded);
+            box2.add(songAdded);
             box2.setLayout(new BoxLayout(box2, BoxLayout.Y_AXIS));
             count++;
         } else if (count % 3 == 2) {
-            box3.add(songadded);
+            box3.add(songAdded);
             box3.setLayout(new BoxLayout(box3, BoxLayout.Y_AXIS));
             count++;
         }
@@ -86,13 +80,12 @@ public class Playlist extends JPanel {
     }
 
     public void readSongs() throws
-            InvalidDataException, IOException, UnsupportedTagException, ClassNotFoundException {
+            IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream("Saves\\" + name + ".ser");
         ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\" + name + ".ser"))));
         songs = (ArrayList<Song>) ois.readObject();
-        for (int i = 0; i < songs.size(); i++) {
-            addsongFromSer(songs.get(i));
-        }
+        for (int i = 0; i < songs.size(); i++)
+            addSongFromSer(songs.get(i));
     }
 
     public String getName() {

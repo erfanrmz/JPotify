@@ -1,6 +1,3 @@
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.UnsupportedTagException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -37,43 +34,33 @@ public class MainFrame extends JFrame {
 //        this.setVisible(true);
 //=======
 
-    public MainFrame() throws IOException, ClassNotFoundException {
-            songs = new ArrayList<Song>();
-            albums = new ArrayList<Album>();
-            playingThreads = new ArrayList<Play>();
-            try{
-                readSongs();
-            }catch (Exception e2)
-            {
-                System.out.println(e2);
-            }
-            System.out.println(songs.size());
-            player = new Play();
-            ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
-            this.setIconImage(spotify.getImage());
-            mainPanel = new MainPanel(this, player, playingThreads,songs);
-            leftPanel = new LeftPanel(mainPanel,this, player, playingThreads ,albums,songs);
-            albumsPanel = new Albums(albums,songs,this);
-            playingPanel = new PlayingPanel(player,playingThreads);
-            songsScrollPane = new JScrollPane(mainPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-            songsScrollPane.setBorder(null);
-            this.setTitle("Jpotify");
-            this.setSize(new Dimension(1600, 900));
-            this.setLayout(new BorderLayout());
-            this.add(songsScrollPane, BorderLayout.CENTER);
-            this.add(playingPanel, BorderLayout.PAGE_END);
-            this.add(leftPanel, BorderLayout.LINE_START);
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            this.setVisible(true);
-    }
-
-
-    void Playernew() {
+    public MainFrame() {
+        songs = new ArrayList<Song>();
+        albums = new ArrayList<Album>();
+        playingThreads = new ArrayList<Play>();
+        try {
+            readSongs();
+        } catch (Exception e2) {
+            System.out.println(e2);
+        }
+        System.out.println(songs.size());
         player = new Play();
-    }
-
-    public PlayingPanel getPlayingPanel() {
-        return playingPanel;
+        ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
+        this.setIconImage(spotify.getImage());
+        mainPanel = new MainPanel(this, player, playingThreads, songs);
+        leftPanel = new LeftPanel(mainPanel, this, player, playingThreads, albums, songs);
+        albumsPanel = new Albums(albums, songs, this);
+        playingPanel = new PlayingPanel(player, playingThreads);
+        songsScrollPane = new JScrollPane(mainPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        songsScrollPane.setBorder(null);
+        this.setTitle("Jpotify");
+        this.setSize(new Dimension(1600, 900));
+        this.setLayout(new BorderLayout());
+        this.add(songsScrollPane, BorderLayout.CENTER);
+        this.add(playingPanel, BorderLayout.PAGE_END);
+        this.add(leftPanel, BorderLayout.LINE_START);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 
     public LeftPanel getLeftPanel() {
@@ -84,32 +71,19 @@ public class MainFrame extends JFrame {
         return player;
     }
 
-    public JScrollPane getSongsScrollPane() {
-        return songsScrollPane;
-    }
-
     public ArrayList<Play> getPlayingThreads() {
         return playingThreads;
     }
 
-    public JPanel getMainPanel() {
-        return mainPanel;
-    }
-
-    public void ChangePanel(Playlist playlist)
-    {
+    public void ChangePanel(Playlist playlist) {
         mainPanel.removeAll();
         mainPanel.add(playlist);
         mainPanel.revalidate();
         this.revalidate();
         this.repaint();
     }
-    public Albums getAlbumsPanel() {
-        return albumsPanel;
-    }
 
-    public void setAlbumPanel()
-    {
+    public void setAlbumPanel() {
         mainPanel.removeAll();
         albumsPanel.updateAlbums();
         mainPanel.add(albumsPanel);
@@ -118,8 +92,8 @@ public class MainFrame extends JFrame {
         this.revalidate();
         this.repaint();
     }
-    public void setAlbumPanel1(Album albumPanel)
-    {
+
+    public void setAlbumPanel1(Album albumPanel) {
         mainPanel.removeAll();
         mainPanel.add(albumPanel);
         mainPanel.revalidate();
@@ -127,9 +101,8 @@ public class MainFrame extends JFrame {
         this.revalidate();
         this.repaint();
     }
-    public void readSongs () throws
-            InvalidDataException, IOException, UnsupportedTagException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream("Saves\\library.ser");
+
+    public void readSongs() throws IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\library.ser"))));
         songs = (ArrayList<Song>) ois.readObject();
     }

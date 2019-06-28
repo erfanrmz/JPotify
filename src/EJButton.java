@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 
 public class EJButton extends JButton {
     private int pressed;
+
     public EJButton() {
         pressed = 0;
         this.setOpaque(false);

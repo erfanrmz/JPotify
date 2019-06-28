@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public class Song implements Serializable {
-    private  int songSeekPos;
+    private int songSeekPos;
     private String address;
     private String title;
     private String artist;
     private String album;
     private String year;
-    private  ImageIcon imageIcon;
+    private ImageIcon imageIcon;
     private boolean favorite;
 
     public Song(String address) throws IOException, InvalidDataException, UnsupportedTagException {
@@ -52,9 +52,9 @@ public class Song implements Serializable {
         try {
             imageIcon = new ImageIcon(mp3File.getId3v2Tag().getAlbumImage());
             Image img = imageIcon.getImage();
-            Image resizedImage = img.getScaledInstance(250, 250,  java.awt.Image.SCALE_SMOOTH);
+            Image resizedImage = img.getScaledInstance(250, 250, java.awt.Image.SCALE_SMOOTH);
             imageIcon = new ImageIcon(resizedImage);
-        }catch (Exception e){
+        } catch (Exception e) {
             imageIcon = new ImageIcon("Icons\\cover1.png");
             System.out.println("No artwork");
         }

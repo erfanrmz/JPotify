@@ -4,7 +4,7 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 import java.io.IOException;
 
 public class test {
-    public static void main(String arg[]){
+    public static void main(String arg[]) {
         Song s = null;
         try {
             s = new Song("D:\\Musics\\Owl City feat. Hanson - Unbelievable.mp3");

@@ -21,14 +21,13 @@ public class PlayingPanel extends JPanel {
     private JPanel buttonsBar;
     private JPanel volumeBar;
     private JPanel musicSeekPanel;
-    private  Play player;
+    private Play player;
     private ArrayList<Play> playingThreads;
 
-    public PlayingPanel(Play player , ArrayList<Play> playingThreads)
-    {
+    public PlayingPanel(Play player, ArrayList<Play> playingThreads) {
         this.playingThreads = playingThreads;
         this.player = player;
-        this.setPreferredSize(new Dimension(1600,100));
+        this.setPreferredSize(new Dimension(1600, 100));
         this.setLayout(new BorderLayout());
         play = new EJButton();
         nextMusic = new EJButton();
@@ -38,10 +37,10 @@ public class PlayingPanel extends JPanel {
         musicSeekPanel = new JPanel();
         buttonsBar = new JPanel();
         volumeBar = new JPanel();
-        volume = new EJSlider(0,100,100);
-        musicSeek = new EJSlider(0,100,50);
-        volume.setPreferredSize(new Dimension(100,10));
-        musicSeek.setPreferredSize(new Dimension(600,10));
+        volume = new EJSlider(0, 100, 100);
+        musicSeek = new EJSlider(0, 100, 50);
+        volume.setPreferredSize(new Dimension(100, 10));
+        musicSeek.setPreferredSize(new Dimension(600, 10));
         musicSeekPanel.add(musicSeek);
         //buttons bar
         buttonsBar.add(shuffle);
@@ -51,29 +50,25 @@ public class PlayingPanel extends JPanel {
         buttonsBar.add(repeat);
         buttonsBar.setLayout(new FlowLayout(FlowLayout.CENTER));
         //volume Bar
-        volumeBar.setLayout(new GridLayout(3,1));
+        volumeBar.setLayout(new GridLayout(3, 1));
         volumeBar.add(volume);
 
-        this.setBackground(new Color(40,40,40));
-        buttonsBar.setBackground(new Color(40,40,40));
+        this.setBackground(new Color(40, 40, 40));
+        buttonsBar.setBackground(new Color(40, 40, 40));
         volumeBar.setBackground(new Color(40, 40, 40));
-        musicSeekPanel.setBackground(new Color(40,40,40));
+        musicSeekPanel.setBackground(new Color(40, 40, 40));
         //icons
         play.setIcon(new ImageIcon("Icons\\play50.png"));
-        play.setPreferredSize(new Dimension(75,50));
+        play.setPreferredSize(new Dimension(75, 50));
         play.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e)
-            {
-                if(play.getPressed() % 2 == 0 )
-                {
+            public void mousePressed(MouseEvent e) {
+                if (play.getPressed() % 2 == 0) {
 
                     play.setIcon(new ImageIcon("Icons\\playEntered50.png"));
-                    playingThreads.get(playingThreads.size()-1).mp3Pause();
+                    playingThreads.get(playingThreads.size() - 1).mp3Pause();
 
-                }
-                else if (play.getPressed()%2 == 1)
-                {
+                } else if (play.getPressed() % 2 == 1) {
 
                     play.setIcon(new ImageIcon("Icons\\pauseEntered50.png"));
 //                    if (play.getPressed() == 1)
@@ -90,55 +85,49 @@ public class PlayingPanel extends JPanel {
 //                        }
 //                        mp3player.start();
 //                    }
-                    playingThreads.get(playingThreads.size()-1).mp3Resume();
+                    playingThreads.get(playingThreads.size() - 1).mp3Resume();
                 }
 
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                if(play.getPressed() % 2 == 0)
-                {
+                if (play.getPressed() % 2 == 0) {
 
                     play.setIcon(new ImageIcon("Icons\\playEntered50.png"));
-                }
-                else if (play.getPressed()%2 == 1)
-                {
+                } else if (play.getPressed() % 2 == 1) {
                     play.setIcon(new ImageIcon("Icons\\pauseEntered50.png"));
                 }
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if(play.getPressed() % 2 == 0)
-                {
+                if (play.getPressed() % 2 == 0) {
                     play.setIcon(new ImageIcon("Icons\\play50.png"));
 
-                }
-                else if (play.getPressed()%2 == 1)
-                {
+                } else if (play.getPressed() % 2 == 1) {
                     play.setIcon(new ImageIcon("Icons\\pause50.png"));
                 }
             }
         });
         previousMusic.setIcon(new ImageIcon("Icons\\previous30.png"));
-        previousMusic.setPreferredSize(new Dimension(75,30));
+        previousMusic.setPreferredSize(new Dimension(75, 30));
         nextMusic.setIcon(new ImageIcon("Icons\\next30.png"));
-        nextMusic.setPreferredSize(new Dimension(75,30));
+        nextMusic.setPreferredSize(new Dimension(75, 30));
         repeat.setIcon(new ImageIcon("Icons\\repeat20.png"));
-        repeat.setPreferredSize(new Dimension(75,30));
+        repeat.setPreferredSize(new Dimension(75, 30));
         shuffle.setIcon(new ImageIcon("Icons\\shuffle20.png"));
-        shuffle.setPreferredSize(new Dimension(75,30));
+        shuffle.setPreferredSize(new Dimension(75, 30));
         //
-        this.setSize(new Dimension(1600,100));
-        this.add(volumeBar,BorderLayout.LINE_END);
-        this.add(buttonsBar,BorderLayout.NORTH);
-        this.add(musicSeekPanel,BorderLayout.CENTER);
+        this.setSize(new Dimension(1600, 100));
+        this.add(volumeBar, BorderLayout.LINE_END);
+        this.add(buttonsBar, BorderLayout.NORTH);
+        this.add(musicSeekPanel, BorderLayout.CENTER);
 
         volume.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                Audio.setMasterOutputVolume((float)volume.getValue()/100);
+                Audio.setMasterOutputVolume((float) volume.getValue() / 100);
             }
         });
         play.addActionListener(new ActionListener() {

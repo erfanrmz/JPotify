@@ -34,17 +34,18 @@ public class LeftPanel extends JPanel {
     private ArrayList<Play> playingThreads;
     private ArrayList<Album> albums;
     private ArrayList<Song> songs1;
+
     public ArrayList<Playlist> getPlaylists() {
         return playlists;
     }
 
 
-    public LeftPanel(JPanel songsPanel, MainFrame mainFrame, Play player, ArrayList<Play> playingThreads, ArrayList<Album> albums , ArrayList<Song> songs1) {
+    public LeftPanel(JPanel songsPanel, MainFrame mainFrame, Play player, ArrayList<Play> playingThreads, ArrayList<Album> albums, ArrayList<Song> songs1) {
         playlistNames = new ArrayList<>();
         this.playingThreads = playingThreads;
         this.player = player;
         this.mainFrame = mainFrame;
-        this.songs1 =songs1;
+        this.songs1 = songs1;
         this.setPreferredSize(new Dimension(250, 800));
         this.setMaximumSize(new Dimension(250, 800));
         this.setMinimumSize(new Dimension(250, 800));
@@ -115,15 +116,15 @@ public class LeftPanel extends JPanel {
         addsong.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser a = new JFileChooser();
-                int fasf = a.showOpenDialog(null);
+                JFileChooser fileChooser = new JFileChooser();
+                int dialog = fileChooser.showOpenDialog(null);
                 try {
-                    Song song = new Song(a.getSelectedFile().getAbsolutePath());
+                    Song song = new Song(fileChooser.getSelectedFile().getAbsolutePath());
                     songs1.add(song);
                     System.out.println(songs1.size());
                     ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("Saves\\library.ser"));
                     library.writeObject(song);
-                    ((MainPanel) songsPanel).addsongFromButton(song);
+                    ((MainPanel) songsPanel).addSongFromButton(song);
                 } catch (IOException | InvalidDataException | UnsupportedTagException ex) {
                     ex.printStackTrace();
                 }
@@ -181,10 +182,10 @@ public class LeftPanel extends JPanel {
                 playlistName.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        Playlist newp = new Playlist(playlistName.getText(), mainFrame, player, playingThreads);
-                        playlists.add(newp);
+                        Playlist newP = new Playlist(playlistName.getText(), mainFrame, player, playingThreads);
+                        playlists.add(newP);
                         playlistNames.add(playlistName.getText());
-                        EJButton playl = new EJButton("     " + playlistName.getText());
+                        EJButton playL = new EJButton("     " + playlistName.getText());
                         FileOutputStream fop = null;
                         try {
                             fop = new FileOutputStream("Saves\\Name of the playlists.ser");
@@ -202,29 +203,29 @@ public class LeftPanel extends JPanel {
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
-                        playl.setFont(new Font(" ", Font.BOLD, 20));
-                        playl.setForeground(new Color(179, 179, 179));
-                        playl.addMouseListener(new MouseAdapter() {
+                        playL.setFont(new Font(" ", Font.BOLD, 20));
+                        playL.setForeground(new Color(179, 179, 179));
+                        playL.addMouseListener(new MouseAdapter() {
                             @Override
                             public void mouseEntered(MouseEvent e) {
-                                playl.setForeground(Color.WHITE);
+                                playL.setForeground(Color.WHITE);
                             }
 
                             @Override
                             public void mouseExited(MouseEvent e) {
-                                playl.setForeground(new Color(179, 179, 179));
+                                playL.setForeground(new Color(179, 179, 179));
                             }
                         });
-                        playl.setPreferredSize(new Dimension(250, 40));
-                        playlistsButt.add(playl);
-                        playlistsPanel.add(playl);
+                        playL.setPreferredSize(new Dimension(250, 40));
+                        playlistsButt.add(playL);
+                        playlistsPanel.add(playL);
                         newPlaylistFrame.dispose();
                         mainFrame.revalidate();
-                        playl.addMouseListener(new MouseAdapter() {
+                        playL.addMouseListener(new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent e) {
                                 if (e.getButton() == MouseEvent.BUTTON1) {
-                                    mainFrame.ChangePanel(newp);
+                                    mainFrame.ChangePanel(newP);
                                 }
                                 if (e.getButton() == MouseEvent.BUTTON3) {
                                     JPopupMenu popForDel = new JPopupMenu("Delete Playlist");
@@ -233,10 +234,10 @@ public class LeftPanel extends JPanel {
                                     deletePlaylist.addActionListener(new ActionListener() {
                                         @Override
                                         public void actionPerformed(ActionEvent e) {
-                                            playlists.remove(newp);
+                                            playlists.remove(newP);
                                             playlistNames.remove(playlistName.getText());
-                                            playlistsButt.remove(playl);
-                                            playlistsPanel.remove(playl);
+                                            playlistsButt.remove(playL);
+                                            playlistsPanel.remove(playL);
                                             LeftPanel.this.revalidate();
                                             LeftPanel.this.repaint();
                                             FileOutputStream fop = null;
@@ -258,15 +259,12 @@ public class LeftPanel extends JPanel {
                                             }
                                         }
                                     });
-                                    popForDel.show(playl, e.getX(), e.getY());
+                                    popForDel.show(playL, e.getX(), e.getY());
                                 }
                             }
                         });
-//                        playlists.add(new Playlist(playlistName.getText(), mainFrame, player, playingThreads));
-//                        EJButton playl = new EJButton("     " + playlistName.getText());
                     }
                 });
-
             }
         });
         songs.addMouseListener(new MouseAdapter() {
@@ -316,53 +314,53 @@ public class LeftPanel extends JPanel {
     }
 
     public void readPlaylists() throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream("Saves\\Name of the playlists.ser");
         ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\Name of the playlists.ser"))));
         playlistNames = (ArrayList<String>) ois.readObject();
         for (int i = 0; i < playlistNames.size(); i++) {
-            Playlist newp = new Playlist(playlistNames.get(i), mainFrame, player, playingThreads);
-            playlists.add(newp);
-            EJButton playl = new EJButton("     " + playlistNames.get(i));
-            playl.setFont(new Font(" ", Font.BOLD, 20));
-            playl.setForeground(new Color(179, 179, 179));
-            playl.addMouseListener(new MouseAdapter() {
+            Playlist newP = new Playlist(playlistNames.get(i), mainFrame, player, playingThreads);
+            playlists.add(newP);
+            EJButton playL = new EJButton("     " + playlistNames.get(i));
+            playL.setFont(new Font(" ", Font.BOLD, 20));
+            playL.setForeground(new Color(179, 179, 179));
+            playL.addMouseListener(new MouseAdapter() {
+
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    playl.setForeground(Color.WHITE);
+                    playL.setForeground(Color.WHITE);
                 }
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    playl.setForeground(new Color(179, 179, 179));
+                    playL.setForeground(new Color(179, 179, 179));
                 }
             });
-            playl.addActionListener(new ActionListener() {
+            playL.addActionListener(new ActionListener() {
+
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    mainFrame.ChangePanel(newp);
+                    mainFrame.ChangePanel(newP);
                 }
             });
-            playl.setPreferredSize(new Dimension(250, 40));
-            playlistsButt.add(playl);
-            playlistsPanel.add(playl);
+            playL.setPreferredSize(new Dimension(250, 40));
+            playlistsButt.add(playL);
+            playlistsPanel.add(playL);
             mainFrame.revalidate();
-            playl.addMouseListener(new MouseAdapter() {
+            playL.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if (e.getButton() == MouseEvent.BUTTON1) {
-                        mainFrame.ChangePanel(newp);
-                    }
-                    if (e.getButton() == MouseEvent.BUTTON3) {
+                    if (e.getButton() == MouseEvent.BUTTON1)
+                        mainFrame.ChangePanel(newP);
+                    else if (e.getButton() == MouseEvent.BUTTON3) {
                         JPopupMenu popForDel = new JPopupMenu("Delete Playlist");
                         JMenuItem deletePlaylist = new JMenuItem("Delete Playlist");
                         popForDel.add(deletePlaylist);
                         deletePlaylist.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                playlists.remove(newp);
-                                playlistNames.remove(newp.getName());
-                                playlistsButt.remove(playl);
-                                playlistsPanel.remove(playl);
+                                playlists.remove(newP);
+                                playlistNames.remove(newP.getName());
+                                playlistsButt.remove(playL);
+                                playlistsPanel.remove(playL);
                                 LeftPanel.this.revalidate();
                                 LeftPanel.this.repaint();
                                 FileOutputStream fop = null;
@@ -384,8 +382,7 @@ public class LeftPanel extends JPanel {
                                 }
                             }
                         });
-                        popForDel.show(playl, e.getX(), e.getY());
-
+                        popForDel.show(playL, e.getX(), e.getY());
                     }
                 }
             });

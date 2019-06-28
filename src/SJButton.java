@@ -83,7 +83,7 @@ public class SJButton extends JButton {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             try {
-                                mainFrame.getLeftPanel().getPlaylists().get(finalI).addsongFromButton(song);
+                                mainFrame.getLeftPanel().getPlaylists().get(finalI).addSongFromButton(song);
                             } catch (IOException ex) {
                             }
                             playlistFrame.dispose();

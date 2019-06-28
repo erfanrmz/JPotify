@@ -49,12 +49,11 @@ public class Albums extends JPanel {
             if (albums.size() == 0) {
                 ArrayList<Song> songsOfAlbum = new ArrayList<Song>();
                 songsOfAlbum.add(songs.get(i));
-                Album album = new Album(songs.get(i).getAlbum(), songs.get(i).getArtist(), songs.get(i).getYear(), songs.get(i).getImageIcon(), mainFrame,songsOfAlbum);
+                Album album = new Album(songs.get(i).getAlbum(), songs.get(i).getArtist(), songs.get(i).getYear(), songs.get(i).getImageIcon(), mainFrame, songsOfAlbum);
 //                album.getSongsOfAlbum().add(songs.get(i));
                 System.out.println("FUck : " + album.getName());
                 albums.add(album);
-            } else
-            {
+            } else {
                 for (int j = 0; j < albums.size(); j++) {
                     if (songs.get(i).getAlbum().equals(albums.get(j).getName())) {
                         albums.get(j).getSongsOfAlbum().add(songs.get(i));
@@ -63,7 +62,7 @@ public class Albums extends JPanel {
                     } else if (j == albums.size() - 1 && !songs.get(i).getAlbum().equals(albums.get(j).getName())) {
                         ArrayList<Song> songsOfAlbum = new ArrayList<Song>();
                         songsOfAlbum.add(songs.get(i));
-                        Album album = new Album(songs.get(i).getAlbum(), songs.get(i).getArtist(), songs.get(i).getYear(), songs.get(i).getImageIcon(), mainFrame,songsOfAlbum);
+                        Album album = new Album(songs.get(i).getAlbum(), songs.get(i).getArtist(), songs.get(i).getYear(), songs.get(i).getImageIcon(), mainFrame, songsOfAlbum);
 //                        albums.get(j).getSongsOfAlbum().add(songs.get(i));
                         System.out.println("FUck : " + album.getName());
                         albums.add(album);
@@ -71,8 +70,6 @@ public class Albums extends JPanel {
                     }
                 }
             }
-
-
         }
         for (int i = 0; i < albums.size(); i++) {
             AJButton albumAdded = new AJButton(albums.get(i).getName(), albums.get(i).getImageIcon(), albums.get(i));
@@ -88,7 +85,5 @@ public class Albums extends JPanel {
             }
             this.revalidate();
         }
-
     }
-
 }

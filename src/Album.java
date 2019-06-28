@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Album extends JPanel{
+public class Album extends JPanel {
     private JPanel box1;
     private JPanel box2;
     private JPanel box3;
@@ -12,9 +12,8 @@ public class Album extends JPanel{
     private MainFrame mainFrame;
     private ImageIcon imageIcon;
     private ArrayList<Song> songsOfAlbum;
-    public Album(String name,String artist,String year , ImageIcon imageIcon , MainFrame mainFrame , ArrayList<Song> songsOfAlbum)
 
-    {
+    public Album(String name, String artist, String year, ImageIcon imageIcon, MainFrame mainFrame, ArrayList<Song> songsOfAlbum) {
         this.songsOfAlbum = songsOfAlbum;
         this.mainFrame = mainFrame;
         box1 = new JPanel();
@@ -35,6 +34,24 @@ public class Album extends JPanel{
         this.artist = artist;
         this.year = year;
         this.imageIcon = imageIcon;
+    }
+
+    public void updateAlbum() {
+        System.out.println("Size in album" + songsOfAlbum.size());
+        for (int i = 0; i < songsOfAlbum.size(); i++) {
+            SJButton songAdded = new SJButton(songsOfAlbum.get(i).getTitle(), songsOfAlbum.get(i).getImageIcon(), songsOfAlbum.get(i), mainFrame.getPlayer(), mainFrame, mainFrame.getPlayingThreads());
+            if (i % 3 == 0) {
+                box1.add(songAdded);
+                box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
+            } else if (i % 3 == 1) {
+                box2.add(songAdded);
+                box2.setLayout(new BoxLayout(box2, BoxLayout.Y_AXIS));
+            } else if (i % 3 == 2) {
+                box3.add(songAdded);
+                box3.setLayout(new BoxLayout(box3, BoxLayout.Y_AXIS));
+            }
+            this.revalidate();
+        }
     }
 
     public String getName() {
@@ -59,24 +76,5 @@ public class Album extends JPanel{
 
     public ImageIcon getImageIcon() {
         return imageIcon;
-    }
-    public void updateAlbum()
-    {
-        System.out.println("Size in album"  + songsOfAlbum.size());
-        for (int i = 0; i < songsOfAlbum.size() ; i++)
-        {
-           SJButton songAdded = new SJButton(songsOfAlbum.get(i).getTitle(), songsOfAlbum.get(i).getImageIcon(), songsOfAlbum.get(i),mainFrame.getPlayer(),mainFrame,mainFrame.getPlayingThreads());
-            if (i % 3 == 0) {
-                box1.add(songAdded);
-                box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
-            } else if (i % 3 == 1) {
-                box2.add(songAdded);
-                box2.setLayout(new BoxLayout(box2, BoxLayout.Y_AXIS));
-            } else if (i % 3 == 2) {
-                box3.add(songAdded);
-                box3.setLayout(new BoxLayout(box3, BoxLayout.Y_AXIS));
-            }
-            this.revalidate();
-        }
     }
 }

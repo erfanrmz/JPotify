@@ -1,5 +1,3 @@
-import com.mpatric.mp3agic.Mp3File;
-import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
 import java.io.BufferedInputStream;
@@ -31,13 +29,13 @@ public class Play extends Thread {
             e.printStackTrace();
         }
     }
+
     @Override
     public void run() {
-        while (!stopMusic)
-        {
+        while (!stopMusic) {
             try {
                 playMP3 = new Player(file);
-                while (playMP3.play(1 ) && !stopMusic ) {
+                while (playMP3.play(1) && !stopMusic) {
                     if (this.isPause) {
                         synchronized (playMP3) {
                             playMP3.wait();
@@ -83,8 +81,7 @@ public class Play extends Thread {
             stopMusic = true;
             System.out.println("stop music true");
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("fuck off :D");
         }
 
