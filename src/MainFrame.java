@@ -111,6 +111,7 @@ public class MainFrame extends JFrame {
     public void readSongs() throws IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\library.ser"))));
         songs = (ArrayList<Song>) ois.readObject();
+        playlistPlaying = songs;
     }
 
     public PlayingPanel getPlayingPanel() {
