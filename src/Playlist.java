@@ -46,7 +46,7 @@ public class Playlist extends JPanel {
 
     public void addsongFromButton(Song song) throws IOException {
         songs.add(song);
-        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads);
+        PJButton songadded = new PJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads,this);
         if (count % 3 == 0) {
             box1.add(songadded);
             box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
@@ -68,7 +68,7 @@ public class Playlist extends JPanel {
     }
 
     public void addsongFromSer(Song song) {
-        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads);
+        PJButton songadded = new PJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads,this);
         if (count % 3 == 0) {
             box1.add(songadded);
             box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
@@ -101,8 +101,20 @@ public class Playlist extends JPanel {
 
     public void modifyPanel() {
         this.removeAll();
+        count = 0;
+        box1 = new JPanel();
+        box2 = new JPanel();
+        box3 = new JPanel();
+        box1.setBackground(new Color(24, 24, 24));
+        box2.setBackground(new Color(24, 24, 24));
+        box3.setBackground(new Color(24, 24, 24));
+        this.setBackground(new Color(24, 24, 24));
+        this.setLayout(new GridLayout(1, 3));
+        this.add(box1);
+        this.add(box2);
+        this.add(box3);
         for (int i = 0; i < songs.size(); i++) {
-            SJButton songadded = new SJButton(songs.get(i).getTitle(), songs.get(i).getImageIcon(), songs.get(i), player, mainFrame, playingThreads);
+            PJButton songadded = new PJButton(songs.get(i).getTitle(), songs.get(i).getImageIcon(), songs.get(i), player, mainFrame, playingThreads, this);
             if (count % 3 == 0) {
                 box1.add(songadded);
                 box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
@@ -116,10 +128,18 @@ public class Playlist extends JPanel {
                 box3.setLayout(new BoxLayout(box3, BoxLayout.Y_AXIS));
                 count++;
             }
-            this.revalidate();
         }
+        this.revalidate();
+        this.repaint();
     }
 
+    public void removeSong(Song song) throws IOException {
+        songs.remove(song);
+        FileOutputStream fop = new FileOutputStream("Saves\\" + name + ".ser");
+        ObjectOutputStream oos = new ObjectOutputStream(fop);
+        oos.writeObject(songs);
+        modifyPanel();
+    }
 }
 
 
