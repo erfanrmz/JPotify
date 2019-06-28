@@ -55,7 +55,7 @@ public class PJButton extends JButton {
                     {
                         mainFrame.getjSliderSeeks().get(i).stop();
                     }
-                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame.getPlayingPanel().getMusicSeek());
+                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame,mainFrame.getPlayingPanel().getMusicSeek());
                     mainFrame.getjSliderSeeks().add(jSliderSeek);
                     jSliderSeek.start();
                     mainFrame.getLeftPanel().getMusicPlayingArtWork().setIcon(song.getImageIcon());

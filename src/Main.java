@@ -3,6 +3,9 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String arg[]) throws IOException, ClassNotFoundException {
+        Time test = new Time(255);
+        test.setTime(255);
+        System.out.println(test.getSec());
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 

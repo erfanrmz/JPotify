@@ -3,9 +3,11 @@ import javax.swing.*;
 public class JSliderSeek extends Thread{
     private JSlider seekslider;
     private boolean isPause;
-    public JSliderSeek(JSlider seekSlider)
+    private MainFrame mainFrame;
+    public JSliderSeek(MainFrame mainFrame,JSlider seekSlider)
     {
         isPause = false;
+        this.mainFrame = mainFrame;
         this.seekslider = seekSlider;
     }
     @Override
@@ -15,12 +17,14 @@ public class JSliderSeek extends Thread{
             while(seekslider.getValue() <= seekslider.getMaximum())
             {
                 if (!this.isPause) {
-                    seekslider.setValue(seekslider.getValue() + 1);
                     try {
                         sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                   ;
+                    seekslider.setValue(seekslider.getValue() + 1);
+                    mainFrame.getPlayingPanel().getPlayingTime().setTime(seekslider.getValue());
                 }
             }
         }

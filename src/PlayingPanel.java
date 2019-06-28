@@ -24,6 +24,8 @@ public class PlayingPanel extends JPanel {
     private Play player;
     private ArrayList<Play> playingThreads;
     private MainFrame mainFrame;
+    private Time playingTime;
+    private Time musicTime;
 
     public PlayingPanel(Play player, ArrayList<Play> playingThreads , MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -31,6 +33,8 @@ public class PlayingPanel extends JPanel {
         this.player = player;
         this.setPreferredSize(new Dimension(1600, 100));
         this.setLayout(new BorderLayout());
+        playingTime = new Time(0);
+        musicTime = new Time(0);
         play = new EJButton();
         nextMusic = new EJButton();
         previousMusic = new EJButton();
@@ -43,7 +47,10 @@ public class PlayingPanel extends JPanel {
         musicSeek = new EJSlider(0, 100, 0);
         volume.setPreferredSize(new Dimension(100, 10));
         musicSeek.setPreferredSize(new Dimension(600, 10));
+        musicSeekPanel.add(playingTime);
         musicSeekPanel.add(musicSeek);
+        musicSeekPanel.add(musicTime);
+        musicSeekPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         //buttons bar
         buttonsBar.add(shuffle);
         buttonsBar.add(previousMusic);
@@ -74,7 +81,7 @@ public class PlayingPanel extends JPanel {
                 } else if (play.getPressed() % 2 == 1) {
                     play.setIcon(new ImageIcon("Icons\\pauseEntered50.png"));
                     playingThreads.get(playingThreads.size() - 1).mp3Resume();
-                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame.getPlayingPanel().getMusicSeek());
+                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame,mainFrame.getPlayingPanel().getMusicSeek());
                     jSliderSeek.start();
                     mainFrame.getjSliderSeeks().add(jSliderSeek);
                 }
@@ -128,6 +135,7 @@ public class PlayingPanel extends JPanel {
                     playingThreads.get(i).stop();
                     System.out.println("fuck stop");
                 }
+                mainFrame.getPlayingPanel().getPlayingTime().setTime(musicSeek.getValue());
                 int frame = musicSeek.getValue()*38;
                 Play player = new Play(frame);
                 playingThreads.add(player);
@@ -199,5 +207,13 @@ public class PlayingPanel extends JPanel {
 
     public EJButton getPlay() {
         return play;
+    }
+
+    public Time getPlayingTime() {
+        return playingTime;
+    }
+
+    public Time getMusicTime() {
+        return musicTime;
     }
 }

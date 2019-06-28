@@ -48,12 +48,13 @@ public class SJButton extends JButton {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
+                    mainFrame.getPlayingPanel().getPlayingTime().setTime(0);
                     mainFrame.getPlayingPanel().getMusicSeek().setValue(0);
                     for (int i = 0 ; i < mainFrame.getjSliderSeeks().size() ;i++)
                     {
                         mainFrame.getjSliderSeeks().get(i).stop();
                     }
-                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame.getPlayingPanel().getMusicSeek());
+                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame,mainFrame.getPlayingPanel().getMusicSeek());
                     mainFrame.getjSliderSeeks().add(jSliderSeek);
                     jSliderSeek.start();
                     mainFrame.getLeftPanel().getMusicPlayingArtWork().setIcon(song.getImageIcon());
@@ -69,7 +70,9 @@ public class SJButton extends JButton {
                     }
                     try {
                         Mp3File playingSong = new Mp3File(song.getAddress());
+                        mainFrame.getPlayingPanel().getMusicTime().setTime((int)playingSong.getLengthInSeconds());
                         mainFrame.getPlayingPanel().getMusicSeek().setMaximum((int)playingSong.getLengthInSeconds());
+                        System.out.println((int)playingSong.getLengthInSeconds());
                         System.out.println( mainFrame.getPlayingPanel().getMusicSeek().getMaximum() + " "  + playingSong.getFrameCount());
                     } catch (IOException e1) {
                         e1.printStackTrace();
