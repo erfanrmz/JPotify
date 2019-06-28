@@ -277,6 +277,11 @@ public class LeftPanel extends JPanel {
             public void mouseExited(MouseEvent e) {
                 songs.setIcon(new ImageIcon("Icons\\song1.png"));
             }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ((MainPanel)mainFrame.getMainPanel()).modifyPanel();
+            }
         });
         albumsButton.addMouseListener(new MouseAdapter() {
             @Override
