@@ -61,7 +61,7 @@ public class PJButton extends JButton {
                     } catch (Exception e1) {
                         System.out.println("SHIT");
                     }
-                    PJButton.this.player = new Play();
+                    PJButton.this.player = new Play(0);
                     PJButton.this.player.setPlayingSong(song);
                     PJButton.this.player.start();
                     playingThreads.add(PJButton.this.player);

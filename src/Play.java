@@ -1,4 +1,5 @@
 import javazoom.jl.player.Player;
+import javazoom.jl.player.advanced.AdvancedPlayer;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -7,23 +8,24 @@ import java.io.FileNotFoundException;
 
 public class Play extends Thread {
     private boolean isPause;
-    private Player playMP3;
+    private AdvancedPlayer playMP3;
     private Song playingSong;
-    private BufferedInputStream file;
+    private FileInputStream file;
     private boolean stopMusic;
+    private int frame;
 
-    public Play() {
+    public Play(int frame) {
         stopMusic = false;
         isPause = false;
 //        playingSong = song;
-
+        this.frame =frame;
     }
 
     public void setPlayingSong(Song song) {
         playingSong = song;
         stopMusic = false;
         try {
-            file = new BufferedInputStream(new FileInputStream(new File(playingSong.getAddress())));
+            file = new FileInputStream(playingSong.getAddress());
             System.out.println("music changed");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -32,10 +34,11 @@ public class Play extends Thread {
 
     @Override
     public void run() {
-        while (!stopMusic) {
+//        while (!stopMusic) {
             try {
-                playMP3 = new Player(file);
-                while (playMP3.play(1) && !stopMusic) {
+                playMP3 = new AdvancedPlayer(file);
+                playMP3.play(frame,frame+1);
+                while (playMP3.play(1)) {
                     if (this.isPause) {
                         synchronized (playMP3) {
                             playMP3.wait();
@@ -43,7 +46,6 @@ public class Play extends Thread {
                     }
                 }
                 System.out.println("END");
-
             }
             //JFileChooser a = new JFileChooser();
             //int fasf = a.showOpenDialog(null);
@@ -52,7 +54,7 @@ public class Play extends Thread {
                 System.out.print(q);
             }
 
-        }
+//        }
         playMP3.close();
 
     }
@@ -86,7 +88,11 @@ public class Play extends Thread {
         }
 
     }
-//    public void mp3seek(int pos) throws JavaLayerException {
+
+    public Song getPlayingSong() {
+        return playingSong;
+    }
+    //    public void mp3seek(int pos) throws JavaLayerException {
 //        playMP3.close();
 //        playMP3 = new AdvancedPlayer(file);
 //        playMP3.play(pos,1000);

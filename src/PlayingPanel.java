@@ -38,7 +38,7 @@ public class PlayingPanel extends JPanel {
         buttonsBar = new JPanel();
         volumeBar = new JPanel();
         volume = new EJSlider(0, 100, 100);
-        musicSeek = new EJSlider(0, 100, 50);
+        musicSeek = new EJSlider(0, 100, 0);
         volume.setPreferredSize(new Dimension(100, 10));
         musicSeek.setPreferredSize(new Dimension(600, 10));
         musicSeekPanel.add(musicSeek);
@@ -69,22 +69,7 @@ public class PlayingPanel extends JPanel {
                     playingThreads.get(playingThreads.size() - 1).mp3Pause();
 
                 } else if (play.getPressed() % 2 == 1) {
-
                     play.setIcon(new ImageIcon("Icons\\pauseEntered50.png"));
-//                    if (play.getPressed() == 1)
-//                    {
-//                        try {
-//                            mp3player = new Play();
-//                            mp3player.setPlayingSong(new Song("D:\\Marketa Irglova - This Right Here.mp3"));
-//                        } catch (IOException e1) {
-//                            e1.printStackTrace();
-//                        } catch (InvalidDataException e1) {
-//                            e1.printStackTrace();
-//                        } catch (UnsupportedTagException e1) {
-//                            e1.printStackTrace();
-//                        }
-//                        mp3player.start();
-//                    }
                     playingThreads.get(playingThreads.size() - 1).mp3Resume();
                 }
 
@@ -109,6 +94,41 @@ public class PlayingPanel extends JPanel {
                     play.setIcon(new ImageIcon("Icons\\pause50.png"));
                 }
             }
+        });
+//        musicSeek.addChangeListener(new ChangeListener() {
+//            @Override
+//            public void stateChanged(ChangeEvent e) {
+//                Song song = playingThreads.get(playingThreads.size()-1).getPlayingSong();
+//                int size = playingThreads.size();
+//                for (int i = 0 ; i < size;i++)
+//                {
+//                    playingThreads.get(i).stop();
+//                    System.out.println("fuck stop");
+//                }
+//                int frame = musicSeek.getValue()*38;
+//                Play player = new Play(frame);
+//                playingThreads.add(player);
+//                player.setPlayingSong(song);
+//                player.start();
+//            }
+//        });
+        musicSeek.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                Song song = playingThreads.get(playingThreads.size()-1).getPlayingSong();
+                int size = playingThreads.size();
+                for (int i = 0 ; i < size;i++)
+                {
+                    playingThreads.get(i).stop();
+                    System.out.println("fuck stop");
+                }
+                int frame = musicSeek.getValue()*38;
+                Play player = new Play(frame);
+                playingThreads.add(player);
+                player.setPlayingSong(song);
+                player.start();
+            }
+
         });
         previousMusic.setIcon(new ImageIcon("Icons\\previous30.png"));
         previousMusic.setPreferredSize(new Dimension(75, 30));
@@ -165,6 +185,10 @@ public class PlayingPanel extends JPanel {
 //
 //            }
 //        });
+    }
+
+    public EJSlider getMusicSeek() {
+        return musicSeek;
     }
 
     public EJButton getPlay() {

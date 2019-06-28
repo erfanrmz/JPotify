@@ -44,7 +44,7 @@ public class MainFrame extends JFrame {
             System.out.println(e2);
         }
         System.out.println(songs.size());
-        player = new Play();
+        player = new Play(0);
         ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
         this.setIconImage(spotify.getImage());
         mainPanel = new MainPanel(this, player, playingThreads, songs);

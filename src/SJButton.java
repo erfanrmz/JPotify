@@ -1,3 +1,7 @@
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -56,7 +60,19 @@ public class SJButton extends JButton {
                     } catch (Exception e1) {
                         System.out.println("SHIT");
                     }
-                    SJButton.this.player = new Play();
+                    try {
+                        Mp3File playingSong = new Mp3File(song.getAddress());
+                        mainFrame.getPlayingPanel().getMusicSeek().setMaximum((int)playingSong.getLengthInSeconds());
+                        System.out.println( mainFrame.getPlayingPanel().getMusicSeek().getMaximum() + " "  + playingSong.getFrameCount());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (UnsupportedTagException e1) {
+                        e1.printStackTrace();
+                    } catch (InvalidDataException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    SJButton.this.player = new Play(0);
                     SJButton.this.player.setPlayingSong(song);
                     SJButton.this.player.start();
                     playingThreads.add(SJButton.this.player);
