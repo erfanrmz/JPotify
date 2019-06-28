@@ -28,7 +28,7 @@ public class Albums extends JPanel {
         box2.setLayout(new BoxLayout(box2, BoxLayout.Y_AXIS));
         box3.setLayout(new BoxLayout(box3, BoxLayout.Y_AXIS));
         for (int i = 0; i < albums.size(); i++) {
-            AJButton albumButton = new AJButton(albums.get(i).getName(), albums.get(i).getImageIcon(), albums.get(i));
+            AJButton albumButton = new AJButton(albums.get(i).getName(), albums.get(i).getImageIcon(), albums.get(i),mainFrame);
             if (i % 3 == 0) {
                 box1.add(albumButton);
             } else if (i % 3 == 1) {
@@ -72,7 +72,7 @@ public class Albums extends JPanel {
             }
         }
         for (int i = 0; i < albums.size(); i++) {
-            AJButton albumAdded = new AJButton(albums.get(i).getName(), albums.get(i).getImageIcon(), albums.get(i));
+            AJButton albumAdded = new AJButton(albums.get(i).getName(), albums.get(i).getImageIcon(), albums.get(i),mainFrame);
             if (i % 3 == 0) {
                 box1.add(albumAdded);
                 box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));

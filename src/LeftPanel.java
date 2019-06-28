@@ -226,6 +226,7 @@ public class LeftPanel extends JPanel {
                             public void mouseClicked(MouseEvent e) {
                                 if (e.getButton() == MouseEvent.BUTTON1) {
                                     mainFrame.ChangePanel(newP);
+                                    mainFrame.setPlaylistPlaying(newP.getSongs());
                                 }
                                 if (e.getButton() == MouseEvent.BUTTON3) {
                                     JPopupMenu popForDel = new JPopupMenu("Delete Playlist");
@@ -268,6 +269,11 @@ public class LeftPanel extends JPanel {
             }
         });
         songs.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                mainFrame.setPlaylistPlaying(mainFrame.getSongs());
+            }
+
             @Override
             public void mouseEntered(MouseEvent e) {
                 songs.setIcon(new ImageIcon("Icons\\songEntered1.png"));
@@ -388,6 +394,8 @@ public class LeftPanel extends JPanel {
             });
         }
     }
+
+
     public EJButton getMusicPlayingArtWork() {
         return musicPlayingArtWork;
     }

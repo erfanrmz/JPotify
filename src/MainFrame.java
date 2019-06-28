@@ -14,6 +14,7 @@ public class MainFrame extends JFrame {
     private ArrayList<Album> albums;
     private ArrayList<Song> songs;
     private ArrayList<JSliderSeek> jSliderSeeks;
+    private ArrayList<Song> playlistPlaying;
 
 //    public MainFrame() throws IOException, ClassNotFoundException {
 //        playingThreads = new ArrayList<Play>();
@@ -36,18 +37,20 @@ public class MainFrame extends JFrame {
 //=======
 
     public MainFrame() {
-
+        playlistPlaying = new ArrayList<Song>();
         jSliderSeeks = new ArrayList<JSliderSeek>();
         songs = new ArrayList<Song>();
         albums = new ArrayList<Album>();
         playingThreads = new ArrayList<Play>();
+        playlistPlaying = songs;
+
         try {
             readSongs();
         } catch (Exception e2) {
             System.out.println(e2);
         }
         System.out.println(songs.size());
-        player = new Play(0);
+        player = new Play(0,this);
         ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
         this.setIconImage(spotify.getImage());
         mainPanel = new MainPanel(this, player, playingThreads, songs);
@@ -116,5 +119,17 @@ public class MainFrame extends JFrame {
 
     public ArrayList<JSliderSeek> getjSliderSeeks() {
         return jSliderSeeks;
+    }
+
+    public ArrayList<Song> getSongs() {
+        return songs;
+    }
+
+    public ArrayList<Song> getPlaylistPlaying() {
+        return playlistPlaying;
+    }
+
+    public void setPlaylistPlaying(ArrayList<Song> playlistPlaying) {
+        this.playlistPlaying = playlistPlaying;
     }
 }

@@ -133,6 +133,10 @@ public class Playlist extends JPanel {
         oos.writeObject(songs);
         modifyPanel();
     }
+
+    public ArrayList<Song> getSongs() {
+        return songs;
+    }
 }
 
 

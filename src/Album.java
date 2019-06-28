@@ -77,4 +77,5 @@ public class Album extends JPanel {
     public ImageIcon getImageIcon() {
         return imageIcon;
     }
+
 }

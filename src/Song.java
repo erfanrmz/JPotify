@@ -1,7 +1,6 @@
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -18,31 +17,12 @@ public class Song implements Serializable {
     private String artist;
     private String album;
     private String year;
+    private String favorite;
     private ImageIcon imageIcon;
-    private boolean favorite;
-    private EJButton favoriteButton;
+
 
     public Song(String address) throws IOException, InvalidDataException, UnsupportedTagException {
-        favorite = false;
-        favoriteButton = new EJButton();
-        favoriteButton.setPreferredSize(new Dimension(25,25));
-        favoriteButton.setIcon(new ImageIcon("Icons\\like25.png"));
-        favoriteButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1)
-                {
-                    if (favoriteButton.getPressed() % 2 == 0)
-                    {
-                        favoriteButton.setIcon(new ImageIcon("Icons\\like25.png"));
-                    }
-                    else
-                    {
-                        favoriteButton.setIcon(new ImageIcon("Icons\\liked25.png"));
-                    }
-                }
-            }
-        });
+
         this.address = address;
         songSeekPos = 0;
         try {
@@ -80,6 +60,7 @@ public class Song implements Serializable {
             imageIcon = new ImageIcon("Icons\\cover1.png");
             System.out.println("No artwork");
         }
+        favorite = "false";
     }
 
     public String getAddress() {
@@ -110,19 +91,27 @@ public class Song implements Serializable {
         return imageIcon;
     }
 
-    public void setSongSeekPos(int songSeekPos) {
-        this.songSeekPos = songSeekPos;
+
+
+    public String  isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(String favorite) {
+        this.favorite = favorite;
     }
 
     @Override
     public String toString() {
         return "Song{" +
-                "address='" + address + '\'' +
-                ", songSeek=" + songSeekPos +
+                "songSeekPos=" + songSeekPos +
+                ", address='" + address + '\'' +
                 ", title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
                 ", album='" + album + '\'' +
                 ", year='" + year + '\'' +
+                ", favorite='" + favorite + '\'' +
+                ", imageIcon=" + imageIcon +
                 '}';
     }
 }

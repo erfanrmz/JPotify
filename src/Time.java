@@ -10,14 +10,12 @@ public class Time extends JLabel {
         this.sec = sec - (min*60);
         if (min < 10 && this.sec < 10)
             this.setText("0"+min+":"+"0"+this.sec);
-        else if (min < 10 && this.sec > 10)
+        else if (min < 10 && this.sec >= 10)
             this.setText("0"+min+":"+this.sec);
-        else if (min > 10 && this.sec < 10)
+        else if (min >= 10 && this.sec < 10)
             this.setText(min+":"+"0"+this.sec);
-        else if (min > 10 && this.sec > 10)
+        else if (min >= 10 && this.sec >= 10)
             this.setText(min+":"+this.sec);
-
-
         this.setForeground(Color.WHITE);
     }
     public void setTime(int sec)
@@ -26,11 +24,11 @@ public class Time extends JLabel {
         this.sec = sec - (min*60);
         if (min < 10 && this.sec < 10)
             this.setText("0"+min+":"+"0"+this.sec);
-        else if (min < 10 && this.sec > 10)
+        else if (min < 10 && this.sec >= 10)
             this.setText("0"+min+":"+this.sec);
-        else if (min > 10 && this.sec < 10)
+        else if (min >= 10 && this.sec < 10)
             this.setText(min+":"+"0"+this.sec);
-        else if (min > 10 && this.sec > 10)
+        else if (min >= 10 && this.sec >= 10)
             this.setText(min+":"+this.sec);
 
     }

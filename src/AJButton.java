@@ -5,10 +5,12 @@ import java.awt.event.MouseEvent;
 
 public class AJButton extends JButton {
     private Album album;
+    private MainFrame mainFrame;
 
-    public AJButton(String text, Icon icon, Album album) {
+    public AJButton(String text, Icon icon, Album album , MainFrame mainFrame) {
         super(text, icon);
         this.album = album;
+        this.mainFrame = mainFrame;
         this.setPreferredSize(new Dimension(250, 250));
         this.setSize(new Dimension(260, 260));
         this.setOpaque(false);
@@ -26,7 +28,7 @@ public class AJButton extends JButton {
                     Album albumPanel = new Album(album.getName(), album.getArtist(), album.getYear(), album.getImageIcon(), album.getMainFrame(), album.getSongsOfAlbum());
                     albumPanel.updateAlbum();
                     album.getMainFrame().setAlbumPanel1(albumPanel);
-
+                    mainFrame.setPlaylistPlaying(albumPanel.getSongsOfAlbum());
                 }
             }
         });

@@ -48,6 +48,8 @@ public class SJButton extends JButton {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
+                    System.out.println(song.toString());
+                    song.setFavorite("true");
                     mainFrame.getPlayingPanel().getPlayingTime().setTime(0);
                     mainFrame.getPlayingPanel().getMusicSeek().setValue(0);
                     for (int i = 0 ; i < mainFrame.getjSliderSeeks().size() ;i++)
@@ -57,7 +59,6 @@ public class SJButton extends JButton {
                     JSliderSeek jSliderSeek = new JSliderSeek(mainFrame,mainFrame.getPlayingPanel().getMusicSeek());
                     mainFrame.getjSliderSeeks().add(jSliderSeek);
                     jSliderSeek.start();
-                    mainFrame.getLeftPanel().getMusicPlayingArtWork().setIcon(song.getImageIcon());
                     mainFrame.getPlayingPanel().getPlay().setIcon(new ImageIcon("Icons\\pause50.png"));
                     mainFrame.getPlayingPanel().getPlay().setPressed(1);
                     try {
@@ -68,21 +69,8 @@ public class SJButton extends JButton {
                     } catch (Exception e1) {
                         System.out.println("SHIT");
                     }
-                    try {
-                        Mp3File playingSong = new Mp3File(song.getAddress());
-                        mainFrame.getPlayingPanel().getMusicTime().setTime((int)playingSong.getLengthInSeconds());
-                        mainFrame.getPlayingPanel().getMusicSeek().setMaximum((int)playingSong.getLengthInSeconds());
-                        System.out.println((int)playingSong.getLengthInSeconds());
-                        System.out.println( mainFrame.getPlayingPanel().getMusicSeek().getMaximum() + " "  + playingSong.getFrameCount());
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    } catch (UnsupportedTagException e1) {
-                        e1.printStackTrace();
-                    } catch (InvalidDataException e1) {
-                        e1.printStackTrace();
-                    }
 
-                    SJButton.this.player = new Play(0);
+                    SJButton.this.player = new Play(0,mainFrame);
                     SJButton.this.player.setPlayingSong(song);
                     SJButton.this.player.start();
                     playingThreads.add(SJButton.this.player);

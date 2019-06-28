@@ -22,9 +22,10 @@ public class JSliderSeek extends Thread{
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                   ;
+
                     seekslider.setValue(seekslider.getValue() + 1);
                     mainFrame.getPlayingPanel().getPlayingTime().setTime(seekslider.getValue());
+
                 }
             }
         }
