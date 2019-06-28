@@ -4,6 +4,8 @@ import com.mpatric.mp3agic.UnsupportedTagException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,9 +20,29 @@ public class Song implements Serializable {
     private String year;
     private ImageIcon imageIcon;
     private boolean favorite;
+    private EJButton favoriteButton;
 
     public Song(String address) throws IOException, InvalidDataException, UnsupportedTagException {
         favorite = false;
+        favoriteButton = new EJButton();
+        favoriteButton.setPreferredSize(new Dimension(25,25));
+        favoriteButton.setIcon(new ImageIcon("Icons\\like25.png"));
+        favoriteButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1)
+                {
+                    if (favoriteButton.getPressed() % 2 == 0)
+                    {
+                        favoriteButton.setIcon(new ImageIcon("Icons\\like25.png"));
+                    }
+                    else
+                    {
+                        favoriteButton.setIcon(new ImageIcon("Icons\\liked25.png"));
+                    }
+                }
+            }
+        });
         this.address = address;
         songSeekPos = 0;
         try {

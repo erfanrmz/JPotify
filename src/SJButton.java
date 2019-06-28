@@ -16,7 +16,6 @@ public class SJButton extends JButton {
     private ArrayList<Play> playingThreads;
     private JPopupMenu popupMenu;
     private JMenuItem addToPlayList;
-
     public Play getPlayer() {
         return player;
     }
@@ -46,7 +45,8 @@ public class SJButton extends JButton {
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     mainFrame.getLeftPanel().getMusicPlayingArtWork().setIcon(song.getImageIcon());
-
+                    mainFrame.getPlayingPanel().getPlay().setIcon(new ImageIcon("Icons\\pause50.png"));
+                    mainFrame.getPlayingPanel().getPlay().setPressed(1);
                     try {
                         for (int i = 0; i < playingThreads.size(); i++) {
                             playingThreads.get(i).stop();

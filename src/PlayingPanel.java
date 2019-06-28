@@ -167,4 +167,7 @@ public class PlayingPanel extends JPanel {
 //        });
     }
 
+    public EJButton getPlay() {
+        return play;
+    }
 }

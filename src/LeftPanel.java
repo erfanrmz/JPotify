@@ -388,7 +388,6 @@ public class LeftPanel extends JPanel {
             });
         }
     }
-
     public EJButton getMusicPlayingArtWork() {
         return musicPlayingArtWork;
     }

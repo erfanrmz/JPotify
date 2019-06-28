@@ -107,4 +107,7 @@ public class MainFrame extends JFrame {
         songs = (ArrayList<Song>) ois.readObject();
     }
 
+    public PlayingPanel getPlayingPanel() {
+        return playingPanel;
+    }
 }

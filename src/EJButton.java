@@ -39,4 +39,8 @@ public class EJButton extends JButton {
     public int getPressed() {
         return pressed;
     }
+
+    public void setPressed(int pressed) {
+        this.pressed = pressed;
+    }
 }
