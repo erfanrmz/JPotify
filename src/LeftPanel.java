@@ -119,6 +119,7 @@ public class LeftPanel extends JPanel {
                 try {
                     Song song = new Song(a.getSelectedFile().getAbsolutePath());
                     songs1.add(song);
+                    System.out.println(songs1.size());
                     ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("Saves\\library.ser"));
                     library.writeObject(song);
                     ((MainPanel) songsPanel).addsongFromButton(song);

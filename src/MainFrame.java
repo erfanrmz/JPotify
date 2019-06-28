@@ -53,7 +53,7 @@ public class MainFrame extends JFrame {
             this.setIconImage(spotify.getImage());
             mainPanel = new MainPanel(this, player, playingThreads,songs);
             leftPanel = new LeftPanel(mainPanel,this, player, playingThreads ,albums,songs);
-            albumsPanel = new Albums(albums,songs);
+            albumsPanel = new Albums(albums,songs,this);
             playingPanel = new PlayingPanel(player,playingThreads);
             songsScrollPane = new JScrollPane(mainPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
             songsScrollPane.setBorder(null);
@@ -66,6 +66,7 @@ public class MainFrame extends JFrame {
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.setVisible(true);
     }
+
 
     void Playernew() {
         player = new Play();
@@ -116,7 +117,15 @@ public class MainFrame extends JFrame {
         mainPanel.repaint();
         this.revalidate();
         this.repaint();
-
+    }
+    public void setAlbumPanel1(Album albumPanel)
+    {
+        mainPanel.removeAll();
+        mainPanel.add(albumPanel);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+        this.revalidate();
+        this.repaint();
     }
     public void readSongs () throws
             InvalidDataException, IOException, UnsupportedTagException, ClassNotFoundException {
@@ -124,4 +133,5 @@ public class MainFrame extends JFrame {
         ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\library.ser"))));
         songs = (ArrayList<Song>) ois.readObject();
     }
+
 }

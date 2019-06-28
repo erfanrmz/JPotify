@@ -6,10 +6,12 @@ public class Albums extends JPanel {
     private JPanel box1;
     private JPanel box2;
     private JPanel box3;
+    private MainFrame mainFrame;
     private ArrayList<Album> albums;
     private ArrayList<Song> songs;
 
-    public Albums(ArrayList<Album> albums, ArrayList<Song> songs) {
+    public Albums(ArrayList<Album> albums, ArrayList<Song> songs, MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
         this.songs = songs;
         box1 = new JPanel();
         box2 = new JPanel();
@@ -40,28 +42,40 @@ public class Albums extends JPanel {
 
     public void updateAlbums() {
         albums.removeAll(albums);
+        box1.removeAll();
+        box2.removeAll();
+        box3.removeAll();
         for (int i = 0; i < songs.size(); i++) {
             if (albums.size() == 0) {
-                Album album = new Album(songs.get(i).getAlbum(), songs.get(i).getArtist(), songs.get(i).getYear(), songs.get(i).getImageIcon());
+                ArrayList<Song> songsOfAlbum = new ArrayList<Song>();
+                songsOfAlbum.add(songs.get(i));
+                Album album = new Album(songs.get(i).getAlbum(), songs.get(i).getArtist(), songs.get(i).getYear(), songs.get(i).getImageIcon(), mainFrame,songsOfAlbum);
+//                album.getSongsOfAlbum().add(songs.get(i));
                 System.out.println("FUck : " + album.getName());
                 albums.add(album);
-            }
-            for (int j = 0; j < albums.size(); j++) {
-                if (songs.get(i).getAlbum().equals(albums.get(j).getName())) {
-                    albums.get(j).getSongs().add(songs.get(i));
-                    System.out.println("shit : " + albums.get(j).getName());
-                    break;
-                } else if (j == albums.size() - 1 && !songs.get(i).getAlbum().equals(albums.get(j).getName())) {
-                    Album album = new Album(songs.get(i).getAlbum(), songs.get(i).getArtist(), songs.get(i).getYear(), songs.get(i).getImageIcon());
-                    System.out.println("FUck : " + album.getName());
-                    albums.add(album);
-                    break;
+            } else
+            {
+                for (int j = 0; j < albums.size(); j++) {
+                    if (songs.get(i).getAlbum().equals(albums.get(j).getName())) {
+                        albums.get(j).getSongsOfAlbum().add(songs.get(i));
+                        System.out.println("shit : " + albums.get(j).getName());
+                        break;
+                    } else if (j == albums.size() - 1 && !songs.get(i).getAlbum().equals(albums.get(j).getName())) {
+                        ArrayList<Song> songsOfAlbum = new ArrayList<Song>();
+                        songsOfAlbum.add(songs.get(i));
+                        Album album = new Album(songs.get(i).getAlbum(), songs.get(i).getArtist(), songs.get(i).getYear(), songs.get(i).getImageIcon(), mainFrame,songsOfAlbum);
+//                        albums.get(j).getSongsOfAlbum().add(songs.get(i));
+                        System.out.println("FUck : " + album.getName());
+                        albums.add(album);
+                        break;
+                    }
                 }
             }
+
+
         }
-        for (int i = 0 ; i < albums.size();i++)
-        {
-            AJButton albumAdded = new AJButton(albums.get(i).getName(),albums.get(i).getImageIcon(),albums.get(i));
+        for (int i = 0; i < albums.size(); i++) {
+            AJButton albumAdded = new AJButton(albums.get(i).getName(), albums.get(i).getImageIcon(), albums.get(i));
             if (i % 3 == 0) {
                 box1.add(albumAdded);
                 box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));

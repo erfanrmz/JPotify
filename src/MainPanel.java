@@ -36,23 +36,24 @@ public class MainPanel extends JPanel {
             this.add(box2);
             this.add(box3);
 //        this.setLayout(new FlowLayout(FlowLayout.LEFT));
+
             for (int i = 0; i < songs.size(); i++) {
                 addsongFromSer(songs.get(i));
             }
         }
     public void addsongFromButton (Song song) throws IOException {
-        songs.add(song);
-        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads);
+//        songs.add(song);
+        SJButton songAdded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads);
         if (count % 3 == 0) {
-            box1.add(songadded);
+            box1.add(songAdded);
             box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
             count++;
         } else if (count % 3 == 1) {
-            box2.add(songadded);
+            box2.add(songAdded);
             box2.setLayout(new BoxLayout(box2, BoxLayout.Y_AXIS));
             count++;
         } else if (count % 3 == 2) {
-            box3.add(songadded);
+            box3.add(songAdded);
             box3.setLayout(new BoxLayout(box3, BoxLayout.Y_AXIS));
             count++;
         }
@@ -63,31 +64,31 @@ public class MainPanel extends JPanel {
 
     }
     public void addsongFromSer (Song song){
-        SJButton songadded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads);
+        SJButton songAdded = new SJButton(song.getTitle(), song.getImageIcon(), song,player, mainFrame,playingThreads);
             if (count % 3 == 0) {
-                box1.add(songadded);
+                box1.add(songAdded);
                 box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
                 count++;
             } else if (count % 3 == 1) {
-                box2.add(songadded);
+                box2.add(songAdded);
                 box2.setLayout(new BoxLayout(box2, BoxLayout.Y_AXIS));
                 count++;
             } else if (count % 3 == 2) {
-                box3.add(songadded);
+                box3.add(songAdded);
                 box3.setLayout(new BoxLayout(box3, BoxLayout.Y_AXIS));
                 count++;
             }
             this.revalidate();
     }
-    public void readSongs () throws
-            InvalidDataException, IOException, UnsupportedTagException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream("Saves\\library.ser");
-        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\library.ser"))));
-        System.out.println(songs.size() + "REad song before Equal");
-        songs = (ArrayList<Song>) ois.readObject();
-        System.out.println(songs.size() + "after Equal");
-
-    }
+//    public void readSongs () throws
+//            InvalidDataException, IOException, UnsupportedTagException, ClassNotFoundException {
+//        FileInputStream fis = new FileInputStream("Saves\\library.ser");
+//        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\library.ser"))));
+//        System.out.println(songs.size() + "REad song before Equal");
+//        songs = (ArrayList<Song>) ois.readObject();
+//        System.out.println(songs.size() + "after Equal");
+//
+//    }
 }
 
 

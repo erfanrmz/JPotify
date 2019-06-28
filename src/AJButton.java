@@ -18,6 +18,18 @@ public class AJButton extends JButton {
             this.setHorizontalTextPosition(SJButton.CENTER);
             this.setForeground(Color.white);
             this.setFont(new Font("", Font.BOLD, 14));
+            this.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getButton() == MouseEvent.BUTTON1)
+                    {
+                        Album albumPanel = new Album(album.getName(),album.getArtist(),album.getYear(),album.getImageIcon(),album.getMainFrame(),album.getSongsOfAlbum());
+                        albumPanel.updateAlbum();
+                        album.getMainFrame().setAlbumPanel1(albumPanel);
+
+                    }
+                }
+            });
         }
 
     public Album getAlbum() {
