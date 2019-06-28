@@ -50,6 +50,7 @@ public class PJButton extends JButton {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
+                    mainFrame.getPlayingPanel().getPlayingTime().setTime(0);
                     mainFrame.getPlayingPanel().getMusicSeek().setValue(0);
                     for (int i = 0 ; i < mainFrame.getjSliderSeeks().size() ;i++)
                     {
