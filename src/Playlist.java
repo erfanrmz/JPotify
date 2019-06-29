@@ -55,7 +55,7 @@ public class Playlist extends JPanel {
             count++;
         }
         this.revalidate();
-        FileOutputStream fop = new FileOutputStream("Saves\\" + name + ".ser");
+        FileOutputStream fop = new FileOutputStream("Saves\\" +mainFrame.getUser()+ name + ".ser");
         ObjectOutputStream oos = new ObjectOutputStream(fop);
         oos.writeObject(songs);
 
@@ -81,8 +81,8 @@ public class Playlist extends JPanel {
 
     public void readSongs() throws
             IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream("Saves\\" + name + ".ser");
-        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\" + name + ".ser"))));
+        FileInputStream fis = new FileInputStream("Saves\\" +mainFrame.getUser()+ name + ".ser");
+        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\" +mainFrame.getUser()+ name + ".ser"))));
         songs = (ArrayList<Song>) ois.readObject();
         for (int i = 0; i < songs.size(); i++)
             addSongFromSer(songs.get(i));
@@ -128,7 +128,7 @@ public class Playlist extends JPanel {
 
     public void removeSong(Song song) throws IOException {
         songs.remove(song);
-        FileOutputStream fop = new FileOutputStream("Saves\\" + name + ".ser");
+        FileOutputStream fop = new FileOutputStream("Saves\\" +mainFrame.getUser()+ name + ".ser");
         ObjectOutputStream oos = new ObjectOutputStream(fop);
         oos.writeObject(songs);
         modifyPanel();

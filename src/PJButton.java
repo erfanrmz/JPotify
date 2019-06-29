@@ -86,7 +86,7 @@ public class PJButton extends JButton {
                     PJButton.this.player.setPlayingSong(song);
                     PJButton.this.player.start();
                     playingThreads.add(PJButton.this.player);
-                    ((MainPanel)mainFrame.getMainPanel()).RecentlyPlayed(PJButton.this.song);
+                    ((MainPanel)mainFrame.getSongPanel()).RecentlyPlayed(PJButton.this.song);
 
                 }
                 if (e.getButton() == MouseEvent.BUTTON3) {

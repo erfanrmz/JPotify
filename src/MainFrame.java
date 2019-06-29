@@ -4,7 +4,11 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
+    private String name;
+    private String myIP;
+    private MainPanel songPanel;
     private JPanel mainPanel;
+    private UserPanel userPanel;
     private PlayingPanel playingPanel;
     private Albums albumsPanel;
     private LeftPanel leftPanel;
@@ -16,8 +20,9 @@ public class MainFrame extends JFrame {
     private ArrayList<JSliderSeek> jSliderSeeks;
     private ArrayList<Song> playlistPlaying;
 
-
-    public MainFrame() {
+    public MainFrame(String name , String IP) {
+        this.name = name;
+        this.myIP = IP;
         playlistPlaying = new ArrayList<Song>();
         jSliderSeeks = new ArrayList<JSliderSeek>();
         songs = new ArrayList<Song>();
@@ -34,16 +39,21 @@ public class MainFrame extends JFrame {
         player = new Play(0,this);
         ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
         this.setIconImage(spotify.getImage());
-        mainPanel = new MainPanel(this, player, playingThreads, songs);
-        leftPanel = new LeftPanel(mainPanel, this, player, playingThreads, albums, songs);
+        mainPanel = new JPanel();
+        userPanel = new UserPanel(name);
+        songPanel = new MainPanel(this, player, playingThreads, songs);
+        leftPanel = new LeftPanel(songPanel, this, player, playingThreads, albums, songs);
         albumsPanel = new Albums(albums, songs, this);
         playingPanel = new PlayingPanel(player, playingThreads,this);
-        songsScrollPane = new JScrollPane(mainPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        songsScrollPane = new JScrollPane(songPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         songsScrollPane.setBorder(null);
         this.setTitle("Jpotify");
         this.setSize(new Dimension(1600, 900));
         this.setLayout(new BorderLayout());
-        this.add(songsScrollPane, BorderLayout.CENTER);
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(songsScrollPane,BorderLayout.CENTER);
+        mainPanel.add(userPanel,BorderLayout.PAGE_START);
+        this.add(mainPanel, BorderLayout.CENTER);
         this.add(playingPanel, BorderLayout.PAGE_END);
         this.add(leftPanel, BorderLayout.LINE_START);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,35 +73,35 @@ public class MainFrame extends JFrame {
     }
 
     public void ChangePanel(JPanel playlist) {
-        mainPanel.removeAll();
-        mainPanel.add(playlist);
-        mainPanel.revalidate();
+        songPanel.removeAll();
+        songPanel.add(playlist);
+        songPanel.revalidate();
         this.revalidate();
         this.repaint();
     }
 
     public void setAlbumPanel() {
-        mainPanel.removeAll();
+        songPanel.removeAll();
         albumsPanel.updateAlbums();
-        mainPanel.add(albumsPanel);
-        mainPanel.revalidate();
-        mainPanel.repaint();
+        songPanel.add(albumsPanel);
+        songPanel.revalidate();
+        songPanel.repaint();
         this.revalidate();
         this.repaint();
     }
 
     public void setAlbumPanel1(Album albumPanel) {
-        mainPanel.removeAll();
-        mainPanel.add(albumPanel);
-        mainPanel.revalidate();
-        mainPanel.repaint();
+        songPanel.removeAll();
+        songPanel.add(albumPanel);
+        songPanel.revalidate();
+        songPanel.repaint();
         this.revalidate();
         this.repaint();
     }
 
     public void readSongs() throws IOException, ClassNotFoundException {
 
-        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\library.ser"))));
+        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\"+this.getUser()+"library.ser"))));
         songs = (ArrayList<Song>) ois.readObject();
         playlistPlaying = songs;
     }
@@ -121,11 +131,15 @@ public class MainFrame extends JFrame {
         return albums;
     }
 
-    public JPanel getMainPanel() {
-        return mainPanel;
+    public JPanel getSongPanel() {
+        return songPanel;
     }
 
     public Albums getAlbumsPanel() {
         return albumsPanel;
+    }
+    public String getUser()
+    {
+       return name;
     }
 }

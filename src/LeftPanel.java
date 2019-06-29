@@ -122,7 +122,7 @@ public class LeftPanel extends JPanel {
                     Song song = new Song(fileChooser.getSelectedFile().getAbsolutePath());
                     songs1.add(song);
                     System.out.println(songs1.size());
-                    ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("Saves\\library.ser"));
+                    ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("Saves\\"+mainFrame.getUser()+"library.ser"));
                     library.writeObject(song);
                     ((MainPanel) songsPanel).addSongFromButton(song);
                 } catch (IOException | InvalidDataException | UnsupportedTagException ex) {
@@ -188,7 +188,7 @@ public class LeftPanel extends JPanel {
                         EJButton playL = new EJButton("     " + playlistName.getText());
                         FileOutputStream fop = null;
                         try {
-                            fop = new FileOutputStream("Saves\\Name of the playlists.ser");
+                            fop = new FileOutputStream("Saves\\"+mainFrame.getUser()+"Name of the playlists.ser");
                         } catch (FileNotFoundException ex) {
                             ex.printStackTrace();
                         }
@@ -243,7 +243,7 @@ public class LeftPanel extends JPanel {
                                             LeftPanel.this.repaint();
                                             FileOutputStream fop = null;
                                             try {
-                                                fop = new FileOutputStream("Saves\\Name of the playlists.ser");
+                                                fop = new FileOutputStream("Saves\\"+mainFrame.getUser()+"Name of the playlists.ser");
                                             } catch (FileNotFoundException ex) {
                                                 ex.printStackTrace();
                                             }
@@ -286,7 +286,7 @@ public class LeftPanel extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                ((MainPanel)mainFrame.getMainPanel()).modifyPanel();
+                ((MainPanel)mainFrame.getSongPanel()).modifyPanel();
                 mainFrame.setPlaylistPlaying(mainFrame.getSongs());
 
             }
@@ -327,7 +327,7 @@ public class LeftPanel extends JPanel {
     }
 
     public void readPlaylists() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\Name of the playlists.ser"))));
+        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\"+mainFrame.getUser()+"Name of the playlists.ser"))));
         playlistNames = (ArrayList<String>) ois.readObject();
         for (int i = 0; i < playlistNames.size(); i++) {
             Playlist newP = new Playlist(playlistNames.get(i), mainFrame, player, playingThreads);
@@ -378,7 +378,7 @@ public class LeftPanel extends JPanel {
                                 LeftPanel.this.repaint();
                                 FileOutputStream fop = null;
                                 try {
-                                    fop = new FileOutputStream("Saves\\Name of the playlists.ser");
+                                    fop = new FileOutputStream("Saves\\"+mainFrame.getUser()+"Name of the playlists.ser");
                                 } catch (FileNotFoundException ex) {
                                     ex.printStackTrace();
                                 }

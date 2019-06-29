@@ -40,7 +40,6 @@ public class MainPanel extends JPanel {
             addSongFromSer(songs.get(i));
         }
     }
-
     public void addSongFromButton(Song song) throws IOException {
 //        songs.add(song);
         SJButton songAdded = new SJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads);
@@ -58,7 +57,7 @@ public class MainPanel extends JPanel {
             count++;
         }
         this.revalidate();
-        FileOutputStream fop = new FileOutputStream("Saves\\library.ser");
+        FileOutputStream fop = new FileOutputStream("Saves\\"+mainFrame.getUser()+"library.ser");
         ObjectOutputStream oos = new ObjectOutputStream(fop);
         oos.writeObject(songs);
 
