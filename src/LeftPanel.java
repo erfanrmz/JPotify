@@ -21,7 +21,7 @@ public class LeftPanel extends JPanel {
     private EJButton albumsButton;
     private EJButton favoriteButtton;
     private JPopupMenu popupMenu;
-    private JMenuItem addsong;
+    private JMenuItem addSong;
     private JPanel songsPanel;
     private JPanel playlistsPanel;
     private JPanel yourLibrary;
@@ -76,8 +76,8 @@ public class LeftPanel extends JPanel {
         this.albums = albums;
         this.songsPanel = songsPanel;
         popupMenu = new JPopupMenu("others");
-        addsong = new JMenuItem("Add song");
-        popupMenu.add(addsong);
+        addSong = new JMenuItem("Add song");
+        popupMenu.add(addSong);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         others = new EJButton();
         home = new EJButton();
@@ -113,18 +113,24 @@ public class LeftPanel extends JPanel {
 
         //Actionlistoners
 
-        addsong.addActionListener(new ActionListener() {
+        addSong.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
                 int dialog = fileChooser.showOpenDialog(null);
                 try {
+                    Boolean equality = false;
                     Song song = new Song(fileChooser.getSelectedFile().getAbsolutePath());
-                    songs1.add(song);
-                    System.out.println(songs1.size());
-                    ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("Saves\\library.ser"));
-                    library.writeObject(song);
-                    ((MainPanel) songsPanel).addSongFromButton(song);
+                    for (int i = 0; i < mainFrame.getSongs().size(); i++)
+                        if (mainFrame.getSongs().get(i).getAddress().equals(song.getAddress()))
+                            equality = true;
+                    if (!equality) {
+                        songs1.add(song);
+                        System.out.println(songs1.size());
+                        ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("Saves\\library.ser"));
+                        library.writeObject(song);
+                        ((MainPanel) songsPanel).addSongFromButton(song);
+                    }
                 } catch (IOException | InvalidDataException | UnsupportedTagException ex) {
                     ex.printStackTrace();
                 }
@@ -286,7 +292,7 @@ public class LeftPanel extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                ((MainPanel)mainFrame.getSongPanel()).modifyPanel();
+                ((MainPanel) mainFrame.getSongPanel()).modifyPanel();
                 mainFrame.setPlaylistPlaying(mainFrame.getSongs());
                 mainFrame.setInAlbum(false);
 

@@ -94,7 +94,7 @@ public class SJButton extends JButton {
 
                     int numOfSong = 0;
                     for (int i = 0; i < mainFrame.getSongs().size(); i++)
-                        if (SJButton.this.song == mainFrame.getSongs().get(i))
+                        if (SJButton.this.song.getAddress().equals(mainFrame.getSongs().get(i).getAddress()))
                             numOfSong = i;
                     for (int j = 0; j < numOfSong; j++)
                         Collections.swap(mainFrame.getSongs(), j, numOfSong);
