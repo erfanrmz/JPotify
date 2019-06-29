@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Song implements Serializable {
+public class Song implements java.io.Serializable {
     private int songSeekPos;
     private String address;
     private String title;

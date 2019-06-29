@@ -71,7 +71,6 @@ public class Play extends Thread {
                 System.out.println("hello");
                 like.setIcon(new ImageIcon("Icons\\liked25.png"));
                 like.setPressed(1);
-
             }
             like.addMouseListener(new MouseAdapter() {
                 @Override
@@ -93,6 +92,11 @@ public class Play extends Thread {
                     }
                 }
             });
+            for (int i = 0 ; i < mainFrame.getFriends().size();i++)
+            {
+                Client send = new Client(mainFrame.getFriends().get(i).getIP(),mainFrame.getFriends().get(i).getPort(),playingSong);
+
+            }
 //            mainFrame.getPlayingPanel().getPlayingSongInformation().add(like);
 //            mainFrame.getPlayingPanel().getPlayingSongLikeName().setLayout(new FlowLayout(FlowLayout.LEFT));
             try {

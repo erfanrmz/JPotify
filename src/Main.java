@@ -37,11 +37,14 @@ public class Main {
         user.addFocusListener(new FocusListener() {
                                   @Override
                                   public void focusGained(FocusEvent e) {
+                                      user.setBackground(new Color(64,64,64));
                                       user.setText("");
+                                      user.setForeground(Color.WHITE);
                                   }
 
                                   @Override
                                   public void focusLost(FocusEvent e) {
+                                      user.setBackground(new Color(51,51,51));
 
                                   }
         });
@@ -63,11 +66,14 @@ public class Main {
         IP.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
+                IP.setBackground(new Color(64,64,64));
                 IP.setText("");
+                IP.setForeground(Color.WHITE);
             }
 
             @Override
             public void focusLost(FocusEvent e) {
+                IP.setBackground(new Color(51,51,51));
 
             }
         });
