@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SJButton extends JButton {
     private Song song;
@@ -20,6 +21,7 @@ public class SJButton extends JButton {
     private ArrayList<Play> playingThreads;
     private JPopupMenu popupMenu;
     private JMenuItem addToPlayList;
+
     public Play getPlayer() {
         return player;
     }
@@ -52,13 +54,16 @@ public class SJButton extends JButton {
                     song.isFavorite();
                     mainFrame.getPlayingPanel().getPlayingTime().setTime(0);
                     mainFrame.getPlayingPanel().getMusicSeek().setValue(0);
-                    for (int i = 0 ; i < mainFrame.getjSliderSeeks().size() ;i++)
-                    {
+                    for (int i = 0; i < mainFrame.getjSliderSeeks().size(); i++) {
                         mainFrame.getjSliderSeeks().get(i).stop();
                     }
                     JSliderSeek jSliderSeek = new JSliderSeek(mainFrame,mainFrame.getPlayingPanel().getMusicSeek());
                     mainFrame.getjSliderSeeks().add(jSliderSeek);
                     jSliderSeek.start();
+//<<<<<<< HEAD
+//=======
+//                mainFrame.getLeftPanel().getMusicPlayingArtWork().setIcon(SJButton.this.song.getImageIcon());
+//>>>>>>> Recently_played
                     mainFrame.getPlayingPanel().getPlay().setIcon(new ImageIcon("Icons\\pause50.png"));
                     mainFrame.getPlayingPanel().getPlay().setPressed(1);
                     try {
@@ -69,14 +74,45 @@ public class SJButton extends JButton {
                     } catch (Exception e1) {
                         System.out.println("SHIT");
                     }
+//<<<<<<< HEAD
 
                     SJButton.this.player = new Play(0,mainFrame);
-                    SJButton.this.player.setPlayingSong(song);
+//                    SJButton.this.player.setPlayingSong(song);
+//=======
+//                    try {
+//                        Mp3File playingSong = new Mp3File(SJButton.this.song.getAddress());
+//                        mainFrame.getPlayingPanel().getMusicSeek().setMaximum((int) playingSong.getLengthInSeconds());
+//                        System.out.println(mainFrame.getPlayingPanel().getMusicSeek().getMaximum() + " " + playingSong.getFrameCount());
+//                    } catch (IOException e1) {
+//                        e1.printStackTrace();
+//                    } catch (UnsupportedTagException e1) {
+//                        e1.printStackTrace();
+//                    } catch (InvalidDataException e1) {
+//                        e1.printStackTrace();
+//                    }
+//                    SJButton.this.player = new Play(0);
+                    SJButton.this.player.setPlayingSong(SJButton.this.song);
+//>>>>>>> Recently_played
                     SJButton.this.player.start();
                     playingThreads.add(SJButton.this.player);
 
+                    int numOfSong = 0;
+                    for (int i = 0; i < mainFrame.getSongs().size(); i++)
+                        if (SJButton.this.song == mainFrame.getSongs().get(i))
+                            numOfSong = i;
+                    for (int j = 0; j < numOfSong; j++)
+                        Collections.swap(mainFrame.getSongs(), j, numOfSong);
+                    ((MainPanel) mainFrame.getMainPanel()).modifyPanel();
 
+                    int numOfAlbum = 0;
+                    for (int i = 0; i < mainFrame.getAlbums().size(); i++)
+                        if (SJButton.this.song.getAlbum().equals(mainFrame.getAlbums().get(i).getName()))
+                            numOfAlbum = i;
+                    for (int j = 0; j < numOfAlbum; j++)
+                        Collections.swap(mainFrame.getAlbums(), j, numOfAlbum);
+                    mainFrame.getAlbumsPanel().updateAlbums();
                 }
+
                 if (e.getButton() == MouseEvent.BUTTON3) {
                     popupMenu.show(SJButton.this, e.getX(), e.getY());
                 }

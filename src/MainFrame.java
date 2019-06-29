@@ -17,26 +17,6 @@ public class MainFrame extends JFrame {
     private ArrayList<Song> playlistPlaying;
 
 
-//    public MainFrame() throws IOException, ClassNotFoundException {
-//        playingThreads = new ArrayList<Play>();
-//        player = new Play();
-//        ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
-//        this.setIconImage(spotify.getImage());
-//        mainPanel = new MainPanel(this, player, playingThreads);
-//        leftPanel = new LeftPanel(mainPanel, this, player, playingThreads);
-//        playingPanel = new PlayingPanel(player, playingThreads);
-//        songsScrollPane = new JScrollPane(mainPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//        songsScrollPane.setBorder(null);
-//        this.setTitle("Jpotify");
-//        this.setSize(new Dimension(1600, 900));
-//        this.setLayout(new BorderLayout());
-//        this.add(songsScrollPane, BorderLayout.CENTER);
-//        this.add(playingPanel, BorderLayout.PAGE_END);
-//        this.add(leftPanel, BorderLayout.LINE_START);
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        this.setVisible(true);
-//=======
-
     public MainFrame() {
         playlistPlaying = new ArrayList<Song>();
         jSliderSeeks = new ArrayList<JSliderSeek>();
@@ -82,7 +62,7 @@ public class MainFrame extends JFrame {
         return playingThreads;
     }
 
-    public void ChangePanel(Playlist playlist) {
+    public void ChangePanel(JPanel playlist) {
         mainPanel.removeAll();
         mainPanel.add(playlist);
         mainPanel.revalidate();
@@ -128,6 +108,7 @@ public class MainFrame extends JFrame {
         return songs;
     }
 
+
     public ArrayList<Song> getPlaylistPlaying() {
         return playlistPlaying;
     }
@@ -136,4 +117,15 @@ public class MainFrame extends JFrame {
         this.playlistPlaying = playlistPlaying;
     }
 
+    public ArrayList<Album> getAlbums() {
+        return albums;
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public Albums getAlbumsPanel() {
+        return albumsPanel;
+    }
 }

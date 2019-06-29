@@ -107,17 +107,17 @@ public class Playlist extends JPanel {
         this.add(box2);
         this.add(box3);
         for (int i = 0; i < songs.size(); i++) {
-            PJButton songadded = new PJButton(songs.get(i).getTitle(), songs.get(i).getImageIcon(), songs.get(i), player, mainFrame, playingThreads, this);
+            PJButton songAdded = new PJButton(songs.get(i).getTitle(), songs.get(i).getImageIcon(), songs.get(i), player, mainFrame, playingThreads, this);
             if (count % 3 == 0) {
-                box1.add(songadded);
+                box1.add(songAdded);
                 box1.setLayout(new BoxLayout(box1, BoxLayout.Y_AXIS));
                 count++;
             } else if (count % 3 == 1) {
-                box2.add(songadded);
+                box2.add(songAdded);
                 box2.setLayout(new BoxLayout(box2, BoxLayout.Y_AXIS));
                 count++;
             } else if (count % 3 == 2) {
-                box3.add(songadded);
+                box3.add(songAdded);
                 box3.setLayout(new BoxLayout(box3, BoxLayout.Y_AXIS));
                 count++;
             }

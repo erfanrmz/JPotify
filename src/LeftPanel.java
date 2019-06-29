@@ -269,10 +269,10 @@ public class LeftPanel extends JPanel {
             }
         });
         songs.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                mainFrame.setPlaylistPlaying(mainFrame.getSongs());
-            }
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                mainFrame.setPlaylistPlaying(mainFrame.getSongs());
+//            }
 
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -282,6 +282,13 @@ public class LeftPanel extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {
                 songs.setIcon(new ImageIcon("Icons\\song1.png"));
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ((MainPanel)mainFrame.getMainPanel()).modifyPanel();
+                mainFrame.setPlaylistPlaying(mainFrame.getSongs());
+
             }
         });
         albumsButton.addMouseListener(new MouseAdapter() {

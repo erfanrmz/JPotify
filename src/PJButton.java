@@ -1,7 +1,3 @@
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -72,7 +68,6 @@ public class PJButton extends JButton {
                         }
                         System.out.println("stopped");
                     } catch (Exception e1) {
-                        System.out.println("SHIT");
                     }
 //                    try {
 //                        Mp3File playingSong = new Mp3File(song.getAddress());
@@ -91,6 +86,8 @@ public class PJButton extends JButton {
                     PJButton.this.player.setPlayingSong(song);
                     PJButton.this.player.start();
                     playingThreads.add(PJButton.this.player);
+                    ((MainPanel)mainFrame.getMainPanel()).RecentlyPlayed(PJButton.this.song);
+
                 }
                 if (e.getButton() == MouseEvent.BUTTON3) {
                     popupMenu.show(PJButton.this, e.getX(), e.getY());
