@@ -13,12 +13,15 @@ import java.util.ArrayList;
 public class MainFrame extends JFrame {
     private String name;
     private String myIP;
+    private Server server;
+    private ServerThread serverThread;
     private MainPanel songPanel;
     private JPanel mainPanel;
     private UserPanel userPanel;
     private PlayingPanel playingPanel;
     private Albums albumsPanel;
     private LeftPanel leftPanel;
+    private RightPanel rightPanel;
     private Play player;
     private JScrollPane songsScrollPane;
     private ArrayList<Play> playingThreads;
@@ -26,17 +29,22 @@ public class MainFrame extends JFrame {
     private ArrayList<Song> songs;
     private ArrayList<JSliderSeek> jSliderSeeks;
     private ArrayList<Song> playlistPlaying;
+    private ArrayList<Friend> friends;
     private Boolean inAlbum;
+    private int port;
 
-    public MainFrame(String name, String IP) {
+    public MainFrame(String name , String IP) {
         this.name = name;
         this.myIP = IP;
+//        serverThread = new ServerThread();
+//        serverThread.start();
         inAlbum = false;
         playlistPlaying = new ArrayList<Song>();
         jSliderSeeks = new ArrayList<JSliderSeek>();
         songs = new ArrayList<Song>();
         albums = new ArrayList<Album>();
         playingThreads = new ArrayList<Play>();
+        friends = new ArrayList<Friend>();
         playlistPlaying = songs;
 
         try {
@@ -50,6 +58,12 @@ public class MainFrame extends JFrame {
         this.setIconImage(spotify.getImage());
         mainPanel = new JPanel();
         userPanel = new UserPanel(name);
+//<<<<<<< HEAD
+//=======
+        rightPanel = new RightPanel(this);
+////=======
+////>>>>>>> Bug_fixing
+//>>>>>>> 63b211c4ff21d393fcb8a0e40d2bdd8f413f3587
         songPanel = new MainPanel(this, player, playingThreads, songs);
         leftPanel = new LeftPanel(songPanel, this, player, playingThreads, albums, songs);
         albumsPanel = new Albums(albums, songs, this);
@@ -65,6 +79,7 @@ public class MainFrame extends JFrame {
         this.add(mainPanel, BorderLayout.CENTER);
         this.add(playingPanel, BorderLayout.PAGE_END);
         this.add(leftPanel, BorderLayout.LINE_START);
+        this.add(rightPanel,BorderLayout.LINE_END);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
@@ -174,5 +189,17 @@ public class MainFrame extends JFrame {
 
     public Boolean getInAlbum() {
         return inAlbum;
+    }
+
+    public ArrayList<Friend> getFriends() {
+        return friends;
+    }
+    public void changeport()
+    {
+        port++;
+    }
+
+    public int getPort() {
+        return port;
     }
 }

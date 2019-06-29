@@ -70,6 +70,7 @@ public class Play extends Thread {
         mainFrame.getPlayingPanel().getPlayingSongInformation().add(mainFrame.getPlayingPanel().getPlayingSongLikeName());
 //            mainFrame.getPlayingPanel().getPlayingSongInformation().add(mainFrame.getPlayingPanel().getPlayingSongArtist());
 //            mainFrame.getPlayingPanel().getPlayingSongLikeName().add(mainFrame.getPlayingPanel().getPlayingSongName());
+//<<<<<<< HEAD
         EJButton like = new EJButton();
         like.setPreferredSize(new Dimension(25, 25));
         like.setIcon(new ImageIcon("Icons\\like25.png"));
@@ -94,8 +95,14 @@ public class Play extends Thread {
                     }
 
                 }
+//<<<<<<< HEAD
             }
         });
+            for (int i = 0 ; i < mainFrame.getFriends().size();i++)
+            {
+                Client send = new Client(mainFrame.getFriends().get(i).getIP(),mainFrame.getFriends().get(i).getPort(),playingSong);
+
+            }
 //            mainFrame.getPlayingPanel().getPlayingSongInformation().add(like);
 //            mainFrame.getPlayingPanel().getPlayingSongLikeName().setLayout(new FlowLayout(FlowLayout.LEFT));
         try {
