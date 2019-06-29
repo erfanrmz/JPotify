@@ -19,10 +19,12 @@ public class MainFrame extends JFrame {
     private ArrayList<Song> songs;
     private ArrayList<JSliderSeek> jSliderSeeks;
     private ArrayList<Song> playlistPlaying;
+    private Boolean inAlbum;
 
     public MainFrame(String name , String IP) {
         this.name = name;
         this.myIP = IP;
+        inAlbum = false;
         playlistPlaying = new ArrayList<Song>();
         jSliderSeeks = new ArrayList<JSliderSeek>();
         songs = new ArrayList<Song>();
@@ -39,8 +41,11 @@ public class MainFrame extends JFrame {
         player = new Play(0,this);
         ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
         this.setIconImage(spotify.getImage());
+//<<<<<<< HEAD
         mainPanel = new JPanel();
         userPanel = new UserPanel(name);
+//=======
+//>>>>>>> Bug_fixing
         songPanel = new MainPanel(this, player, playingThreads, songs);
         leftPanel = new LeftPanel(songPanel, this, player, playingThreads, albums, songs);
         albumsPanel = new Albums(albums, songs, this);
@@ -138,8 +143,18 @@ public class MainFrame extends JFrame {
     public Albums getAlbumsPanel() {
         return albumsPanel;
     }
-    public String getUser()
-    {
-       return name;
+//<<<<<<< HEAD
+    public String getUser() {
+        return name;
+    }
+//=======
+
+    public void setInAlbum(Boolean inAlbum) {
+        this.inAlbum = inAlbum;
+    }
+
+    public Boolean getInAlbum() {
+        return inAlbum;
+//>>>>>>> Bug_fixing
     }
 }

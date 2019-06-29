@@ -53,7 +53,7 @@ public class SJButton extends JButton {
                     for (int i = 0; i < mainFrame.getjSliderSeeks().size(); i++) {
                         mainFrame.getjSliderSeeks().get(i).stop();
                     }
-                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame,mainFrame.getPlayingPanel().getMusicSeek());
+                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame, mainFrame.getPlayingPanel().getMusicSeek());
                     mainFrame.getjSliderSeeks().add(jSliderSeek);
                     jSliderSeek.start();
 //<<<<<<< HEAD
@@ -72,7 +72,7 @@ public class SJButton extends JButton {
                     }
 //<<<<<<< HEAD
 
-                    SJButton.this.player = new Play(0,mainFrame);
+                    SJButton.this.player = new Play(0, mainFrame);
 //                    SJButton.this.player.setPlayingSong(song);
 //=======
 //                    try {
@@ -94,11 +94,12 @@ public class SJButton extends JButton {
 
                     int numOfSong = 0;
                     for (int i = 0; i < mainFrame.getSongs().size(); i++)
-                        if (SJButton.this.song == mainFrame.getSongs().get(i))
+                        if (SJButton.this.song.getAddress().equals(mainFrame.getSongs().get(i).getAddress()))
                             numOfSong = i;
                     for (int j = 0; j < numOfSong; j++)
                         Collections.swap(mainFrame.getSongs(), j, numOfSong);
-                    ((MainPanel) mainFrame.getSongPanel()).modifyPanel();
+                    if (!mainFrame.getInAlbum())
+                        ((MainPanel) mainFrame.getSongPanel()).modifyPanel();
 
                     int numOfAlbum = 0;
                     for (int i = 0; i < mainFrame.getAlbums().size(); i++)
