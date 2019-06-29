@@ -1,6 +1,8 @@
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -9,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Song implements Serializable {
     private int songSeekPos;
@@ -17,12 +20,12 @@ public class Song implements Serializable {
     private String artist;
     private String album;
     private String year;
-    private String favorite;
+    private Boolean favorite;
     private ImageIcon imageIcon;
 
 
     public Song(String address) throws IOException, InvalidDataException, UnsupportedTagException {
-
+        favorite =false;
         this.address = address;
         songSeekPos = 0;
         try {
@@ -60,7 +63,7 @@ public class Song implements Serializable {
             imageIcon = new ImageIcon("Icons\\cover1.png");
             System.out.println("No artwork");
         }
-        favorite = "false";
+        favorite = false;
     }
 
     public String getAddress() {
@@ -93,12 +96,16 @@ public class Song implements Serializable {
 
 
 
-    public String  isFavorite() {
-        return favorite;
+    public void   isFavorite() {
+        favorite =true;
     }
 
-    public void setFavorite(String favorite) {
-        this.favorite = favorite;
+    public void notFavorite() {
+        favorite =false;
+    }
+
+    public Boolean getFavorite() {
+        return favorite;
     }
 
     @Override
@@ -114,4 +121,20 @@ public class Song implements Serializable {
                 ", imageIcon=" + imageIcon +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Song song = (Song) o;
+        return
+                Objects.equals(address, song.address) &&
+                Objects.equals(title, song.title) &&
+                Objects.equals(artist, song.artist) &&
+                Objects.equals(album, song.album) &&
+                Objects.equals(year, song.year) &&
+                Objects.equals(favorite, song.favorite) &&
+                Objects.equals(imageIcon, song.imageIcon);
+    }
+
 }

@@ -381,4 +381,8 @@ public class PlayingPanel extends JPanel {
     public JPanel getPlayingSongLikeName() {
         return playingSongLikeName;
     }
+
+    public JPanel getPlayingSongInformation() {
+        return playingSongInformation;
+    }
 }

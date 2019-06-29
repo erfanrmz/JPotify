@@ -58,18 +58,20 @@ public class Play extends Thread {
             mainFrame.getPlayingPanel().getPlayingSongArtist().setText(playingSong.getArtist());
             mainFrame.getPlayingPanel().getPlayingSongName().setText(playingSong.getTitle());
             mainFrame.getPlayingPanel().getPlayingSongLikeName().removeAll();
+//            mainFrame.getPlayingPanel().getPlayingSongInformation().removeAll();
+            mainFrame.getPlayingPanel().getPlayingSongInformation().add(mainFrame.getPlayingPanel().getPlayingSongLikeName());
+//            mainFrame.getPlayingPanel().getPlayingSongInformation().add(mainFrame.getPlayingPanel().getPlayingSongArtist());
 //            mainFrame.getPlayingPanel().getPlayingSongLikeName().add(mainFrame.getPlayingPanel().getPlayingSongName());
             EJButton like = new EJButton();
             like.setPreferredSize(new Dimension(25,25));
-            if (playingSong.isFavorite().equals("true"))
+            like.setIcon(new ImageIcon("Icons\\like25.png"));
+            like.setPressed(0);
+            if (playingSong.getFavorite())
             {
+                System.out.println("hello");
                 like.setIcon(new ImageIcon("Icons\\liked25.png"));
                 like.setPressed(1);
-            }
-            else
-            {
-                like.setIcon(new ImageIcon("Icons\\like25.png"));
-                like.setPressed(0);
+
             }
             like.addMouseListener(new MouseAdapter() {
                 @Override
@@ -79,18 +81,20 @@ public class Play extends Thread {
                         if (like.getPressed() % 2 == 0)
                         {
                             like.setIcon(new ImageIcon("Icons\\like25.png"));
-//                            playingSong.setFavorite("false");
+//                            mainFrame.getFavoriteSongs().remove(playingSong);
+
                         }
                         else
                         {
                             like.setIcon(new ImageIcon("Icons\\liked25.png"));
-//                            playingSong.setFavorite("true");
+//                            mainFrame.getFavoriteSongs().add(playingSong);
                         }
+
                     }
                 }
             });
-            mainFrame.getPlayingPanel().getPlayingSongLikeName().add(like);
-            mainFrame.getPlayingPanel().getPlayingSongLikeName().setLayout(new FlowLayout(FlowLayout.LEFT));
+//            mainFrame.getPlayingPanel().getPlayingSongInformation().add(like);
+//            mainFrame.getPlayingPanel().getPlayingSongLikeName().setLayout(new FlowLayout(FlowLayout.LEFT));
             try {
                 playMP3 = new AdvancedPlayer(file);
                 playMP3.play(frame,frame+1);

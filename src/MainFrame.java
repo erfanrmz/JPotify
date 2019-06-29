@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
     private ArrayList<JSliderSeek> jSliderSeeks;
     private ArrayList<Song> playlistPlaying;
 
+
 //    public MainFrame() throws IOException, ClassNotFoundException {
 //        playingThreads = new ArrayList<Play>();
 //        player = new Play();
@@ -109,6 +110,7 @@ public class MainFrame extends JFrame {
     }
 
     public void readSongs() throws IOException, ClassNotFoundException {
+
         ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\library.ser"))));
         songs = (ArrayList<Song>) ois.readObject();
         playlistPlaying = songs;
@@ -133,4 +135,5 @@ public class MainFrame extends JFrame {
     public void setPlaylistPlaying(ArrayList<Song> playlistPlaying) {
         this.playlistPlaying = playlistPlaying;
     }
+
 }

@@ -49,7 +49,7 @@ public class SJButton extends JButton {
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     System.out.println(song.toString());
-                    song.setFavorite("true");
+                    song.isFavorite();
                     mainFrame.getPlayingPanel().getPlayingTime().setTime(0);
                     mainFrame.getPlayingPanel().getMusicSeek().setValue(0);
                     for (int i = 0 ; i < mainFrame.getjSliderSeeks().size() ;i++)
