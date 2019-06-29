@@ -3,6 +3,13 @@ import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This is a class for creating a playlist.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class Playlist extends JPanel {
     private String name;
     private MainFrame mainFrame;
@@ -38,6 +45,12 @@ public class Playlist extends JPanel {
         }
     }
 
+    /**
+     * adds the song to playlist by pressing the add button
+     *
+     * @param song the song that the user wants to add to playlist
+     * @throws IOException
+     */
     public void addSongFromButton(Song song) throws IOException {
         songs.add(song);
         PJButton songAdded = new PJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads, this);
@@ -61,6 +74,11 @@ public class Playlist extends JPanel {
 
     }
 
+    /**
+     * adds the song to playlist form the saved file
+     *
+     * @param song the song that we want to be added to playlist
+     */
     public void addSongFromSer(Song song) {
         PJButton songAdded = new PJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads, this);
         if (count % 3 == 0) {
@@ -79,6 +97,12 @@ public class Playlist extends JPanel {
         this.revalidate();
     }
 
+    /**
+     * Reads the songs of the playlist from seved file
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void readSongs() throws
             IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream("Saves\\" + mainFrame.getUser() + "'s " + name + ".ser");
@@ -92,6 +116,9 @@ public class Playlist extends JPanel {
         return name;
     }
 
+    /**
+     * Regenerates the playlist panel
+     */
     public void modifyPanel() {
         this.removeAll();
         count = 0;
@@ -126,6 +153,12 @@ public class Playlist extends JPanel {
         this.repaint();
     }
 
+    /**
+     * Remove the song from the playlist
+     *
+     * @param song the song that need to be removed
+     * @throws IOException
+     */
     public void removeSong(Song song) throws IOException {
         songs.remove(song);
         FileOutputStream fop = new FileOutputStream("Saves\\" + mainFrame.getUser() + "'s " + name + ".ser");

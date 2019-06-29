@@ -3,10 +3,23 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * This is the button for the albums in the album list.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class AJButton extends JButton {
     private Album album;
     private MainFrame mainFrame;
 
+    /**
+     * @param text      text of the button
+     * @param icon      icon of the button
+     * @param album     the album which the button indicates
+     * @param mainFrame it's the main frame !! :)
+     */
     public AJButton(String text, Icon icon, Album album, MainFrame mainFrame) {
         super(text, icon);
         this.album = album;

@@ -5,6 +5,13 @@ import javax.sound.sampled.Mixer.Info;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is a class for adjusting the volume of a song.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class Audio {
 
     public static void setMasterOutputVolume(float value) {

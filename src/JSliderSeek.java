@@ -1,5 +1,12 @@
 import javax.swing.*;
 
+/**
+ * This is a class for making the JSlider move with music automatically.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class JSliderSeek extends Thread {
     private JSlider seekSlider;
     private boolean isPause;
@@ -11,6 +18,9 @@ public class JSliderSeek extends Thread {
         this.seekSlider = seekSlider;
     }
 
+    /**
+     * the method to move the slider
+     */
     @Override
     public void run() {
         while (true) {

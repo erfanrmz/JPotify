@@ -2,6 +2,13 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * This is a class for making a Jbutton look cooler! :)
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class EJButton extends JButton {
     private int pressed;
 

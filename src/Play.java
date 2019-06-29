@@ -11,6 +11,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * This is a class for playing a music.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class Play extends Thread {
     private MainFrame mainFrame;
     private boolean isPause;

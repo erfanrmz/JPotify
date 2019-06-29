@@ -1,6 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This is a class for showing time.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class Time extends JLabel {
     private int min;
     private int sec;

@@ -8,6 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * This is a button for the musics in the main(song) & album panel.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class SJButton extends JButton {
     private Song song;
     private Play player;
@@ -17,10 +24,6 @@ public class SJButton extends JButton {
     private ArrayList<Play> playingThreads;
     private JPopupMenu popupMenu;
     private JMenuItem addToPlayList;
-
-    public Play getPlayer() {
-        return player;
-    }
 
     public SJButton(String text, Icon icon, Song song, Play player, MainFrame mainFrame, ArrayList<Play> playingThreads) {
         super(text, icon);
@@ -139,5 +142,9 @@ public class SJButton extends JButton {
                 }
             }
         });
+    }
+
+    public Play getPlayer() {
+        return player;
     }
 }

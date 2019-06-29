@@ -2,6 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This is a class for the album panel in the album list.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class Albums extends JPanel {
     private JPanel box1;
     private JPanel box2;
@@ -10,6 +17,11 @@ public class Albums extends JPanel {
     private ArrayList<Album> albums;
     private ArrayList<Song> songs;
 
+    /**
+     * @param albums    the array list of all albums
+     * @param songs     the array list of all songs
+     * @param mainFrame it's the main frame
+     */
     public Albums(ArrayList<Album> albums, ArrayList<Song> songs, MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         this.songs = songs;
@@ -40,6 +52,9 @@ public class Albums extends JPanel {
         }
     }
 
+    /**
+     * regenerates the album panel
+     */
     public void updateAlbums() {
         albums.removeAll(albums);
         box1.removeAll();

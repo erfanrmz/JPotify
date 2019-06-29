@@ -8,7 +8,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-
+/**
+ * This is a class for the playing(lower) panel of the program.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class PlayingPanel extends JPanel {
     private EJButton play;
     private EJButton nextMusic;

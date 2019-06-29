@@ -5,6 +5,13 @@ import java.awt.event.MouseEvent;
 import java.awt.font.TextAttribute;
 import java.util.Map;
 
+/**
+ * This is a class for the upper panel of the main panel that shows the user ID.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class UserPanel extends JPanel {
     private JLabel name;
     private EJButton user;

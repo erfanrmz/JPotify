@@ -3,6 +3,13 @@ import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This is a class for the main frame of the program.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class MainFrame extends JFrame {
     private String name;
     private String myIP;
@@ -62,6 +69,11 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Changes the main panel to playlist panel
+     *
+     * @param playlist the playlist that we want to switch to
+     */
     public void ChangePanel(JPanel playlist) {
         songPanel.removeAll();
         songPanel.add(playlist);
@@ -70,6 +82,9 @@ public class MainFrame extends JFrame {
         this.repaint();
     }
 
+    /**
+     * Changes the main panel to album panel
+     */
     public void setAlbumPanel() {
         songPanel.removeAll();
         albumsPanel.updateAlbums();
@@ -80,6 +95,9 @@ public class MainFrame extends JFrame {
         this.repaint();
     }
 
+    /**
+     * Changes the main panel to albums panel
+     */
     public void setAlbumPanel1(Album albumPanel) {
         songPanel.removeAll();
         songPanel.add(albumPanel);
@@ -89,6 +107,12 @@ public class MainFrame extends JFrame {
         this.repaint();
     }
 
+    /**
+     * reads the songs from saved file
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void readSongs() throws IOException, ClassNotFoundException {
 
         ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\" + this.name + "'s library.ser"))));

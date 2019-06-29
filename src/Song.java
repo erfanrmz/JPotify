@@ -10,6 +10,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * This is a class for creating a song.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class Song implements Serializable {
     private int songSeekPos;
     private String address;
@@ -19,7 +26,6 @@ public class Song implements Serializable {
     private String year;
     private Boolean favorite;
     private ImageIcon imageIcon;
-
 
     public Song(String address) throws IOException, InvalidDataException, UnsupportedTagException {
         favorite = false;

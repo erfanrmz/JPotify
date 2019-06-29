@@ -6,6 +6,13 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * This is a class for the main(central) panel of the program.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class MainPanel extends JPanel {
     private MainFrame mainFrame;
     private Play player;
@@ -40,6 +47,12 @@ public class MainPanel extends JPanel {
         }
     }
 
+    /**
+     * adds the song by pressing the add button
+     *
+     * @param song the song that the user wants to add
+     * @throws IOException
+     */
     public void addSongFromButton(Song song) throws IOException {
 //        songs.add(song);
         SJButton songAdded = new SJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads);
@@ -63,6 +76,11 @@ public class MainPanel extends JPanel {
 
     }
 
+    /**
+     * adds the song form the saved file
+     *
+     * @param song the song that we want to add
+     */
     public void addSongFromSer(Song song) {
         SJButton songAdded = new SJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads);
         if (count % 3 == 0) {
@@ -81,6 +99,9 @@ public class MainPanel extends JPanel {
         this.revalidate();
     }
 
+    /**
+     * Regenerates the songs panel
+     */
     public void modifyPanel() {
         this.removeAll();
         count = 0;
@@ -115,6 +136,11 @@ public class MainPanel extends JPanel {
         this.repaint();
     }
 
+    /**
+     * makes the panel to get the recently played song to the first of the list
+     *
+     * @param song the recently played song
+     */
     public void RecentlyPlayed(Song song) {
         int numOfSong = 0;
         for (int i = 0; i < mainFrame.getSongs().size(); i++)

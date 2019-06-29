@@ -2,6 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * This is a class for creating an album.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class Album extends JPanel {
     private JPanel box1;
     private JPanel box2;
@@ -13,6 +20,14 @@ public class Album extends JPanel {
     private ImageIcon imageIcon;
     private ArrayList<Song> songsOfAlbum;
 
+    /**
+     * @param name         name of the album
+     * @param artist       artist of the album
+     * @param year         the year that this album is made
+     * @param imageIcon    the artwork of the album
+     * @param mainFrame    it's the main frame !! :)
+     * @param songsOfAlbum it's the songs of the album !
+     */
     public Album(String name, String artist, String year, ImageIcon imageIcon, MainFrame mainFrame, ArrayList<Song> songsOfAlbum) {
         this.songsOfAlbum = songsOfAlbum;
         this.mainFrame = mainFrame;
@@ -36,6 +51,9 @@ public class Album extends JPanel {
         this.imageIcon = imageIcon;
     }
 
+    /**
+     * regenerates the album
+     */
     public void updateAlbum() {
         System.out.println("Size in album" + songsOfAlbum.size());
         for (int i = 0; i < songsOfAlbum.size(); i++) {

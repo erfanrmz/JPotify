@@ -10,6 +10,13 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * This is a class for the left panel of the program.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class LeftPanel extends JPanel {
     private EJButton home;
     private EJButton others;
@@ -34,11 +41,6 @@ public class LeftPanel extends JPanel {
     private ArrayList<Play> playingThreads;
     private ArrayList<Album> albums;
     private ArrayList<Song> songs1;
-
-    public ArrayList<Playlist> getPlaylists() {
-        return playlists;
-    }
-
 
     public LeftPanel(JPanel songsPanel, MainFrame mainFrame, Play player, ArrayList<Play> playingThreads, ArrayList<Album> albums, ArrayList<Song> songs1) {
         playlistNames = new ArrayList<>();
@@ -328,6 +330,12 @@ public class LeftPanel extends JPanel {
         }
     }
 
+    /**
+     * reads the name of the playlists and make them
+     *
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void readPlaylists() throws IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\" + mainFrame.getUser() + "'s Name of the playlists.ser"))));
         playlistNames = (ArrayList<String>) ois.readObject();
@@ -407,5 +415,9 @@ public class LeftPanel extends JPanel {
 
     public EJButton getMusicPlayingArtWork() {
         return musicPlayingArtWork;
+    }
+
+    public ArrayList<Playlist> getPlaylists() {
+        return playlists;
     }
 }

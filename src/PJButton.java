@@ -7,6 +7,13 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This is a button for the musics in a playlist list.
+ *
+ * @author Erfan Ramezani & Amir Mojtaba Kiasat
+ * @version 1.0
+ * @since 6-21-2019
+ */
 public class PJButton extends JButton {
     private Song song;
     private Play player;
