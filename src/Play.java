@@ -1,14 +1,15 @@
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
-import javazoom.jl.player.Player;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Play extends Thread {
     private MainFrame mainFrame;
@@ -58,10 +59,10 @@ public class Play extends Thread {
             mainFrame.getPlayingPanel().getPlayingSongArtist().setText(playingSong.getArtist());
             mainFrame.getPlayingPanel().getPlayingSongName().setText(playingSong.getTitle());
             mainFrame.getPlayingPanel().getPlayingSongLikeName().removeAll();
-//            mainFrame.getPlayingPanel().getPlayingSongInformation().removeAll();
+            mainFrame.getPlayingPanel().getPlayingSongInformation().removeAll();
             mainFrame.getPlayingPanel().getPlayingSongInformation().add(mainFrame.getPlayingPanel().getPlayingSongLikeName());
-//            mainFrame.getPlayingPanel().getPlayingSongInformation().add(mainFrame.getPlayingPanel().getPlayingSongArtist());
-//            mainFrame.getPlayingPanel().getPlayingSongLikeName().add(mainFrame.getPlayingPanel().getPlayingSongName());
+            mainFrame.getPlayingPanel().getPlayingSongInformation().add(mainFrame.getPlayingPanel().getPlayingSongArtist());
+            mainFrame.getPlayingPanel().getPlayingSongLikeName().add(mainFrame.getPlayingPanel().getPlayingSongName());
             EJButton like = new EJButton();
             like.setPreferredSize(new Dimension(25,25));
             like.setIcon(new ImageIcon("Icons\\like25.png"));
@@ -93,8 +94,8 @@ public class Play extends Thread {
                     }
                 }
             });
-//            mainFrame.getPlayingPanel().getPlayingSongInformation().add(like);
-//            mainFrame.getPlayingPanel().getPlayingSongLikeName().setLayout(new FlowLayout(FlowLayout.LEFT));
+            mainFrame.getPlayingPanel().getPlayingSongInformation().add(like);
+            mainFrame.getPlayingPanel().getPlayingSongLikeName().setLayout(new FlowLayout(FlowLayout.LEFT));
             try {
                 playMP3 = new AdvancedPlayer(file);
                 playMP3.play(frame,frame+1);
@@ -107,9 +108,6 @@ public class Play extends Thread {
                 }
                 System.out.println("END");
             }
-            //JFileChooser a = new JFileChooser();
-            //int fasf = a.showOpenDialog(null);
-            //if (fasf == JFileChooser.APPROVE_OPTION) {
             catch (Exception q) {
                 System.out.print(q);
             }
@@ -152,9 +150,4 @@ public class Play extends Thread {
     public Song getPlayingSong() {
         return playingSong;
     }
-    //    public void mp3seek(int pos) throws JavaLayerException {
-//        playMP3.close();
-//        playMP3 = new AdvancedPlayer(file);
-//        playMP3.play(pos,1000);
-//    }
 }

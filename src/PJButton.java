@@ -122,6 +122,7 @@ public class PJButton extends JButton {
                             try {
                                 mainFrame.getLeftPanel().getPlaylists().get(finalI).addSongFromButton(song);
                             } catch (IOException ex) {
+
                             }
                             playlistFrame.dispose();
                         }

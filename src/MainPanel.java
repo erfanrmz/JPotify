@@ -57,7 +57,7 @@ public class MainPanel extends JPanel {
             count++;
         }
         this.revalidate();
-        FileOutputStream fop = new FileOutputStream("Saves\\"+mainFrame.getUser()+"library.ser");
+        FileOutputStream fop = new FileOutputStream("Saves\\" + mainFrame.getUser() + "'s library.ser");
         ObjectOutputStream oos = new ObjectOutputStream(fop);
         oos.writeObject(songs);
 
@@ -114,15 +114,7 @@ public class MainPanel extends JPanel {
         this.revalidate();
         this.repaint();
     }
-//    public void readSongs () throws
-//            InvalidDataException, IOException, UnsupportedTagException, ClassNotFoundException {
-//        FileInputStream fis = new FileInputStream("Saves\\library.ser");
-//        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\library.ser"))));
-//        System.out.println(songs.size() + "REad song before Equal");
-//        songs = (ArrayList<Song>) ois.readObject();
-//        System.out.println(songs.size() + "after Equal");
-//
-//    }
+
     public void RecentlyPlayed(Song song) {
         int numOfSong = 0;
         for (int i = 0; i < mainFrame.getSongs().size(); i++)

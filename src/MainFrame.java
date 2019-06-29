@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
     private ArrayList<Song> playlistPlaying;
     private Boolean inAlbum;
 
-    public MainFrame(String name , String IP) {
+    public MainFrame(String name, String IP) {
         this.name = name;
         this.myIP = IP;
         inAlbum = false;
@@ -38,7 +38,7 @@ public class MainFrame extends JFrame {
             System.out.println(e2);
         }
         System.out.println(songs.size());
-        player = new Play(0,this);
+        player = new Play(0, this);
         ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
         this.setIconImage(spotify.getImage());
 //<<<<<<< HEAD
@@ -49,15 +49,15 @@ public class MainFrame extends JFrame {
         songPanel = new MainPanel(this, player, playingThreads, songs);
         leftPanel = new LeftPanel(songPanel, this, player, playingThreads, albums, songs);
         albumsPanel = new Albums(albums, songs, this);
-        playingPanel = new PlayingPanel(player, playingThreads,this);
+        playingPanel = new PlayingPanel(player, playingThreads, this);
         songsScrollPane = new JScrollPane(songPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         songsScrollPane.setBorder(null);
         this.setTitle("Jpotify");
         this.setSize(new Dimension(1600, 900));
         this.setLayout(new BorderLayout());
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(songsScrollPane,BorderLayout.CENTER);
-        mainPanel.add(userPanel,BorderLayout.PAGE_START);
+        mainPanel.add(songsScrollPane, BorderLayout.CENTER);
+        mainPanel.add(userPanel, BorderLayout.PAGE_START);
         this.add(mainPanel, BorderLayout.CENTER);
         this.add(playingPanel, BorderLayout.PAGE_END);
         this.add(leftPanel, BorderLayout.LINE_START);
@@ -106,7 +106,7 @@ public class MainFrame extends JFrame {
 
     public void readSongs() throws IOException, ClassNotFoundException {
 
-        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\"+this.getUser()+"library.ser"))));
+        ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("Saves\\" + this.name + "'s library.ser"))));
         songs = (ArrayList<Song>) ois.readObject();
         playlistPlaying = songs;
     }
@@ -143,7 +143,8 @@ public class MainFrame extends JFrame {
     public Albums getAlbumsPanel() {
         return albumsPanel;
     }
-//<<<<<<< HEAD
+
+    //<<<<<<< HEAD
     public String getUser() {
         return name;
     }
