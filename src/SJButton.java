@@ -1,7 +1,3 @@
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -57,7 +53,7 @@ public class SJButton extends JButton {
                     for (int i = 0; i < mainFrame.getjSliderSeeks().size(); i++) {
                         mainFrame.getjSliderSeeks().get(i).stop();
                     }
-                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame,mainFrame.getPlayingPanel().getMusicSeek());
+                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame, mainFrame.getPlayingPanel().getMusicSeek());
                     mainFrame.getjSliderSeeks().add(jSliderSeek);
                     jSliderSeek.start();
 //<<<<<<< HEAD
@@ -76,7 +72,7 @@ public class SJButton extends JButton {
                     }
 //<<<<<<< HEAD
 
-                    SJButton.this.player = new Play(0,mainFrame);
+                    SJButton.this.player = new Play(0, mainFrame);
 //                    SJButton.this.player.setPlayingSong(song);
 //=======
 //                    try {
@@ -102,7 +98,8 @@ public class SJButton extends JButton {
                             numOfSong = i;
                     for (int j = 0; j < numOfSong; j++)
                         Collections.swap(mainFrame.getSongs(), j, numOfSong);
-                    ((MainPanel) mainFrame.getMainPanel()).modifyPanel();
+                    if (!mainFrame.getInAlbum())
+                        ((MainPanel) mainFrame.getSongPanel()).modifyPanel();
 
                     int numOfAlbum = 0;
                     for (int i = 0; i < mainFrame.getAlbums().size(); i++)

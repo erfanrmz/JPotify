@@ -29,6 +29,7 @@ public class AJButton extends JButton {
                     albumPanel.updateAlbum();
                     album.getMainFrame().setAlbumPanel1(albumPanel);
                     mainFrame.setPlaylistPlaying(albumPanel.getSongsOfAlbum());
+                    mainFrame.setInAlbum(true);
                 }
             }
         });

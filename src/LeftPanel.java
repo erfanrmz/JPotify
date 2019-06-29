@@ -286,8 +286,9 @@ public class LeftPanel extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                ((MainPanel)mainFrame.getMainPanel()).modifyPanel();
+                ((MainPanel)mainFrame.getSongPanel()).modifyPanel();
                 mainFrame.setPlaylistPlaying(mainFrame.getSongs());
+                mainFrame.setInAlbum(false);
 
             }
         });
