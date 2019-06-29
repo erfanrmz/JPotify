@@ -41,11 +41,8 @@ public class MainFrame extends JFrame {
         player = new Play(0, this);
         ImageIcon spotify = new ImageIcon("Icons\\Jpotify.png");
         this.setIconImage(spotify.getImage());
-//<<<<<<< HEAD
         mainPanel = new JPanel();
         userPanel = new UserPanel(name);
-//=======
-//>>>>>>> Bug_fixing
         songPanel = new MainPanel(this, player, playingThreads, songs);
         leftPanel = new LeftPanel(songPanel, this, player, playingThreads, albums, songs);
         albumsPanel = new Albums(albums, songs, this);
@@ -63,18 +60,6 @@ public class MainFrame extends JFrame {
         this.add(leftPanel, BorderLayout.LINE_START);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
-    }
-
-    public LeftPanel getLeftPanel() {
-        return leftPanel;
-    }
-
-    public Play getPlayer() {
-        return player;
-    }
-
-    public ArrayList<Play> getPlayingThreads() {
-        return playingThreads;
     }
 
     public void ChangePanel(JPanel playlist) {
@@ -111,18 +96,29 @@ public class MainFrame extends JFrame {
         playlistPlaying = songs;
     }
 
+    public Play getPlayer() {
+        return player;
+    }
+
+    public LeftPanel getLeftPanel() {
+        return leftPanel;
+    }
+
+    public ArrayList<Play> getPlayingThreads() {
+        return playingThreads;
+    }
+
     public PlayingPanel getPlayingPanel() {
         return playingPanel;
     }
 
-    public ArrayList<JSliderSeek> getjSliderSeeks() {
+    public ArrayList<JSliderSeek> getJSliderSeeks() {
         return jSliderSeeks;
     }
 
     public ArrayList<Song> getSongs() {
         return songs;
     }
-
 
     public ArrayList<Song> getPlaylistPlaying() {
         return playlistPlaying;
@@ -144,11 +140,9 @@ public class MainFrame extends JFrame {
         return albumsPanel;
     }
 
-    //<<<<<<< HEAD
     public String getUser() {
         return name;
     }
-//=======
 
     public void setInAlbum(Boolean inAlbum) {
         this.inAlbum = inAlbum;
@@ -156,6 +150,5 @@ public class MainFrame extends JFrame {
 
     public Boolean getInAlbum() {
         return inAlbum;
-//>>>>>>> Bug_fixing
     }
 }

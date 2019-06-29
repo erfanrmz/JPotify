@@ -19,10 +19,6 @@ public class PJButton extends JButton {
     private JMenuItem removeSong;
     private Playlist playlist;
 
-    public Play getPlayer() {
-        return player;
-    }
-
     public PJButton(String text, Icon icon, Song song, Play player, MainFrame mainFrame, ArrayList<Play> playingThreads, Playlist playlist) {
         super(text, icon);
         this.playlist = playlist;
@@ -52,12 +48,11 @@ public class PJButton extends JButton {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     mainFrame.getPlayingPanel().getPlayingTime().setTime(0);
                     mainFrame.getPlayingPanel().getMusicSeek().setValue(0);
-                    for (int i = 0 ; i < mainFrame.getjSliderSeeks().size() ;i++)
-                    {
-                        mainFrame.getjSliderSeeks().get(i).stop();
+                    for (int i = 0; i < mainFrame.getJSliderSeeks().size(); i++) {
+                        mainFrame.getJSliderSeeks().get(i).stop();
                     }
-                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame,mainFrame.getPlayingPanel().getMusicSeek());
-                    mainFrame.getjSliderSeeks().add(jSliderSeek);
+                    JSliderSeek jSliderSeek = new JSliderSeek(mainFrame, mainFrame.getPlayingPanel().getMusicSeek());
+                    mainFrame.getJSliderSeeks().add(jSliderSeek);
                     jSliderSeek.start();
 //                    mainFrame.getLeftPanel().getMusicPlayingArtWork().setIcon(song.getImageIcon());
                     mainFrame.getPlayingPanel().getPlay().setIcon(new ImageIcon("Icons\\pause50.png"));
@@ -82,11 +77,11 @@ public class PJButton extends JButton {
 //                    } catch (InvalidDataException e1) {
 //                        e1.printStackTrace();
 //                    }
-                    PJButton.this.player = new Play(0,mainFrame);
+                    PJButton.this.player = new Play(0, mainFrame);
                     PJButton.this.player.setPlayingSong(song);
                     PJButton.this.player.start();
                     playingThreads.add(PJButton.this.player);
-                    ((MainPanel)mainFrame.getSongPanel()).RecentlyPlayed(PJButton.this.song);
+                    ((MainPanel) mainFrame.getSongPanel()).RecentlyPlayed(PJButton.this.song);
 
                 }
                 if (e.getButton() == MouseEvent.BUTTON3) {
@@ -131,5 +126,10 @@ public class PJButton extends JButton {
             }
         });
     }
+
+    public Play getPlayer() {
+        return player;
+    }
+
 }
 

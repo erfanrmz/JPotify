@@ -7,7 +7,7 @@ public class AJButton extends JButton {
     private Album album;
     private MainFrame mainFrame;
 
-    public AJButton(String text, Icon icon, Album album , MainFrame mainFrame) {
+    public AJButton(String text, Icon icon, Album album, MainFrame mainFrame) {
         super(text, icon);
         this.album = album;
         this.mainFrame = mainFrame;

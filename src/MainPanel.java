@@ -34,12 +34,12 @@ public class MainPanel extends JPanel {
         this.add(box1);
         this.add(box2);
         this.add(box3);
-//        this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         for (int i = 0; i < songs.size(); i++) {
             addSongFromSer(songs.get(i));
         }
     }
+
     public void addSongFromButton(Song song) throws IOException {
 //        songs.add(song);
         SJButton songAdded = new SJButton(song.getTitle(), song.getImageIcon(), song, player, mainFrame, playingThreads);

@@ -121,13 +121,6 @@ public class LeftPanel extends JPanel {
                 try {
                     Boolean equality = false;
                     Song song = new Song(fileChooser.getSelectedFile().getAbsolutePath());
-//<<<<<<< HEAD
-//                    songs1.add(song);
-//                    System.out.println(songs1.size());
-//                    ObjectOutputStream library = new ObjectOutputStream(new FileOutputStream("Saves\\"+mainFrame.getUser()+"library.ser"));
-//                    library.writeObject(song);
-//                    ((MainPanel) songsPanel).addSongFromButton(song);
-//=======
                     for (int i = 0; i < mainFrame.getSongs().size(); i++)
                         if (mainFrame.getSongs().get(i).getAddress().equals(song.getAddress()))
                             equality = true;
@@ -138,7 +131,6 @@ public class LeftPanel extends JPanel {
                         library.writeObject(song);
                         ((MainPanel) songsPanel).addSongFromButton(song);
                     }
-//>>>>>>> Bug_fixing
                 } catch (IOException | InvalidDataException | UnsupportedTagException ex) {
                     ex.printStackTrace();
                 }
@@ -283,11 +275,6 @@ public class LeftPanel extends JPanel {
             }
         });
         songs.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                mainFrame.setPlaylistPlaying(mainFrame.getSongs());
-//            }
-
             @Override
             public void mouseEntered(MouseEvent e) {
                 songs.setIcon(new ImageIcon("Icons\\songEntered1.png"));

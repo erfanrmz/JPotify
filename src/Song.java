@@ -1,12 +1,9 @@
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,7 +22,7 @@ public class Song implements Serializable {
 
 
     public Song(String address) throws IOException, InvalidDataException, UnsupportedTagException {
-        favorite =false;
+        favorite = false;
         this.address = address;
         songSeekPos = 0;
         try {
@@ -95,13 +92,12 @@ public class Song implements Serializable {
     }
 
 
-
-    public void   isFavorite() {
-        favorite =true;
+    public void isFavorite() {
+        favorite = true;
     }
 
     public void notFavorite() {
-        favorite =false;
+        favorite = false;
     }
 
     public Boolean getFavorite() {
@@ -129,12 +125,12 @@ public class Song implements Serializable {
         Song song = (Song) o;
         return
                 Objects.equals(address, song.address) &&
-                Objects.equals(title, song.title) &&
-                Objects.equals(artist, song.artist) &&
-                Objects.equals(album, song.album) &&
-                Objects.equals(year, song.year) &&
-                Objects.equals(favorite, song.favorite) &&
-                Objects.equals(imageIcon, song.imageIcon);
+                        Objects.equals(title, song.title) &&
+                        Objects.equals(artist, song.artist) &&
+                        Objects.equals(album, song.album) &&
+                        Objects.equals(year, song.year) &&
+                        Objects.equals(favorite, song.favorite) &&
+                        Objects.equals(imageIcon, song.imageIcon);
     }
 
 }

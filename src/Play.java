@@ -20,12 +20,12 @@ public class Play extends Thread {
     private boolean stopMusic;
     private int frame;
 
-    public Play(int frame , MainFrame mainFrame) {
+    public Play(int frame, MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         stopMusic = false;
         isPause = false;
 //        playingSong = song;
-        this.frame =frame;
+        this.frame = frame;
     }
 
     public void setPlayingSong(Song song) {
@@ -43,10 +43,10 @@ public class Play extends Thread {
     public void run() {
         try {
             Mp3File playingSong = new Mp3File(getPlayingSong().getAddress());
-            mainFrame.getPlayingPanel().getMusicTime().setTime((int)playingSong.getLengthInSeconds());
-            mainFrame.getPlayingPanel().getMusicSeek().setMaximum((int)playingSong.getLengthInSeconds());
-            System.out.println((int)playingSong.getLengthInSeconds());
-            System.out.println( mainFrame.getPlayingPanel().getMusicSeek().getMaximum() + " "  + playingSong.getFrameCount());
+            mainFrame.getPlayingPanel().getMusicTime().setTime((int) playingSong.getLengthInSeconds());
+            mainFrame.getPlayingPanel().getMusicSeek().setMaximum((int) playingSong.getLengthInSeconds());
+            System.out.println((int) playingSong.getLengthInSeconds());
+            System.out.println(mainFrame.getPlayingPanel().getMusicSeek().getMaximum() + " " + playingSong.getFrameCount());
         } catch (IOException e1) {
             e1.printStackTrace();
         } catch (UnsupportedTagException e1) {
@@ -56,65 +56,55 @@ public class Play extends Thread {
         }
         mainFrame.getLeftPanel().getMusicPlayingArtWork().setIcon(playingSong.getImageIcon());
 //        while (!stopMusic) {
-            mainFrame.getPlayingPanel().getPlayingSongArtist().setText(playingSong.getArtist());
-            mainFrame.getPlayingPanel().getPlayingSongName().setText(playingSong.getTitle());
-            mainFrame.getPlayingPanel().getPlayingSongLikeName().removeAll();
-            mainFrame.getPlayingPanel().getPlayingSongInformation().removeAll();
-            mainFrame.getPlayingPanel().getPlayingSongInformation().add(mainFrame.getPlayingPanel().getPlayingSongLikeName());
-            mainFrame.getPlayingPanel().getPlayingSongInformation().add(mainFrame.getPlayingPanel().getPlayingSongArtist());
-            mainFrame.getPlayingPanel().getPlayingSongLikeName().add(mainFrame.getPlayingPanel().getPlayingSongName());
-            EJButton like = new EJButton();
-            like.setPreferredSize(new Dimension(25,25));
-            like.setIcon(new ImageIcon("Icons\\like25.png"));
-            like.setPressed(0);
-            if (playingSong.getFavorite())
-            {
-                System.out.println("hello");
-                like.setIcon(new ImageIcon("Icons\\liked25.png"));
-                like.setPressed(1);
+        mainFrame.getPlayingPanel().getPlayingSongArtist().setText(playingSong.getArtist());
+        mainFrame.getPlayingPanel().getPlayingSongName().setText(playingSong.getTitle());
+        mainFrame.getPlayingPanel().getPlayingSongLikeName().removeAll();
+//            mainFrame.getPlayingPanel().getPlayingSongInformation().removeAll();
+        mainFrame.getPlayingPanel().getPlayingSongInformation().add(mainFrame.getPlayingPanel().getPlayingSongLikeName());
+//            mainFrame.getPlayingPanel().getPlayingSongInformation().add(mainFrame.getPlayingPanel().getPlayingSongArtist());
+//            mainFrame.getPlayingPanel().getPlayingSongLikeName().add(mainFrame.getPlayingPanel().getPlayingSongName());
+        EJButton like = new EJButton();
+        like.setPreferredSize(new Dimension(25, 25));
+        like.setIcon(new ImageIcon("Icons\\like25.png"));
+        like.setPressed(0);
+        if (playingSong.getFavorite()) {
+            System.out.println("hello");
+            like.setIcon(new ImageIcon("Icons\\liked25.png"));
+            like.setPressed(1);
 
-            }
-            like.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    if (e.getButton() == MouseEvent.BUTTON1)
-                    {
-                        if (like.getPressed() % 2 == 0)
-                        {
-                            like.setIcon(new ImageIcon("Icons\\like25.png"));
+        }
+        like.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    if (like.getPressed() % 2 == 0) {
+                        like.setIcon(new ImageIcon("Icons\\like25.png"));
 //                            mainFrame.getFavoriteSongs().remove(playingSong);
 
-                        }
-                        else
-                        {
-                            like.setIcon(new ImageIcon("Icons\\liked25.png"));
+                    } else {
+                        like.setIcon(new ImageIcon("Icons\\liked25.png"));
 //                            mainFrame.getFavoriteSongs().add(playingSong);
-                        }
+                    }
 
+                }
+            }
+        });
+//            mainFrame.getPlayingPanel().getPlayingSongInformation().add(like);
+//            mainFrame.getPlayingPanel().getPlayingSongLikeName().setLayout(new FlowLayout(FlowLayout.LEFT));
+        try {
+            playMP3 = new AdvancedPlayer(file);
+            playMP3.play(frame, frame + 1);
+            while (playMP3.play(1)) {
+                if (this.isPause) {
+                    synchronized (playMP3) {
+                        playMP3.wait();
                     }
                 }
-            });
-            mainFrame.getPlayingPanel().getPlayingSongInformation().add(like);
-            mainFrame.getPlayingPanel().getPlayingSongLikeName().setLayout(new FlowLayout(FlowLayout.LEFT));
-            try {
-                playMP3 = new AdvancedPlayer(file);
-                playMP3.play(frame,frame+1);
-                while (playMP3.play(1)) {
-                    if (this.isPause) {
-                        synchronized (playMP3) {
-                            playMP3.wait();
-                        }
-                    }
-                }
-                System.out.println("END");
             }
-            catch (Exception q) {
-                System.out.print(q);
-            }
-
-//        }
-//        playMP3.close();
-
+            System.out.println("END");
+        } catch (Exception q) {
+            System.out.print(q);
+        }
     }
 
     public void mp3Pause() {
@@ -150,4 +140,5 @@ public class Play extends Thread {
     public Song getPlayingSong() {
         return playingSong;
     }
+
 }

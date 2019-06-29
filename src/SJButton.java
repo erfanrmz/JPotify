@@ -50,11 +50,11 @@ public class SJButton extends JButton {
                     song.isFavorite();
                     mainFrame.getPlayingPanel().getPlayingTime().setTime(0);
                     mainFrame.getPlayingPanel().getMusicSeek().setValue(0);
-                    for (int i = 0; i < mainFrame.getjSliderSeeks().size(); i++) {
-                        mainFrame.getjSliderSeeks().get(i).stop();
+                    for (int i = 0; i < mainFrame.getJSliderSeeks().size(); i++) {
+                        mainFrame.getJSliderSeeks().get(i).stop();
                     }
                     JSliderSeek jSliderSeek = new JSliderSeek(mainFrame, mainFrame.getPlayingPanel().getMusicSeek());
-                    mainFrame.getjSliderSeeks().add(jSliderSeek);
+                    mainFrame.getJSliderSeeks().add(jSliderSeek);
                     jSliderSeek.start();
 //<<<<<<< HEAD
 //=======

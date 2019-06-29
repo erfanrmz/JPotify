@@ -1,43 +1,30 @@
 import javax.swing.*;
 
-public class JSliderSeek extends Thread{
-    private JSlider seekslider;
+public class JSliderSeek extends Thread {
+    private JSlider seekSlider;
     private boolean isPause;
     private MainFrame mainFrame;
-    public JSliderSeek(MainFrame mainFrame,JSlider seekSlider)
-    {
+
+    public JSliderSeek(MainFrame mainFrame, JSlider seekSlider) {
         isPause = false;
         this.mainFrame = mainFrame;
-        this.seekslider = seekSlider;
+        this.seekSlider = seekSlider;
     }
+
     @Override
     public void run() {
-        while(true)
-        {
-            while(seekslider.getValue() <= seekslider.getMaximum())
-            {
+        while (true) {
+            while (seekSlider.getValue() <= seekSlider.getMaximum()) {
                 if (!this.isPause) {
                     try {
                         sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-//<<<<<<< HEAD
-
-                    seekslider.setValue(seekslider.getValue() + 1);
-                    mainFrame.getPlayingPanel().getPlayingTime().setTime(seekslider.getValue());
-
-//=======
-//                    seekslider.setValue(seekslider.getValue() + 1);
-//>>>>>>> Recently_played
+                    seekSlider.setValue(seekSlider.getValue() + 1);
+                    mainFrame.getPlayingPanel().getPlayingTime().setTime(seekSlider.getValue());
                 }
             }
         }
-
-
-
     }
-
-
-
 }

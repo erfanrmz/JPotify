@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -107,14 +106,14 @@ public class PlayingPanel extends JPanel {
 
                     play.setIcon(new ImageIcon("Icons\\playEntered50.png"));
                     playingThreads.get(playingThreads.size() - 1).mp3Pause();
-                    mainFrame.getjSliderSeeks().get(mainFrame.getjSliderSeeks().size() - 1).stop();
+                    mainFrame.getJSliderSeeks().get(mainFrame.getJSliderSeeks().size() - 1).stop();
 
                 } else if (play.getPressed() % 2 == 1) {
                     play.setIcon(new ImageIcon("Icons\\pauseEntered50.png"));
                     playingThreads.get(playingThreads.size() - 1).mp3Resume();
                     JSliderSeek jSliderSeek = new JSliderSeek(mainFrame, mainFrame.getPlayingPanel().getMusicSeek());
                     jSliderSeek.start();
-                    mainFrame.getjSliderSeeks().add(jSliderSeek);
+                    mainFrame.getJSliderSeeks().add(jSliderSeek);
                 }
 
             }
@@ -219,11 +218,11 @@ public class PlayingPanel extends JPanel {
                     }
                     mainFrame.getPlayingPanel().getPlayingTime().setTime(0);
                     mainFrame.getPlayingPanel().getMusicSeek().setValue(0);
-                    for (int i = 0; i < mainFrame.getjSliderSeeks().size(); i++) {
-                        mainFrame.getjSliderSeeks().get(i).stop();
+                    for (int i = 0; i < mainFrame.getJSliderSeeks().size(); i++) {
+                        mainFrame.getJSliderSeeks().get(i).stop();
                     }
                     JSliderSeek jSliderSeek = new JSliderSeek(mainFrame, mainFrame.getPlayingPanel().getMusicSeek());
-                    mainFrame.getjSliderSeeks().add(jSliderSeek);
+                    mainFrame.getJSliderSeeks().add(jSliderSeek);
                     jSliderSeek.start();
 
                     for (int i = 0; i < mainFrame.getPlaylistPlaying().size(); i++) {
@@ -277,11 +276,11 @@ public class PlayingPanel extends JPanel {
                     }
                     mainFrame.getPlayingPanel().getPlayingTime().setTime(0);
                     mainFrame.getPlayingPanel().getMusicSeek().setValue(0);
-                    for (int i = 0; i < mainFrame.getjSliderSeeks().size(); i++) {
-                        mainFrame.getjSliderSeeks().get(i).stop();
+                    for (int i = 0; i < mainFrame.getJSliderSeeks().size(); i++) {
+                        mainFrame.getJSliderSeeks().get(i).stop();
                     }
                     JSliderSeek jSliderSeek = new JSliderSeek(mainFrame, mainFrame.getPlayingPanel().getMusicSeek());
-                    mainFrame.getjSliderSeeks().add(jSliderSeek);
+                    mainFrame.getJSliderSeeks().add(jSliderSeek);
                     jSliderSeek.start();
 
                     for (int i = 0; i < mainFrame.getPlaylistPlaying().size(); i++) {
@@ -302,34 +301,6 @@ public class PlayingPanel extends JPanel {
                 }
             }
         });
-//        musicSeek.addAncestorListener(new AncestorListener() {
-//            @Override
-//            public void ancestorAdded(AncestorEvent event) {
-//                if (mp3player != null && !musicSeek.getValueIsAdjusting()) {
-//                    int dAngle = musicSeek.getValue();
-//                    try {
-//                        mp3player.mp3seek(dAngle);
-//                    } catch (JavaLayerException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//            @Override
-//            public void ancestorRemoved(AncestorEvent event) {
-//                if (mp3player != null && !musicSeek.getValueIsAdjusting()) {
-//                    int dAngle = musicSeek.getValue();
-//                    try {
-//                        mp3player.mp3seek(dAngle);
-//                    } catch (JavaLayerException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//            @Override
-//            public void ancestorMoved(AncestorEvent event) {
-//
-//            }
-//        });
     }
 
     public EJSlider getMusicSeek() {
